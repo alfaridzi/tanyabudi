@@ -80,7 +80,8 @@
 						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="150" height="150">
 						<h4 style="color:white; text-align: center"><b>tanyabudi</b></h4>
 					</div>
-					<form>
+					<form method="post">
+						@csrf
 						<div class="row">
 							<div class="input-field col s12">
 								<input type="text" class="validate" name="username" placeholder="Nomor Hp / Email">
@@ -94,7 +95,7 @@
 						</div>
 					</form>
 					<div class="col s12">
-						<a href="#" class="btn waves-effect waves-light blue btn-block btn-flat">Register</a>
+						<a href="{{ url('register') }}" class="btn waves-effect waves-light blue btn-block btn-flat">Register</a>
 					</div>
 				</div>
 			</div>
