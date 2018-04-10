@@ -90,12 +90,12 @@
 								<input type="password" class="validate" name="password" placeholder="Password">
 							</div>
 							<div class="col s12">
-								<button class="btn waves-effect waves-light green btn-block btn-flat">Log In</button>
+								<button class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>LOG IN</b></button>
 							</div>
 						</div>
 					</form>
 					<div class="col s12">
-						<a href="{{ url('register') }}" class="btn waves-effect waves-light blue btn-block btn-flat">Register</a>
+						<a href="{{ url('register') }}" class="btn waves-effect waves-light blue btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
 					</div>
 				</div>
 			</div>

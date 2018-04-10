@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/materialize/css/materialize.min.css') }}" media="screen,projection">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/animate/animate.css') }}">
 	<style type="text/css">
 		body {
@@ -24,6 +25,10 @@
 		  color: white;
 		}
 
+		#form-page {
+			opacity: 0;
+		}
+
 		#form-page form input {
 			color: white;
 		}
@@ -32,6 +37,60 @@
 			.container {
 				width: 50%;
 			}
+		}
+
+		#btn-user {
+			position: relative;
+			background-color: #18CC3E;
+			border-radius: 5px;
+			padding: 10px;
+			font-size: 14px;
+			font-weight: bold;
+			border: 0px;
+			height: 100%;
+			min-height: 100px;
+			max-height: 200px;
+			cursor: pointer;
+		}
+
+		#btn-user:hover {
+			background-color: #00A523;
+		}
+
+		#btn-user i {
+			font-size: 120px;
+			color: white;
+		}
+
+		#btn-user span {
+			color: white;
+		}
+
+		#btn-agen {
+			position: relative;
+			background-color: #1374C6;
+			border-radius: 5px;
+			padding: 10px;
+			font-size: 14px;
+			font-weight: bold;
+			border: 0px;
+			height: 100%;
+			min-height: 100px;
+			max-height: 200px;
+			cursor: pointer;
+		}
+
+		#btn-agen:hover {
+			background-color: #005399;
+		}
+
+		#btn-agen i {
+			font-size: 120px;
+			color: white;
+		}
+
+		#btn-agen span {
+			color: white;
 		}
 
 		.btn-block {
@@ -46,6 +105,27 @@
 </head>
 <body>
 
+<div id="form-pilihan" class="valign-wrapper" style="width:100%;height:100%; margin-top:30px;">
+	<div class="valign" style="width:100%;">
+		<div class="container">
+			<div class="row">
+				<div class="centered">
+					<div class="logo" style="text-align: center">
+						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="100" height="100">
+						<h5 style="color:white; text-align: center; margin-top: -5px;"><b>tanyabudi</b></h5>
+					</div>
+				</div>
+				<br>
+				<div class="kotak-pilihan" style="text-align: center">
+					<button id="btn-user"><i class="material-icons">person_outline</i><br><span>DAFTAR USER</span></button>
+					&nbsp;
+					<button id="btn-agen"><i class="material-icons">assignment_ind</i><br><span>DAFTAR AGEN</span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="form-page" class="valign-wrapper" style="width:100%;height:100%; margin-top:30px;">
 	<div class="valign" style="width:100%;">
 		<div class="container">
@@ -53,10 +133,11 @@
 				<div class="centered">
 					<div class="logo" style="text-align: center">
 						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="100" height="100">
-						<h5 style="color:white; text-align: center"><b>tanyabudi</b></h5>
+						<h5 style="color:white; text-align: center; margin-top: -5px;"><b>tanyabudi</b></h5>
 					</div>
 					<form method="post">
 						@csrf
+						<input type="hidden" name="tipe_user">
 						<div class="row">
 							<div class="input-field col s12">
 								<input type="text" class="validate" name="nama" placeholder="Nama Lengkap">
@@ -77,10 +158,20 @@
 								<input type="text" class="validate" name="kode_referal" placeholder="Kode Referal (Optional)">
 							</div>
 							<div class="col s12">
-								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat">Log In</button>
+								<label>
+							        <input id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
+							        <span style="color: white;">Saya setuju dengan <a href="#">Syarat & Ketentuan</a></span>
+							    </label>
+						    </div>
+							<div class="col s12">
+								<br>
+								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></button>
 							</div>
 						</div>
 					</form>
+					<div class="col s12">
+						<button id="btn-batal" class="btn waves-effect waves-light blue btn-block btn-flat" style="color:white;"><b>BATAL</b></button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -89,5 +180,32 @@
 
 <script type="text/javascript" src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/materialize/js/materialize.min.js') }}"></script>
+<script type="text/javascript">
+	$('#form-page').hide();
+	$(document).ready(function(){
+		$('#btn-user').on('click', function(){
+			$('#form-pilihan').hide();
+			$('#form-page').css('opacity', '1');
+			$('#form-page').addClass('animated fadeIn');
+			$('#form-page').show();
+			$('input[name="tipe_user"]').val(1);
+		});
+
+		$('#btn-batal').on('click', function(){
+			$('#form-page').css('opacity', '0');
+			$('#form-page').hide();
+			$('#form-pilihan').addClass('animated fadeIn');
+			$('#form-pilihan').show();
+		});
+
+		$('#btn-agen').on('click', function(){
+			$('#form-pilihan').hide();
+			$('#form-page').css('opacity', '1');
+			$('#form-page').addClass('animated fadeIn');
+			$('#form-page').show();
+			$('input[name="tipe_user"]').val(2);
+		});
+	});
+</script>
 </body>
 </html>

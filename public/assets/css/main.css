@@ -1,0 +1,263 @@
+body {
+	min-height: 400px;
+	margin-bottom: 100px;
+	clear: both;
+}
+
+nav {
+	background-color: #2F0F62;
+	webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+nav .nav-wrapper .brand-logo img {
+	padding-top: 15px;
+	padding-left: 15px;
+    height: 50px;
+}
+
+footer {
+	position: fixed;
+	margin: 0;
+	width: 100%;
+	bottom: 0;
+}
+
+nav.nav-center ul {
+    text-align: center;
+}
+nav.nav-center ul li {
+    display: inline;
+    float: none;
+}
+nav.nav-center ul li a {
+    display: inline-block;
+}
+
+div.steps {
+	text-align: center;
+}
+
+div.steps ol.steps{
+	position: relative;
+	display: block;
+}
+
+ol.circle-steps > li {
+	display: inline-block;
+	vertical-align: middle;
+	list-style: none;
+	width: 75px;
+	height: 75px;
+	margin: 0;
+	padding-left: 3px;
+	border-radius: 50%;
+	border: 2px solid #ddd;
+}
+
+div.tabungan-haji {
+	display: block;
+	text-align: center;
+	width: 100%;
+	padding: 10px 20px;
+	background-color: #AA76B5;
+	border: 0px;
+	border-radius: 5px;
+	color: white;
+}
+
+div.tabungan-haji .sisa-pembayaran {
+	color: #BD1212;
+	font-size: 12px;
+}
+
+div.item {
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	width: 100%;
+	padding: 10px 20px;
+	background-color: #AA76B5;
+	border: 0px;
+	border-radius: 5px;
+	color: white;
+	height: 150px;
+}
+
+.item.item-red {
+	background-color: #FF8888;
+}
+
+ol.circle-steps > li span {
+	color: #ddd;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: -9px;
+}
+
+ol.circle-steps > li:not(:first-child) {
+	margin-left: 35px;
+}
+
+ol.circle-steps > li i {
+	position: relative;
+	vertical-align: middle;
+	font-size: 50px;
+	color: #ddd;
+	margin: 0 auto;
+}
+
+ol.circle-steps > li:not(:last-child) i::after {
+	content: '';
+	position: absolute;
+	border-top: 2px solid #ddd;
+	padding: 20px;
+	left: 60px;
+	top: 30px;
+}
+
+ol.circle-steps > li.done,
+ol.circle-steps > li.done i,
+ol.circle-steps > li.done span,
+ol.circle-steps > li.done:not(:last-child) i::after {
+	border-color: #2F0F62;
+	color: #2F0F62;
+}
+
+
+div.secondary-menu {
+	display: block;
+	margin: 0 auto;
+}
+
+div.secondary-menu ol.circle-menu {
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
+ol.circle-menu > a {
+	display: inline-block;
+	min-height: 80px;
+}
+
+ol.circle-menu > a li {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	list-style: none;
+	width: 55px;
+	height: 55px;
+	margin: 0;
+	padding-left: 0.1em;
+	padding-top: 2px;
+	border-radius: 50%;
+	border: 2px solid #363636;
+}
+
+ol.circle-menu > a li i {
+	font-size: 35px;
+	color: #363636;
+}
+
+ol.circle-menu > a li span {
+	position: absolute;
+	left: 7px;
+	top: 50px;
+	width: 80px;
+	margin-left: -22px;
+	text-align: center;
+	color: #363636;
+	font-size: 12px;
+	padding-top: 4px;
+}
+
+ol.circle-menu > a:not(:first-child) li {
+	margin-left: 40px;
+}
+
+/*ol.circle-menu > li a {
+	text-align: center;
+	display: block;
+}*/
+
+@media only screen and (max-width: 600px) {
+	nav.nav-center {
+		line-height: 65px;
+	}
+
+	nav .nav-wrapper .brand-logo img {
+		padding-left: 0;
+		padding-top: 13px;
+	    height: 45px;
+	}
+
+	div.steps {
+		text-align: center;
+		margin-left: -50%;
+		padding-left: 40%;
+	}
+
+	ol.circle-steps > li {
+		width: 50px;
+		height: 50px;
+	}
+
+	ol.circle-steps > li:not(:last-child) i::after {
+		padding: 20px;
+		left: 41px;
+		top: 19px;
+	}
+
+	div.secondary-menu {
+		display: block;
+		margin: 0 auto;
+	}
+
+	div.secondary-menu ol.circle-menu {
+		padding: 0;
+	}
+
+	ol.circle-steps > li span {
+		visibility: hidden;
+	}
+
+	ol.circle-menu > a li {
+		width: 50px;
+		height: 50px;
+		padding-left: 0.1em;
+		padding-top: 3px;
+	}
+
+	ol.circle-menu > a li i {
+		font-size: 30px;
+		color: #363636;
+	}
+
+	ol.circle-menu > a li span {
+		position: absolute;
+		left: 7px;
+		top: 50px;
+		width: 80px;
+		margin-left: -25px;
+		text-align: center;
+		color: #363636;
+		font-size: 11px;
+		padding-top: 1px;
+	}
+
+	ol.circle-menu > a:not(:first-child) li {
+		margin-left: 25px;
+	}
+
+	ol.circle-steps > li i {
+		position: relative;
+		vertical-align: middle;
+		font-size: 35px;
+		margin: 0 auto;
+		left: -1px;
+		bottom: 0;
+	}
+
+}
