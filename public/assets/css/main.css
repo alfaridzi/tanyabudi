@@ -23,6 +23,42 @@ footer {
 	bottom: 0;
 }
 
+.page-break {
+	display: block;
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	margin: 0 auto;
+	padding: 5px;
+	background-color: #ddd;
+}
+
+.btn-konfirmasi {
+	border: 0px;
+	border-radius: 40px;
+	background-color: #4498CE;
+	color: white;
+	padding: 10px 40px;
+	cursor: pointer;
+	width: 60%;
+}
+
+.bantuan {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
+
+.bantuan a {
+	color: #2F0F62;
+}
+
+.bantuan-tengah {
+	bottom: 70px;
+}
+
 nav.nav-center ul {
     text-align: center;
 }
@@ -32,6 +68,18 @@ nav.nav-center ul li {
 }
 nav.nav-center ul li a {
     display: inline-block;
+}
+
+div.nama-user {
+	width: 100%;
+	text-align: center;
+
+}
+
+div.nama-user span {
+	font-size: 14px;
+	text-align: center;
+	display: inline-block;
 }
 
 div.steps {
@@ -86,6 +134,33 @@ div.item {
 
 .item.item-red {
 	background-color: #FF8888;
+}
+
+div.haji-umroh {
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	margin-top: 10%;
+}
+
+div.haji-umroh ol {
+	display: block;
+	list-style: none;
+	padding-left: 0px;
+}
+
+div.haji-umroh ol a li {
+	display: inline-block;
+}
+
+div.haji-umroh ol a:not(:first-child) li {
+	margin-left: 50px;
+}
+
+div.haji-umroh ol a li img {
+	width: 150px;
+	height: 150px;
+	margin-bottom: 20px;
 }
 
 ol.circle-steps > li span {
@@ -182,6 +257,147 @@ ol.circle-menu > a:not(:first-child) li {
 	display: block;
 }*/
 
+.instruksi {
+	display: table;
+	margin: 0 auto;
+}
+
+.instruksi ul.instruksi-steps {
+	display: block;
+	position: relative;
+	list-style: none;
+}
+
+.instruksi ul.instruksi-steps:before {
+	display: block;
+	content: ' ';
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	top: 7px;
+	left: -1px;
+	height: 90%;
+	border-left: 2px solid #2F0F62;
+}
+
+.instruksi ul.instruksi-steps li {
+	display: block;
+	padding-bottom: 10px;
+	position: relative;
+	padding-left: 1em; 
+	text-indent: -1.4em;
+}
+
+.instruksi ul.instruksi-steps li:before {
+	background-color: #2F0F62;
+	border-radius: 50%;
+	content: "";
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 2px;
+	height: 10px;
+	width: 10px;
+	color: #2F0F62;
+}
+
+
+div.daftar-paket {
+	margin: 0 auto;
+	text-align: center;
+}
+
+div.daftar-paket ol {
+	list-style: none;
+	padding-left: 0px;
+}
+
+div.daftar-paket ol li {
+	overflow: hidden;
+	height: 300px;
+	position: relative;
+	border-radius: 20px;
+	margin-bottom: 10px;
+	z-index: 0;
+}
+
+div.daftar-paket ol li a {
+	display: block;
+}
+
+div.daftar-paket ol li a .overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(61, 61, 61, 0.6);
+	z-index: 1;
+}
+
+div.daftar-paket ol li a .cover-img {
+	position: absolute;
+	z-index: 0;
+	top: -50%;
+	left: 0;
+	width: auto;
+	height: 800px;
+}
+
+div.daftar-paket ol li a .cover-img img {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+div.daftar-paket ol li a .detail-paket {
+	display: block;
+	position: absolute;
+	top: 27%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	z-index: 2;
+	font-weight: bold;
+}
+
+.detail-paket .nama-travel {
+	font-size: 25px;
+}
+
+.detail-paket .nama-paket {
+	font-size: 30px;
+	text-decoration: underline;
+}
+
+.form-detail {
+	margin-top: 10%;
+}
+
+.detail-paket .harga-paket {
+	font-size: 20px;
+}
+
+@media only screen and (min-width: 600px) {
+	.instruksi ul.instruksi-steps:before {
+		left: -1.5px;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.instruksi ul.instruksi-steps:before {
+		left: -1px;
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.instruksi ul.instruksi-steps:before {
+		left: -2px;
+	}
+}
+
 @media only screen and (max-width: 600px) {
 	nav.nav-center {
 		line-height: 65px;
@@ -260,4 +476,48 @@ ol.circle-menu > a:not(:first-child) li {
 		bottom: 0;
 	}
 
+	.instruksi ul.instruksi-steps:before {
+		left: -1px;
+	}
+
+	.btn-konfirmasi {
+		padding: 3px 40px
+	}
+
+	div.haji-umroh {
+		margin-top: 30%;
+	}
+
+	div.haji-umroh ol a:not(:first-child) li {
+		margin-left: 0;
+	}
+
+	div.haji-umroh ol a li img {
+		width: 120px;
+		height: 120px;
+		margin-bottom: 20px;
+	}
+
+	div.daftar-paket ol li {
+		height: 150px;
+	}
+	div.daftar-paket ol li a .cover-img {
+		top: -150%;
+	}
+	div.daftar-paket ol li a .detail-paket {
+		top: 20%;
+	}
+
+	.detail-paket .nama-travel {
+		font-size: 20px;
+	}
+
+	.detail-paket .nama-paket {
+		font-size: 25px;
+		text-decoration: underline;
+	}
+
+	.detail-paket .harga-paket {
+		font-size: 15px;
+	}
 }

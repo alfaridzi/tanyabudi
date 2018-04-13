@@ -26,7 +26,9 @@
 	<div class="row valign-wrapper">
 		<div class="col l2 m2">
 			<img src="{{ asset('assets/images/user-1.png') }}" class="circle responsive-img" width="130" height="130">
-			<p class="center-align">Rika Sastika</p>
+			<div class="center-align nama-user">
+				<span>Rika Sartika</span>
+			</div>
 		</div>
 		<div class="col l10 m10">
 			<div class="tabungan-haji">
@@ -51,11 +53,14 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="container-fluid">
 	<div class="row">
 		<div class="col s12">
 			<div class="secondary-menu">
 				<ol class="circle-menu">
-					<a href="#">
+					<a href="instruksi">
 						<li>
 							<i class="icon icon-rupiah"></i>
 							<span>Bayar Paket</span>
@@ -84,5 +89,4 @@
 		</div>
 	</div>
 </div>
-
 @endsection

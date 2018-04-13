@@ -25,35 +25,16 @@
 	      		<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>
 	      	</ul>
 	      	<ul class="left hide-on-large-only">
-	      		<li><a href="#"><i style="font-size: 35px; padding-top: 3px" class="icon icon-agen-circle"></i></a></li>
-	      	</ul>
-	      	<ul class="right hide-on-large-only">
-	      		<li><a href="#"><i class="icon icon-notifikasi"></i></a></li>
-	      		<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>
+	      		<li><a href="javascript:;" onclick="javascript:history.back();"><i class="icon icon-panah"></i></a></li>
 	      	</ul>
 	    </div>
 	</nav>
 </div>
 
 @yield('content')
-
-<div class="bantuan bantuan-tengah">
+<div class="bantuan">
 	<a href="#"><i class="fa fa-question-circle fa-lg"></i></a>
 </div>
-
-<footer>
-	<nav class="nav-center" role="navigation">
-	    <div class="nav-wrapper container">
-	        <ul>
-	            <li><a href="{{ url('dashboard') }}"><i class="icon icon-home"></i></a></li>
-	            <li><a href="{{ url('haji-umroh') }}"><i class="icon icon-kabah"></i></a></li>
-	            <li><a href="#"><i class="icon icon-sedekah"></i></a></li>
-	            <li><a href="#"><i class="icon icon-pesawat-alt"></i></a></li>
-	            <li><a href="#"><i class="icon icon-store"></i></a></li>
-	        </ul>
-	    </div>
-	</nav>
-</footer>
 <script type="text/javascript" src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/materialize/js/materialize.min.js') }}"></script>
 @stack('js')

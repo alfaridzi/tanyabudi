@@ -25,10 +25,9 @@
 	      		<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>
 	      	</ul>
 	      	<ul class="left hide-on-large-only">
-	      		<li><a href="#"><i style="font-size: 35px; padding-top: 3px" class="icon icon-agen-circle"></i></a></li>
+	      		<li><a href="#"><i class="icon icon-notifikasi"></i></a></li>
 	      	</ul>
 	      	<ul class="right hide-on-large-only">
-	      		<li><a href="#"><i class="icon icon-notifikasi"></i></a></li>
 	      		<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>
 	      	</ul>
 	    </div>
@@ -36,10 +35,6 @@
 </div>
 
 @yield('content')
-
-<div class="bantuan bantuan-tengah">
-	<a href="#"><i class="fa fa-question-circle fa-lg"></i></a>
-</div>
 
 <footer>
 	<nav class="nav-center" role="navigation">
