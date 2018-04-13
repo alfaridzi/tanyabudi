@@ -165,7 +165,7 @@
 						    </div>
 							<div class="col s12">
 								<br>
-								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></button>
+								<a href="{{ url('dashboard') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
 							</div>
 						</div>
 					</form>

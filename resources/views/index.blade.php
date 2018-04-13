@@ -90,7 +90,7 @@
 								<input type="password" class="validate" name="password" placeholder="Password">
 							</div>
 							<div class="col s12">
-								<button class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>LOG IN</b></button>
+								<a href="{{ url('dashboard') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>LOG IN</b></a>
 							</div>
 						</div>
 					</form>

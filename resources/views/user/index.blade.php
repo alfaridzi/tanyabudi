@@ -60,7 +60,7 @@
 		<div class="col s12">
 			<div class="secondary-menu">
 				<ol class="circle-menu">
-					<a href="instruksi">
+					<a href="{{ url('instruksi') }}">
 						<li>
 							<i class="icon icon-rupiah"></i>
 							<span>Bayar Paket</span>
