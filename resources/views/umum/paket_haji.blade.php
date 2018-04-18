@@ -1,8 +1,8 @@
 @extends('user.layout.app')
-@section('page-title', 'Haji dan Umroh')
+@section('page-title', 'Paket Haji')
 @section('content')
 <div class="page-break">
-	Paket Wisata
+	Paket Haji
 </div>
 <div class="container">
 	<div class="row">
@@ -13,7 +13,7 @@
 						<div class="overlay"></div>
 						<div class="detail-paket">
 							<div class="nama-travel">Nama Travel</div>
-							<div class="nama-paket">Paket Umroh 9 Hari</div>
+							<div class="nama-paket">Paket Haji 9 Hari</div>
 							<div class="harga-paket">Rp. 20.500.000</div>
 						</div>
 						<div class="cover-img">
@@ -26,7 +26,7 @@
 						<div class="overlay"></div>
 						<div class="detail-paket">
 							<div class="nama-travel">Nama Travel</div>
-							<div class="nama-paket">Paket Umroh 9 Hari</div>
+							<div class="nama-paket">Paket Haji 9 Hari</div>
 							<div class="harga-paket">Rp. 20.500.000</div>
 						</div>
 						<div class="cover-img">
@@ -39,7 +39,7 @@
 						<div class="overlay"></div>
 						<div class="detail-paket">
 							<div class="nama-travel">Nama Travel</div>
-							<div class="nama-paket">Paket Umroh 9 Hari</div>
+							<div class="nama-paket">Paket Haji 9 Hari</div>
 							<div class="harga-paket">Rp. 20.500.000</div>
 						</div>
 						<div class="cover-img">
@@ -52,7 +52,7 @@
 						<div class="overlay"></div>
 						<div class="detail-paket">
 							<div class="nama-travel">Nama Travel</div>
-							<div class="nama-paket">Paket Umroh 9 Hari</div>
+							<div class="nama-paket">Paket Haji 9 Hari</div>
 							<div class="harga-paket">Rp. 20.500.000</div>
 						</div>
 						<div class="cover-img">

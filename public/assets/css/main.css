@@ -26,12 +26,16 @@ footer {
 .page-break {
 	display: block;
 	position: relative;
+	color: #5A5A5A;
+	font-size: 14px;
+	font-weight: bold;
 	top: 0;
+	bottom: 0;
 	left: 0;
 	right: 0;
 	width: 100%;
 	margin: 0 auto;
-	padding: 5px;
+	padding: 5px 50px;
 	background-color: #ddd;
 }
 
@@ -70,25 +74,59 @@ nav.nav-center ul li a {
     display: inline-block;
 }
 
-div.nama-user {
+/* Notifikasi */
+
+.notifikasi {
+	display: block;
+}
+
+.notifikasi .list-notifikasi .isi-notifikasi{
+	position: relative;
+	background-color: #EDEE84;
+}
+
+.notifikasi .list-notifikasi .isi-notifikasi.terbaca{
+	background-color: #FFFFFF;
+}
+
+.notifikasi .list-notifikasi .isi-notifikasi:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-bottom: 1px solid #A5A5A5;
 	width: 100%;
-	text-align: center;
-
 }
 
-div.nama-user span {
-	font-size: 14px;
-	text-align: center;
-	display: inline-block;
+.isi-notifikasi .judul-pesan {
+	font-size: 15px;
+	font-weight: bold;
+	color: #363636;
 }
 
+.isi-notifikasi .pesan {
+	font-size: 13px;
+	color: #363636;
+}
+
+.isi-notifikasi .tanggal-pesan {
+	font-size: 11px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	color: #A7A7A7;
+}
+
+/* Dashboard */
 div.steps {
 	text-align: center;
 }
 
-div.steps ol.steps{
+div.steps ol.circle-steps{
 	position: relative;
 	display: block;
+	margin-left: -10px;
 }
 
 ol.circle-steps > li {
@@ -103,15 +141,59 @@ ol.circle-steps > li {
 	border: 2px solid #ddd;
 }
 
+.user-content {
+	margin-top: 30px;
+}
+
+.user-content .row-1 {
+	width: 100%;
+	display: block;
+}
+
+.img-user {
+	float: left;
+	width: 15%;
+}
+
+.img-user img {
+	margin: 0 auto;
+	display: block;
+}
+
+.img-user .nama-user {
+	width: 100%;
+	text-align: center;
+}
+
+.img-user .nama-user span {
+	font-size: 14px;
+	text-align: center;
+	display: inline-block;
+}
+
+.user-content .title-produk {
+	font-weight: bold;
+}
+
+.user-content .produk {
+	font-weight: bold;
+}
+
 div.tabungan-haji {
 	display: block;
 	text-align: center;
-	width: 100%;
-	padding: 10px 20px;
+	width: 75%;
+	padding: 10px 19px;
 	background-color: #AA76B5;
 	border: 0px;
 	border-radius: 5px;
 	color: white;
+	margin-left: 25%;
+}
+
+.user-content .jumlah {
+	font-size: 20px;
+	margin: 10px auto;
 }
 
 div.tabungan-haji .sisa-pembayaran {
@@ -120,7 +202,7 @@ div.tabungan-haji .sisa-pembayaran {
 }
 
 div.item {
-	display: block;
+	display: table-cell;
 	text-align: center;
 	margin: 0 auto;
 	width: 100%;
@@ -130,10 +212,20 @@ div.item {
 	border-radius: 5px;
 	color: white;
 	height: 150px;
+	vertical-align: middle;
 }
 
 .item.item-red {
 	background-color: #FF8888;
+}
+
+.row-1 .item.item-kanan {
+	display: block;
+	margin-right: 0%;
+	width: 75%;
+	padding-top: 25px;
+	padding-bottom: 0;
+	height: 120px;
 }
 
 div.haji-umroh {
@@ -171,6 +263,30 @@ ol.circle-steps > li span {
 	margin-left: -9px;
 }
 
+ol.circle-steps.text-steps > li {
+	position: relative;
+}
+
+ol.circle-steps.text-steps > li span {
+	position: absolute;
+	font-size: 15px;
+	top: 30%;
+	bottom: 0;
+	left: 15%;
+	right: 0;
+}
+
+ol.circle-steps.text-steps > li:not(:last-child):after {
+	content: '';
+	position: absolute;
+	border-top: 2px solid #ddd;
+	padding: 20px;
+	left: 73px;
+	bottom: 0;
+	top: 35px;
+	right: 0;
+}
+
 ol.circle-steps > li:not(:first-child) {
 	margin-left: 35px;
 }
@@ -195,7 +311,8 @@ ol.circle-steps > li:not(:last-child) i::after {
 ol.circle-steps > li.done,
 ol.circle-steps > li.done i,
 ol.circle-steps > li.done span,
-ol.circle-steps > li.done:not(:last-child) i::after {
+ol.circle-steps > li.done:not(:last-child) i::after,
+ol.circle-steps.text-steps > li.done:not(:last-child):after {
 	border-color: #2F0F62;
 	color: #2F0F62;
 }
@@ -209,6 +326,7 @@ div.secondary-menu {
 div.secondary-menu ol.circle-menu {
 	display: block;
 	position: relative;
+	padding-left: 0;
 	text-align: center;
 }
 
@@ -252,11 +370,77 @@ ol.circle-menu > a:not(:first-child) li {
 	margin-left: 40px;
 }
 
+.countdown {
+	display: block;
+	text-align: center;
+}
+
+.countdown ol {
+	position: relative;
+	list-style: none;
+	padding-left: 0;
+}
+
+.countdown ol li {
+	display: inline-block;
+	position: relative;
+	color: white;
+	padding: 10px 0;
+	background-color: #2F0F62;
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.countdown ol li:not(:first-child){
+	margin-left: 5px;
+}
+
+.countdown ol li:not(:last-child):after{
+	content: ':';
+	font-size: 40px;
+	position: absolute;
+	top: -21%;
+	color: #2F0F62;
+	bottom: 0;
+	right: 0;
+	left: 100%;
+}
+
+.countdown ol li .angka {
+	display: block;
+	font-size: 18px;
+}
+
+.countdown ol li .detail {
+	position: absolute;
+	color: #2F0F62;
+	font-size: 12px;
+	padding:0;
+	margin: 0;
+	font-weight: bold;
+	top: -20px;
+	left: 3%;
+	right: 0;
+	z-index: 1;
+}
+
+.tenggat-waktu {
+	color: #8E8E8E;
+}
+
+.tenggat-waktu span {
+	font-size: 14px;
+}
+
 /*ol.circle-menu > li a {
 	text-align: center;
 	display: block;
 }*/
 
+/* Instruksi */
 .instruksi {
 	display: table;
 	margin: 0 auto;
@@ -301,6 +485,8 @@ ol.circle-menu > a:not(:first-child) li {
 }
 
 
+/* Paket Wisata */
+
 div.daftar-paket {
 	margin: 0 auto;
 	text-align: center;
@@ -312,6 +498,7 @@ div.daftar-paket ol {
 }
 
 div.daftar-paket ol li {
+	display: flex;
 	overflow: hidden;
 	height: 300px;
 	position: relative;
@@ -321,7 +508,7 @@ div.daftar-paket ol li {
 }
 
 div.daftar-paket ol li a {
-	display: block;
+
 }
 
 div.daftar-paket ol li a .overlay {
@@ -336,17 +523,15 @@ div.daftar-paket ol li a .overlay {
 
 div.daftar-paket ol li a .cover-img {
 	position: absolute;
-	z-index: 0;
 	top: -50%;
-	left: 0;
-	width: auto;
-	height: 800px;
+	bottom: 50%;
+	z-index: 0;
 }
 
 div.daftar-paket ol li a .cover-img img {
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
+	align-items: center;
+  	justify-content: center;
+  	height: 600px;
 }
 
 div.daftar-paket ol li a .detail-paket {
@@ -380,6 +565,118 @@ div.daftar-paket ol li a .detail-paket {
 	font-size: 20px;
 }
 
+/* History */
+
+.group-list {
+	display: block;
+	width: 100%;
+}
+
+.group-list .list {
+	display: block;
+	position: relative;
+	text-indent: 50px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.group-list .list:after {
+	content: '';
+	position: absolute;
+	border-bottom: 1px solid #6A6A6A;
+	width: 100%;
+}
+
+.group-list .list .title-list {
+	font-size: 15px;
+	font-weight: bold;
+	color: #6A6A6A;
+}
+
+.group-list .list .sub-title {
+	font-size: 13px;
+	color: #747474;
+}
+
+/* Bayar - Bayar */
+.bayar-bayar {
+	display: block;
+	text-align: center;
+}
+
+.bayar-bayar .list-produk {
+	display: block;
+	margin: 0 auto;
+	padding-top: 20px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.list-produk ol {
+	display: block;
+	position: relative;
+	padding-left: 0;
+	list-style: none;
+}
+
+.list-produk ol li{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: 55px;
+	height: 55px;
+	margin: 0;
+	padding-left: 0.1em;
+	padding-top: 2px;
+	border-radius: 50%;
+	border: 2px solid #363636;
+}
+
+.list-produk ol li:not(:first-child) {
+	margin-left: 10px;
+}
+
+.list-produk ol li:not(:last-child):after {
+	content: '';
+	position: absolute;
+	border-right: 1px black solid;
+	top: 10px;
+	bottom: 10px;
+	left: 60px;
+	right: 0;
+}
+
+.list-produk ol li a {
+	display: block;
+	position: relative;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.list-produk ol li img{
+	position: absolute;
+	top: 2px;
+	bottom: 0;
+	right: 0;
+	left: 3px;
+	width: 42px;
+	height: 42px;
+}
+
+.list-produk ol li span {
+	position: absolute;
+	font-size: 11px;
+	margin: 0 auto;
+	text-align: center;
+	top: 55px;
+	bottom: 0;
+	right: -9px;
+	left: -7px;
+	color: black;
+}
+
 @media only screen and (min-width: 600px) {
 	.instruksi ul.instruksi-steps:before {
 		left: -1.5px;
@@ -403,16 +700,58 @@ div.daftar-paket ol li a .detail-paket {
 		line-height: 65px;
 	}
 
+	nav#navbar-atas {
+		height: 65px;
+		line-height: 65px;
+	}
+
+	nav#navbar-atas i, nav#navbar-atas [class^="mdi-"], nav#navbar-atas [class*="mdi-"], nav#navbar-atas i.material-icons {
+		height: 65px;
+		line-height: 65px;
+	}
+
+	nav#navbar-atas i {
+		font-size: 20px;
+	}
+
+	nav#navbar-atas .right.hide-on-large-only li a {
+		padding: 0px 6px;
+	}
+
 	nav .nav-wrapper .brand-logo img {
 		padding-left: 0;
-		padding-top: 13px;
-	    height: 45px;
+		padding-top: 18px;
+	    height: 48px;
+	}
+
+	.page-break {
+		padding: 10px 10px 5px 20px;
+	}
+
+	.group-list:first-child .page-break {
+		padding: 10px 0 5px 20px;
+	}
+
+	.group-list:not(:first-child) .page-break {
+		padding: 4px 0 5px 20px;
+	}
+
+	.group-list .list {
+		display: block;
+		width: 100%;
+		text-indent: 20px;
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+
+	.notifikasi {
+		margin-top: 10px;
 	}
 
 	div.steps {
 		text-align: center;
 		margin-left: -50%;
-		padding-left: 40%;
+		padding-left: 45%;
 	}
 
 	ol.circle-steps > li {
@@ -424,6 +763,64 @@ div.daftar-paket ol li a .detail-paket {
 		padding: 20px;
 		left: 41px;
 		top: 19px;
+	}
+
+	ol.circle-steps.text-steps > li {
+		position: relative;
+	}
+
+	ol.circle-steps.text-steps > li {
+		width: 70px;
+		height: 70px;
+	}
+
+	ol.circle-steps.text-steps > li span {
+		position: absolute;
+		font-size: 13px;
+		top: 33%;
+		bottom: 0;
+		left: 15%;
+		right: 0;
+		visibility: initial;
+	}
+
+	ol.circle-steps.text-steps > li:not(:last-child):after {
+		content: '';
+		position: absolute;
+		border-top: 2px solid #ddd;
+		padding: 20px;
+		left: 68px;
+		bottom: 0;
+		top: 33px;
+		right: 0;
+	}
+
+	.img-user {
+		width: 20%;
+	}
+
+	.img-user img {
+		margin: 0 auto;
+	}
+
+	div.tabungan-haji {
+		width: 75%;
+		padding: 5px 19px;
+		margin-left: 25%;
+	}
+
+	.row-1 .item.item-kanan {
+		display: block;
+		margin-right: 0%;
+		width: 75%;
+		padding-top: 20px;
+		padding-bottom: 0;
+		height: 100px;
+	}
+
+	.user-content .jumlah {
+		font-size: 17px;
+		font-weight: bold;
 	}
 
 	div.secondary-menu {
@@ -519,5 +916,208 @@ div.daftar-paket ol li a .detail-paket {
 
 	.detail-paket .harga-paket {
 		font-size: 15px;
+	}
+
+	/* Bayar - Bayar */
+
+	.list-produk ol li{
+		width: 45px;
+		height: 45px;
+	}
+
+	.list-produk ol li:not(:last-child):after {
+		position: absolute;
+		top: 10px;
+		bottom: 10px;
+		left: 50px;
+		right: 0;
+	}
+
+	.list-produk ol li img{
+		position: absolute;
+		top: 2px;
+		bottom: 0;
+		right: 0;
+		left: 4px;
+		width: 32px;
+		height: 32px;
+	}
+
+	.list-produk ol li span {
+		position: absolute;
+		font-size: 10px;
+		top: 45px;
+		bottom: 0;
+		right: -9px;
+		left: -7px;
+		color: black;
+	}
+}
+
+@media only screen and (max-width: 430px) {
+	ol.circle-steps.text-steps > li {
+		position: relative;
+	}
+
+	ol.circle-steps.text-steps > li {
+		width: 50px;
+		height: 50px;
+	}
+
+	ol.circle-steps.text-steps > li span {
+		position: absolute;
+		font-size: 10px;
+		top: 33%;
+		bottom: 0;
+		left: 15%;
+		right: 0;
+		visibility: initial;
+	}
+
+	ol.circle-steps.text-steps > li:not(:last-child):after {
+		content: '';
+		position: absolute;
+		border-top: 2px solid #ddd;
+		padding: 20px;
+		left: 48px;
+		bottom: 0;
+		top: 23px;
+		right: 0;
+	}
+
+	.user-content .img-user img {
+		max-width: 100%;
+	}
+
+	.row-1 .item.item-kanan {
+		display: block;
+		margin-right: 0%;
+		width: 75%;
+		padding-top: 5px;
+		padding-bottom: 0;
+		height: 60px;
+	}
+
+	.user-content .title-produk {
+		font-size: 11px;
+	}
+
+	.user-content .jumlah {
+		margin: 0;
+		font-size: 14px;
+	}
+
+	.user-content .produk {
+		font-size: 11px;
+	}
+
+	.total-bonus div.item .title-produk {
+		font-size: 16px;
+	}
+
+	.total-bonus div.item .jumlah {
+		font-size: 15px;
+	}
+	
+}
+
+@media only screen and (max-width: 350px){
+	div.steps ol.circle-steps {
+		padding-left: 20px;
+	}
+
+	div.tabungan-haji .title-produk{
+		font-size: 9px;
+	}
+
+	div.tabungan-haji .sisa-pembayaran {
+		font-size: 8px;
+	}
+
+	nav.nav-center {
+		line-height: 45px
+	}
+
+	nav.nav-center ul li a i {
+		font-size: 17px;
+	}
+
+	div.item {
+		padding: 10px 5px;
+		height: 120px;
+	}
+
+	div.item .title-produk {
+		font-size: 9px;
+	}
+
+	div.item .produk {
+		font-size: 9px;
+	}
+
+	div.item .jumlah {
+		font-size: 12px;
+	}
+
+	.total-bonus div.item .title-produk {
+		font-size: 16px;
+	}
+
+	.total-bonus div.item .jumlah {
+		font-size: 15px;
+	}
+
+	.user-content .nama-user span{
+		font-size: 11px;
+	}
+
+	.secondary-menu ol.circle-menu a li{
+		width: 40px;
+		height: 40px;
+	}
+
+	.secondary-menu ol.circle-menu a li i {
+		font-size: 22px;
+	}
+
+	.secondary-menu ol.circle-menu a li span {
+		font-size: 10px;
+		margin-left: -29px;
+		top: 40px;
+	}
+
+	/* Bayar - Bayar */
+
+	.list-produk ol li{
+		width: 36px;
+		height: 36px;
+	}
+
+	.list-produk ol li:not(:last-child):after {
+		position: absolute;
+		top: 5px;
+		bottom: 5px;
+		left: 40px;
+		right: 0;
+	}
+
+	.list-produk ol li img{
+		position: absolute;
+		top: 3px;
+		bottom: 0;
+		right: 0;
+		left: 4px;
+		width: 22px;
+		height: 22px;
+	}
+
+	.list-produk ol li span {
+		position: absolute;
+		font-size: 8px;
+		top: 35px;
+		bottom: 0;
+		right: -48%;
+		left: -42%;
+		color: black;
 	}
 }

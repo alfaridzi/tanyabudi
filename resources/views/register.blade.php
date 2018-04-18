@@ -58,7 +58,7 @@
 		}
 
 		#btn-user i {
-			font-size: 120px;
+			font-size: 100px;
 			color: white;
 		}
 
@@ -85,7 +85,7 @@
 		}
 
 		#btn-agen i {
-			font-size: 120px;
+			font-size: 100px;
 			color: white;
 		}
 
@@ -135,9 +135,9 @@
 						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="100" height="100">
 						<h5 style="color:white; text-align: center; margin-top: -5px;"><b>tanyabudi</b></h5>
 					</div>
-					<form method="post">
+					<form method="post" id="form-user">
 						@csrf
-						<input type="hidden" name="tipe_user">
+						<input type="hidden" name="tipe_user" value="1">
 						<div class="row">
 							<div class="input-field col s12">
 								<input type="text" class="validate" name="nama" placeholder="Nama Lengkap">
@@ -160,12 +160,51 @@
 							<div class="col s12">
 								<label>
 							        <input id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
-							        <span style="color: white;">Saya setuju dengan <a href="#">Syarat & Ketentuan</a></span>
+							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan') }}">Syarat & Ketentuan</a></span>
 							    </label>
 						    </div>
 							<div class="col s12">
 								<br>
 								<a href="{{ url('dashboard') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
+							</div>
+						</div>
+					</form>
+					<form method="post" id="form-agen">
+						@csrf
+						<input type="hidden" name="tipe_user" value="2">
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="text" class="validate" name="nama" placeholder="Nama Lengkap">
+							</div>
+							<div class="input-field col s12">
+								<input type="text" class="validate" name="nomor_hp" placeholder="Nomor Hp">
+							</div>
+							<div class="input-field col s12">
+								<input type="email" class="validate" name="email" placeholder="Email">
+							</div>
+							<div class="input-field col s12">
+								<input type="password" class="validate" name="password" placeholder="Password">
+							</div>
+							<div class="input-field col s12">
+								<input type="password" class="validate" name="konfirmasi_password" placeholder="Konfirmasi Password">
+							</div>
+							<div class="input-field col s12">
+								<select>
+									<option selected="" disabled="">Paket Produk</option>
+									<option>Paket 1</option>
+									<option>Paket 2</option>
+									<option>Paket 3</option>
+								</select>
+							</div>
+							<div class="col s12">
+								<label>
+							        <input id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
+							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan') }}">Syarat & Ketentuan</a></span>
+							    </label>
+						    </div>
+							<div class="col s12">
+								<br>
+								<a href="{{ url('detail-produk') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
 							</div>
 						</div>
 					</form>
@@ -183,12 +222,14 @@
 <script type="text/javascript">
 	$('#form-page').hide();
 	$(document).ready(function(){
+    	$('select').formSelect();
 		$('#btn-user').on('click', function(){
 			$('#form-pilihan').hide();
 			$('#form-page').css('opacity', '1');
 			$('#form-page').addClass('animated fadeIn');
 			$('#form-page').show();
-			$('input[name="tipe_user"]').val(1);
+			$('#form-user').show();
+			$('#form-agen').hide();
 		});
 
 		$('#btn-batal').on('click', function(){
@@ -203,7 +244,8 @@
 			$('#form-page').css('opacity', '1');
 			$('#form-page').addClass('animated fadeIn');
 			$('#form-page').show();
-			$('input[name="tipe_user"]').val(2);
+			$('#form-agen').show();
+			$('#form-user').hide();
 		});
 	});
 </script>

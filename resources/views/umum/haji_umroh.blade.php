@@ -5,13 +5,13 @@
 	<div class="row">
 		<div class="haji-umroh">
 			<ol>
-				<a href="#">
+				<a href="{{ url('paket-haji') }}">
 				<li>
 					<img src="{{ asset('assets/images/icon/haji.png') }}" class="responsive-img"><br>
 					<span class="btn-konfirmasi">Haji</span>
 				</li>
 				</a>
-				<a href="#">
+				<a href="{{ url('paket-umroh') }}">
 				<li>
 					<img src="{{ asset('assets/images/icon/umroh.png') }}" class="responsive-img"><br>
 					<span class="btn-konfirmasi">Umroh</span>

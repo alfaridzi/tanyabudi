@@ -110,3 +110,6 @@
 .icon-voucher:before {
   content: "\78";
 }
+.icon-star:before {
+  content: "\79";
+}

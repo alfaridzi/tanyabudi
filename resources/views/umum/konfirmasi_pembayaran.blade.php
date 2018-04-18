@@ -15,7 +15,7 @@
 				<div class="input-field col s12">
 					<input type="text" class="datepicker" name="tanggal_pembayaran" placeholder="Tanggal Pembayaran">
 				</div>
-				<div class="file-field input-field">
+				<div class="file-field input-field col s12">
 					<div class="btn" style="background-color: #4498CE; float:right; border-radius: 40px; width: 100px;">
 						<span><i class="fa fa-camera"></i></span>
 						<input type="file" accept=".png,.jpg,.jpeg">
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<div class="col s12 center-align">
-					<button type="submit" class="btn-konfirmasi">Selesai</button>
+					<a href="{{ url('berhasil') }}" class="btn-konfirmasi">Selesai</a>
 				</div>
 			</div>
 		</form>

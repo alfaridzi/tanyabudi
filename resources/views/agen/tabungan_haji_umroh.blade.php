@@ -1,5 +1,5 @@
-@extends('user.layout.app')
-@section('page-title', 'Dashboard User')
+@extends('user.layout.app-1')
+@section('page-title', 'Tabungan Haji/Umroh')
 @section('content')
 
 <div class="container">
@@ -74,13 +74,7 @@
 							<span>Scan Voucher</span>
 						</li>
 					</a>
-					<a href="{{ url('instruksi') }}">
-						<li>
-							<i class="icon icon-top-up"></i>
-							<span>Top Up Bayar-Bayar</span>
-						</li>
-					</a>
-					<a href="{{ url('history') }}">
+					<a href="#">
 						<li>
 							<i class="icon icon-history"></i>
 							<span>History</span>
