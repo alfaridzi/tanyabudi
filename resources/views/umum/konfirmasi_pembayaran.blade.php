@@ -6,26 +6,32 @@
 		<h4>Konfirmasi Pembayaran</h4>
 		<p>Silahkan melakukan konfirmasi pembayaran dengan mengisi form berikut</p>
 
-		<form method="post">
+		<form method="post" enctype="multipart/form-data" method="post" action="{{ url('selesai/'.$produk->id) }}">
 			@csrf
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="number" class="validate" name="jumlah_pembayaran" placeholder="Jumlah Pembayaran">
+					<input type="number" class="validate" name="jumlah_pembayaran" placeholder="Jumlah Pembayaran"
+					@if(isset($jumlah_pembayaran))
+					value="{{ $jumlah_pembayaran }}"
+					@else
+					value="{{ $produk->harga }}"
+					@endif
+					 readonly="">
 				</div>
 				<div class="input-field col s12">
-					<input type="text" class="datepicker" name="tanggal_pembayaran" placeholder="Tanggal Pembayaran">
+					<input type="text" class="datepicker" name="tgl_pembayaran" placeholder="Tanggal Pembayaran" value="{{ date('Y-m-d') }}">
 				</div>
 				<div class="file-field input-field col s12">
 					<div class="btn" style="background-color: #4498CE; float:right; border-radius: 40px; width: 100px;">
 						<span><i class="fa fa-camera"></i></span>
-						<input type="file" accept=".png,.jpg,.jpeg">
+						<input type="file" name="foto" accept=".png,.jpg,.jpeg">
 					</div>
 					<div class="file-path-wrapper" style="padding-right: 10px;">
 						<input class="file-path validate" placeholder="Nama File" type="text">
 					</div>
 				</div>
 				<div class="col s12 center-align">
-					<a href="{{ url('berhasil') }}" class="btn-konfirmasi">Selesai</a>
+					<button type="submit" class="btn-konfirmasi">Selesai</button>
 				</div>
 			</div>
 		</form>

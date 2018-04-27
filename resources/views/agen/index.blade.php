@@ -10,7 +10,7 @@
 					<li class="done">
 						<span>Basic</span>
 					</li>
-					<li class="done">
+					<li>
 						<span>Advance</span>
 					</li>
 					<li>
@@ -26,13 +26,13 @@
 				<div class="img-user">
 					<img src="{{ asset('assets/images/user-1.png') }}" class="circle responsive-img" width="110" height="110">
 					<div class="center-align nama-user">
-						<span>Rika Sartika</span>
+						<span>{{ Auth::user()->name }}</span>
 					</div>
 				</div>
 				<a href="{{ url('total-bonus') }}">
 					<div class="item item-kanan">
 						<span class="title-produk">Total Bonus</span>			
-						<p class="jumlah">Rp. 3.500.000</p>
+						<p class="jumlah">Rp. 0</p>
 					</div>
 				</a>
 			</div>
@@ -41,13 +41,13 @@
 			<div class="col s6" style="display: table;">
 				<div class="item">
 					<span class="title-produk">Bonus Umroh / Haji</span><br>
-					<p class="jumlah">Rp. 7.000.000</p>
+					<p class="jumlah">Rp. 0</p>
 				</div>
 			</div>
 			<div class="col s6" style="display: table;">
 				<div class="item valign-wrapper">
 					<span class="title-produk">Bonus Paket Wisata</span>
-					<p class="jumlah">Rp. 2.000.000</p>
+					<p class="jumlah">Rp. 0</p>
 				</div>
 			</div>
 		</div>
@@ -55,13 +55,13 @@
 			<div class="col s6" style="display: table;">
 				<div class="item">
 					<span class="title-produk">Bonus Bayar-Bayar</span><br>
-					<p class="jumlah">Rp. 1.000.000</p>
+					<p class="jumlah">Rp. 0</p>
 				</div>
 			</div>
 			<div class="col s6" style="display: table;">
 				<div class="item item-red valign-wrapper">
 					<span class="title-produk">Saldo Bayar Bayar</span>
-					<p class="jumlah">Rp. 1.000.000</p>
+					<p class="jumlah">Rp. 0</p>
 				</div>
 			</div>
 		</div>

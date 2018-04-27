@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<h5 style="color: #B0B0B0">Tambah ....</h5>
+		<h5 style="color: #B0B0B0">Tambah Tabungan</h5>
 		<h4>Instruksi</h4>
 		<div class="instruksi">
 			<ul class="instruksi-steps">

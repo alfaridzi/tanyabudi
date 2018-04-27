@@ -6,21 +6,28 @@
 </div>
 <div class="container">
 	<div class="row">
-		<form class="col s12">
+		<form class="col s12" method="post" action="sedekah/konfirmasi">
+			@csrf
 			<div class="row">
 				<div class="input-field col s12">
-					<select class="browser-default">
+					<select class="browser-default" name="type">
 				      <option value="" disabled selected>Pilih Salah Satu</option>
-				      <option value="1">Option 1</option>
-				      <option value="2">Option 2</option>
-				      <option value="3">Option 3</option>
+				      <?php
+				      $sedekah = App\produk::where('type', 4)->get();
+				      ?>
+
+				      @foreach($sedekah as $item)
+
+				      <option value="{{ $item->id }}">{{ $item->nama }}</option>
+
+				      @endforeach
 				    </select>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="jumlah_sedekah" class="validate" placeholder="Jumlah Sedekah">
+					<input type="text" name="jumlah_pembayaran" class="validate" placeholder="Jumlah Sedekah">
 				</div>
 			</div>
-		</form>
+		
 	</div>
 	<div class="row">
 		<h5>Pembayaran</h5>
@@ -35,9 +42,10 @@
 		</div>
 		<br>
 		<div class="center-align">
-			<a href="{{ url('konfirmasi') }}" class="btn-konfirmasi">Berikutnya</a>
+			<button type="submit" class="btn-konfirmasi">Berikutnya</button>
 		</div>
 	</div>
+	</form>
 </div>
 @endsection
 @push('js')

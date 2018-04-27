@@ -15,26 +15,35 @@
 //     return view('welcome');
 // });
 
-Route::get('/', function(){
-	return view('index');
-});
 
-//Bagian Register dan Login 
-Route::get('/register', function(){
-	return view('register');
-});
+	Route::get('/logout','Auth\LoginController@logout');
+Route::group(['middleware'=>'guest'], function() {
 
-Route::get('/syarat-ketentuan', function(){
-	return view('syarat_ketentuan');
-});
 
-Route::get('/instruksi-bayar', function(){
+
+	Route::get('/', function(){
+		return view('index');
+	})->name('login');
+
+	//Bagian Register dan Login 
+	Route::get('/register', function(){
+		return view('register');
+	});
+
+
+	Route::post('/login','Auth\LoginController@login');
+
+	Route::get('/syarat-ketentuan', function(){
+		return view('syarat_ketentuan');
+	});
+
+});
+Route::group(['middleware'=>'auth'], function() {
+       Route::get('/instruksi-bayar', function(){
 	return view('instruksi');
 });
 
-Route::get('/detail-produk', function(){
-	return view('paket_produk');
-});
+Route::get('/detail-paket/{id}', 'produkController@detail_produk');
 
 Route::get('/daftar-konfirmasi-pembayaran', function(){
 	return view('konfirmasi_pembayaran');
@@ -45,9 +54,7 @@ Route::get('/pendaftaran-berhasil', function(){
 });
 // Akhir Bagian Register dan Login
 
-Route::get('/dashboard', function(){
-	return view('user.index');
-});
+Route::get('/dashboard', 'dashboardController@index');
 
 Route::get('/notifikasi', function(){
 	return view('umum.notifikasi');
@@ -136,7 +143,13 @@ Route::get('/detail-paket', function(){
 Route::get('/instruksi', function() {
 	return view('umum.instruksi');
 });
-
 Route::get('/konfirmasi', function() {
-	return view('umum.konfirmasi_pembayaran');
+	return view('umum.konfirmasi');
+});
+Route::get('/konfirmasi/{id}', 'produkController@konfirmasi');
+Route::post('/konfirmasi/{id}', 'produkController@konfirmasi_wisata');
+Route::get('/intruksi/{id}', 'produkController@intruksi');
+Route::post('/intruksi/{id}', 'produkController@intruksi_wisata');
+Route::post('/selesai/{id}', 'produkController@selesai');
+Route::post('sedekah/konfirmasi', 'produkController@konfirmasi_sedekah');
 });
