@@ -14,6 +14,45 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('index/login', function(){
+	return view('admin.login');
+});
+
+Route::prefix('index/admin')->group(function(){
+
+	Route::get('dashboard', function(){
+		return view('admin.dashboard');
+	});
+
+	Route::get('ajax/get_jabatan/{kode_divisi}', 'Admin\AjaxController@get_jabatan');
+	Route::get('ajax/get_kota/{province_id}', 'Admin\AjaxController@get_kota');
+	Route::get('ajax/get_kecamatan/{regency_id}', 'Admin\AjaxController@get_kecamatan');
+	Route::get('ajax/get_kelurahan/{district_id}', 'Admin\AjaxController@get_kelurahan');
+	Route::get('ajax/detail_karyawan/{id_karyawan}', 'Admin\AjaxController@detail_karyawan');
+
+	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
+
+	Route::get('karyawan', 'Admin\KaryawanController@index');
+	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
+	Route::post('karyawan/tambah/simpan', 'Admin\KaryawanController@store');
+	Route::get('karyawan/edit/{id_karyawan}', 'Admin\KaryawanController@edit');
+	Route::patch('karyawan/update/{id_karyawan}', 'Admin\KaryawanController@update');
+	Route::delete('karyawan/delete/{id_karyawan}', 'Admin\KaryawanController@delete');
+
+	Route::get('divisi', 'Admin\DivisiController@index');
+	Route::get('divisi/tambah', 'Admin\DivisiController@create');
+	Route::post('divisi/tambah/simpan', 'Admin\DivisiController@store');
+	Route::get('divisi/edit/{kode_divisi}', 'Admin\DivisiController@edit');
+	Route::patch('divisi/update/{kode_divisi}', 'Admin\DivisiController@update');
+	Route::delete('divisi/delete/{kode_divisi}', 'Admin\DivisiController@delete');
+
+	Route::get('jabatan', 'Admin\JabatanController@index');
+	Route::get('jabatan/tambah', 'Admin\JabatanController@create');
+	Route::post('jabatan/tambah/simpan', 'Admin\JabatanController@store');
+	Route::get('jabatan/edit/{kode_jabatan}', 'Admin\JabatanController@edit');
+	Route::patch('jabatan/update/{kode_jabatan}', 'Admin\JabatanController@update');
+	Route::delete('jabatan/delete/{kode_jabatan}', 'Admin\JabatanController@delete');
+});
 
 Route::get('/', function(){
 	return view('index');

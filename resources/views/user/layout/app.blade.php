@@ -24,9 +24,11 @@
 	    		<li><a href="#"><i style="font-size: 30px;" class="icon icon-agen-circle"></i></a></li>
 	      		<li><a href="{{ url('/notifikasi') }}"><i class="icon icon-notifikasi"></i></a></li>
 	      		<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>
+	      		<li><a href="{{ url('logout') }}"><i class="icon icon-logout"></i></a></li>
 	      	</ul>
 	      	<ul class="left hide-on-large-only">
-	      		<li><a href="#"><i style="font-size: 30px; padding-top: 2px" class="icon icon-agen-circle"></i></a></li>
+	      		<li><a href="#"><i class="icon icon-agen-circle"></i></a></li>
+	      		<li><a href="{{ url('logout') }}"><i class="icon icon-logout"></i></a></li>
 	      	</ul>
 	      	<ul class="right hide-on-large-only">
 	      		<li><a href="{{ url('/notifikasi') }}"><i class="icon icon-notifikasi"></i></a></li>
