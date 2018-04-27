@@ -4,20 +4,57 @@
 <div class="detail-paket">
 	<div class="container">
 		<div class="row">
-			<p>Nama Paket</p>
+
+
+			<form  method="post" action="/intruksi/{{$produk->id}}">
+			@csrf
+			<p>{{ $produk->nama }}</p>
+			
+			
+			@if($produk->type == 3)
+			<div class="input-field">
+				<select class="browser-default" name="jumlah_orang" id="jumlah_orang">
+					<option value="" disabled selected>Jumlah orang</option>
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+
+			</select>
+		</div>
+			@endif
+			
+			<p id="harga_final">Rp. {{ number_format($produk->harga,0,'.','.') }}</p>
+			<input type="hidden" id="harga" value="{{$produk->harga}}">
+			<input type="hidden" id="jumlah_harga" name="jumlah_harga" value="{{$produk->harga}}">
 			<hr>
-			<p>Harga</p>
-			<hr>
-			<p>Deskripsi : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<p>Deskripsi : {{ $produk->desc_prod }}</p>
 		</div>
 		<div class="center-align">
-			<a href="{{ url('konfirmasi') }}" class="btn-konfirmasi">Beli Paket</a>
+			<button type="submit" class="btn-konfirmasi">Beli Paket</button>
 		</div>
+		</form>
 	</div>
 </div>
+
+
+
 @endsection
+
+
+@push('js')
+
+
+<script>
+	
+
+	$('#jumlah_orang').change(function() {
+		var f_harga = $('#harga').val() * $('#jumlah_orang').val();
+		document.getElementsByName('jumlah_harga')[0].value = f_harga;
+		$('#harga_final').text('Rp. ' + f_harga.toLocaleString());
+		
+	});
+</script>
+
+@endpush
+
+

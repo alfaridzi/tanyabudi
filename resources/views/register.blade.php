@@ -135,76 +135,81 @@
 						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="100" height="100">
 						<h5 style="color:white; text-align: center; margin-top: -5px;"><b>tanyabudi</b></h5>
 					</div>
-					<form method="post" id="form-user">
+					<form method="post" id="form-user" action="{{ url('api/register') }}">
 						@csrf
 						<input type="hidden" name="tipe_user" value="1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="nama" placeholder="Nama Lengkap">
+								<input type="text" class="validate" name="name" placeholder="Nama Lengkap" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="nomor_hp" placeholder="Nomor Hp">
+								<input type="text" class="validate" name="nohp" placeholder="Nomor Hp" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="email" class="validate" name="email" placeholder="Email">
+								<input type="email" class="validate" name="email" placeholder="Email" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="password" class="validate" name="password" placeholder="Password">
+								<input type="password" class="validate" name="password" placeholder="Password" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="password" class="validate" name="konfirmasi_password" placeholder="Konfirmasi Password">
+								<input type="password" class="validate" name="c_password" placeholder="Konfirmasi Password" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="kode_referal" placeholder="Kode Referal (Optional)">
+								<input type="text" class="validate" name="referal" placeholder="Kode Referal (Optional)">
 							</div>
+							<input type="hidden" value="1" name="type">
+
 							<div class="col s12">
 								<label>
-							        <input id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
+							        <input required id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
 							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan') }}">Syarat & Ketentuan</a></span>
 							    </label>
 						    </div>
 							<div class="col s12">
 								<br>
-								<a href="{{ url('dashboard') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
+								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></button>
 							</div>
 						</div>
 					</form>
-					<form method="post" id="form-agen">
+					<form method="post" id="form-agen" action="{{ url('api/register') }}">
 						@csrf
 						<input type="hidden" name="tipe_user" value="2">
 						<div class="row">
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="nama" placeholder="Nama Lengkap">
+								<input type="text" class="validate" name="name" placeholder="Nama Lengkap" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="nomor_hp" placeholder="Nomor Hp">
+								<input type="text" class="validate" name="nohp" placeholder="Nomor Hp" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="email" class="validate" name="email" placeholder="Email">
+								<input type="email" class="validate" name="email" placeholder="Email" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="password" class="validate" name="password" placeholder="Password">
+								<input type="password" class="validate" name="password" placeholder="Password" required>
 							</div>
 							<div class="input-field col s12">
-								<input type="password" class="validate" name="konfirmasi_password" placeholder="Konfirmasi Password">
+								<input type="password" class="validate" name="c_password" placeholder="Konfirmasi Password" required>
 							</div>
 							<div class="input-field col s12">
-								<select>
+								<select name="paket">
 									<option selected="" disabled="">Paket Produk</option>
-									<option>Paket 1</option>
-									<option>Paket 2</option>
-									<option>Paket 3</option>
+									<option value="1">Basic - RP. 250.000</option>
+									<option value="2">Professional - Rp. 320.000</option>
 								</select>
 							</div>
+
+
+							<input type="hidden" value="2" name="type">
+							<input type="hidden" value="0" name="status">
 							<div class="col s12">
 								<label>
-							        <input id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
+							        <input required id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
 							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan') }}">Syarat & Ketentuan</a></span>
 							    </label>
 						    </div>
 							<div class="col s12">
 								<br>
-								<a href="{{ url('detail-produk') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></a>
+								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>SIGN UP</b></button>
 							</div>
 						</div>
 					</form>

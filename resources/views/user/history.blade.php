@@ -3,27 +3,34 @@
 @section('content')
 <div class="container-fluid">
 	<div class="row">
+
+
+		<?php
+		$history = App\history::where('id_user',Auth::user()->id)->orderBy('created_at','desc')->get();
+		?>
+
+
+		
 		<div class="group-list">
 			<div class="page-break">
-				28 MARET 2018
+				April 2018
 			</div>
+
+			@foreach($history as $item)
 			<div class="list">
 				<div class="title-list">
-					TOP UP BAYAR-BAYAR
+					{{ $item->title }}
 				</div>
 				<div class="sub-title">
-					13:35 - Isi Saldo
+					{{ $item->jam }} - {{ $item->info }}
 				</div>
 			</div>
-			<div class="list">
-				<div class="title-list">
-					BAYAR PAKET
-				</div>
-				<div class="sub-title">
-					17:45 - Pembayaran Paket Umroh
-				</div>
-			</div>
+			@endforeach
+
 		</div>
+		
+
+		<!--
 		<div class="group-list">
 			<div class="page-break">
 				04 APRIL 2018
@@ -57,7 +64,7 @@
 					14:23 - Telkomsel 10K
 				</div>
 			</div>
-		</div>
+		</div>-->
 	</div>
 </div>	
 @endsection

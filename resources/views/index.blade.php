@@ -75,22 +75,45 @@
 	<div class="valign" style="width:100%;">
 		<div class="container">
 			<div class="row">
+				
 				<div class="centered">
 					<div class="logo" style="text-align: center">
 						<img src="{{ asset('assets/images/logo.png') }}" alt="logo" width="150" height="150">
 						<h4 style="color:white; text-align: center"><b>tanyabudi</b></h4>
 					</div>
-					<form method="post">
+					<form method="post" action="{{ url('login') }}">
+
+
+						@if($errors->any())
+						<div class="card red darken-1">
+   <div class="row">
+    <div class="col s12 m10">
+      <div class="card-content white-text">
+						@foreach($errors->all() as $error)
+
+							<p>{{ $error }}</p>
+
+
+						@endforeach
+						</div>
+  </div>
+  <div class="col s12 m2">
+    <i class="fa fa-times icon_style"                             id="alert_close" aria-hidden="true"></i>
+  </div>
+  </div>
+  </div>
+
+						@endif
 						@csrf
 						<div class="row">
 							<div class="input-field col s12">
-								<input type="text" class="validate" name="username" placeholder="Nomor Hp / Email">
+								<input type="text" class="validate" name="email" placeholder="Nomor Hp / Email">
 							</div>
 							<div class="input-field col s12">
 								<input type="password" class="validate" name="password" placeholder="Password">
 							</div>
 							<div class="col s12">
-								<a href="{{ url('dashboard') }}" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>LOG IN</b></a>
+								<button type="submit" class="btn waves-effect waves-light green btn-block btn-flat" style="color:white;"><b>LOG IN</b></a>
 							</div>
 						</div>
 					</form>
