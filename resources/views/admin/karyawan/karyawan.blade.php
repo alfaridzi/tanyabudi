@@ -19,6 +19,12 @@
 			<div class="col-md-12">
 				<div class="box box-primary">
 		            <div class="box-header">
+		            	@if(Session::has('success'))
+		            	<div class="alert alert-success alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>{{ Session::get('success') }}</strong>
+						</div>
+		            	@endif
 		            	<a href="{{ url('index/admin/karyawan/tambah') }}" class="btn btn-primary btn-flat">Tambah Karyawan</a>
 		            </div>
 		            <div class="box-body">

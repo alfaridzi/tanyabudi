@@ -15,20 +15,7 @@
 					<th class="center-align">Top Up Saldo</th>
 					<th class="center-align">Penghasilan</th>
 				</tr>
-				<tr>
-					<td>M.Yusuf</td>
-					<td class="center-align">5</td>
-					<td class="center-align">42</td>
-					<td class="center-align">0</td>
-					<td class="center-align">Rp 105.000</td>
-				</tr>
-				<tr>
-					<td>Junedi</td>
-					<td class="center-align">5</td>
-					<td class="center-align">42</td>
-					<td class="center-align">0</td>
-					<td class="center-align">Rp 105.000</td>
-				</tr>
+			
 			</table>
 		</div>
 	</div>

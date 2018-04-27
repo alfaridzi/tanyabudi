@@ -31,6 +31,7 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('ajax/detail_karyawan/{id_karyawan}', 'Admin\AjaxController@detail_karyawan');
 
 	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
+	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_haji');
 
 	Route::get('karyawan', 'Admin\KaryawanController@index');
 	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
