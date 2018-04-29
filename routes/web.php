@@ -33,6 +33,21 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
 	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_haji');
 
+	Route::get('produk/tambah', 'Admin\ProdukController@create');
+	Route::post('produk/tambah/simpan', 'Admin\ProdukController@store');
+	Route::get('produk/{produk}', 'Admin\ProdukController@index');
+	Route::get('produk/{produk}/search', 'Admin\ProdukController@search');
+	Route::get('produk/edit/{id_produk}', 'Admin\ProdukController@edit');
+	Route::patch('produk/update/{id_produk}', 'Admin\ProdukController@update');
+	Route::delete('produk/update/{id_produk}', 'Admin\ProdukController@delete');
+
+	Route::get('voucher', 'Admin\VoucherController@index');
+	Route::get('voucher/tambah', 'Admin\VoucherController@create');
+	Route::post('voucher/tambah/simpan', 'Admin\VoucherController@store');
+	Route::get('voucher/edit/{id_voucher}', 'Admin\VoucherController@edit');
+	Route::patch('voucher/update/{id_voucher}', 'Admin\VoucherController@update');
+	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete');
+
 	Route::get('karyawan', 'Admin\KaryawanController@index');
 	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
 	Route::post('karyawan/tambah/simpan', 'Admin\KaryawanController@store');

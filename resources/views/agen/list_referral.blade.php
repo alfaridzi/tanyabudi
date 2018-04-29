@@ -15,7 +15,6 @@
 					<th class="center-align">Top Up Saldo</th>
 					<th class="center-align">Penghasilan</th>
 				</tr>
-			
 			</table>
 		</div>
 	</div>

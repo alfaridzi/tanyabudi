@@ -210,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Tanggal' => App\Helpers\Tanggal::class,
+        'Pemilihan' => App\Helpers\Pemilihan::class,
     ],
 
 ];

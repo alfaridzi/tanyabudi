@@ -22,13 +22,28 @@
         <!-- Optionally, you can add icons to the links -->
         <li><a href="{{ url('index/admin/dashboard') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
+          <a href="#"><i class="fa fa-bookmark"></i> <span>Produk</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('index/admin/produk/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
+            <li><a href="{{ url('index/admin/produk/umroh') }}"><i class="fa fa-link"></i> Umroh</a></li>
+            <li><a href="{{ url('index/admin/produk/wisata') }}"><i class="fa fa-link"></i> Wisata</a></li>
+            <li><a href="{{ url('index/admin/produk/sedekah') }}"><i class="fa fa-link"></i> Sedekah</a></li>
+            <li><a href="{{ url('index/admin/produk/tabungan') }}"><i class="fa fa-link"></i> Tabungan</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
           <a href="#"><i class="fa fa-shopping-cart"></i> <span>Transaksi</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-link"></i> Haji dan Umroh</a></li>
+            <li><a href="#"><i class="fa fa-link"></i> Haji</a></li>
+            <li><a href="#"><i class="fa fa-link"></i> Umroh</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Wisata</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Sedekah</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Bayar Paket</a></li>
@@ -36,6 +51,8 @@
             <li><a href="#"><i class="fa fa-link"></i> PPOB</a></li>
           </ul>
         </li>
+        <li class="header">MASTER VOUCHER</li>
+        <li><a href="{{ url('index/admin/voucher') }}"><i class="fa fa-ticket"></i> Voucher</a></li>
         <li class="header">MASTER DATA</li>
         <li><a href="{{ url('index/admin/karyawan') }}"><i class="fa fa-user"></i> <span>Karyawan</span></a></li>
         <li><a href="{{ url('index/admin/divisi') }}"><i class="fa fa-building"></i> <span>Divisi</span></a></li>

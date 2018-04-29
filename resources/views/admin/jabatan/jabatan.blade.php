@@ -8,7 +8,7 @@
 	    Data Jabatan
 	  </h1>
 	  <ol class="breadcrumb">
-	    <li><a href="#"><i class="fa fa-briecase"></i> Jabatan</a></li>
+	    <li><a href="#"><i class="fa fa-briefcase"></i> Jabatan</a></li>
 	    <li class="active">Data Jabatan</li>
 	  </ol>
 	</section>
