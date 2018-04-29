@@ -24,7 +24,7 @@ class TambahDivisiRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode_divisi' => 'required|unique:tbl_divisi,kode_divisi',
+            'kode_divisi' => 'required|alpha_dash|unique:tbl_divisi,kode_divisi',
             'nama_divisi' => 'required|string',
         ];
     }

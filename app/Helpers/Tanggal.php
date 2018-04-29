@@ -19,4 +19,11 @@ class Tanggal
 		
 		return $dt->formatLocalized('%d %B %Y %H:%M:%S');
 	}
+
+	public static function sisaDetik($tgl1, $tgl2)
+	{
+		$hasil = strtotime($tgl2) - strtotime($tgl1);
+
+		return $hasil;
+	}
 }

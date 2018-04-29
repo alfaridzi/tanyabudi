@@ -26,7 +26,7 @@ class TambahKaryawanRequest extends FormRequest
         return [
             'divisi' => 'required|exists:tbl_divisi,kode_divisi',
             'jabatan' => 'required|exists:tbl_jabatan,kode_jabatan',
-            'nik' => 'required|string|unique:tbl_karyawan,nik',
+            'nik' => 'required|string|alpha_dash|unique:tbl_karyawan,nik',
             'nama' => 'required|string|max:30',
             'tanggal_bergabung' => 'required|date',
             'tempat_lahir' => 'required|string',

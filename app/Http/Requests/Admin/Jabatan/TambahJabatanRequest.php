@@ -24,7 +24,7 @@ class TambahJabatanRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode_jabatan' => 'required|unique:tbl_jabatan,kode_jabatan',
+            'kode_jabatan' => 'required|alpha_dash|unique:tbl_jabatan,kode_jabatan',
             'divisi' => 'required|exists:tbl_divisi,kode_divisi',
             'nama_jabatan' => 'required|string',
             'deskripsi' => 'required|string',

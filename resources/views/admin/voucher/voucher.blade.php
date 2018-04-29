@@ -29,7 +29,7 @@
 		            </div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
-							<table class="table table-bordered">
+							<table class="table table-bordered" id="table-voucher">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -38,8 +38,8 @@
 										<th>Kategori</th>
 										<th>Nama Voucher</th>
 										<th>Nominal</th>
+										<th>Expired Voucher</th>
 										<th>Tanggal</th>
-										<th>Countdown</th>
 										<th>Status Expired</th>
 										<th>Status Voucher</th>
 										<th>Aksi</th>
@@ -47,7 +47,7 @@
 								</thead>
 								<tbody>
 									@foreach($voucher as $dataVoucher)
-									<tr>
+									<tr id="tr-{{ $loop->iteration }}">
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataVoucher->kode_voucher }}</td>
 										<td>{{ $dataVoucher->pemilik }}</td>
@@ -62,7 +62,7 @@
 										</td>
 										<td>{{ $dataVoucher->nama_voucher }}</td>
 										<td>Rp {{ number_format($dataVoucher->nominal, 2, ',', '.') }}</td>
-										<td>ASAP</td>
+										<td><span class="countdown" data-tanggal-awal="{{ $dataVoucher->tanggal_mulai }}" data-tanggal-akhir="{{ $dataVoucher->tanggal_akhir }}">Mohon Tunggu..</span></td>
 										<td>{{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_mulai) }} s.d {{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_akhir) }}</td>
 										<td>{{ $dataVoucher->status_expired == 0 ? 'Belum Expired' : 'Expired' }}</td>
 										<td>{{ $dataVoucher->status_voucher == 0 ? 'Belum Terpakai' : 'Terpakai' }}</td>
@@ -89,7 +89,54 @@
 @endsection
 @push('js')
 <script type="text/javascript">
+
 	$(document).ready(function(){
+
+	var table = document.getElementById("table-voucher");
+
+	var x = setInterval(
+	    function () {
+
+	        for (var i = 1, row; row = table.rows[i]; i++) {
+	            //iterate through rows
+	            //rows would be accessed using the "row" variable assigned in the for loop
+
+	            var endDate = new Date($('#tr-'+i+' .countdown').data('tanggal-akhir'));
+	            var startDate = new Date($('#tr-'+i+' .countdown').data('tanggal-awal'));
+
+	            countDownDate = endDate.getTime();
+	            var countDown = $('#tr-'+i+' .countdown');
+	            // Update the count down every 1 second
+
+	            // Get todays date and time
+	            var now = new Date().getTime();
+
+	            var tanggal = new Date();
+	            // Find the distance between now an the count down date
+	            var distance = countDownDate - now;
+
+	            // Time calculations for days, hours, minutes and seconds
+	            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+	            // Display the result in the element
+	            if (startDate > tanggal) {
+	            	countDown.text('Akan Datang');
+	            }else{
+	            	countDown.text(days+' Hari '+hours+' Jam '+minutes+' Menit '+seconds+' Detik ');
+	            }
+
+	            //If the count down is finished, write some text 
+	            if (distance < 0) {
+	                clearInterval(x);
+	                countDown.text('Expired');
+	            }
+	        }
+	    }, 1000);
+
 		$(document).on('click', '#btn-delete-voucher', function(e){
             e.preventDefault();
             var jawaban = confirm('Apakah anda yakin ingin menghapus data ini?');

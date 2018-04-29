@@ -24,7 +24,7 @@ class TambahVoucherRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode_voucher' => 'required|unique:tbl_voucher,kode_voucher',
+            'kode_voucher' => 'required|alpha_dash|unique:tbl_voucher,kode_voucher',
             'pemilik' => 'required|string|max:50',
             'kategori' => 'required|integer',
             'nama_voucher' => 'required|string|max:50',
