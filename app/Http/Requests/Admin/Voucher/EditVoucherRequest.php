@@ -25,7 +25,7 @@ class EditVoucherRequest extends FormRequest
     {
         $id = $this->route('id_voucher');
         return [
-            'kode_voucher' => 'required|unique:tbl_voucher,kode_voucher,'.$id.',id_voucher',
+            'kode_voucher' => 'required|alpha_dash|unique:tbl_voucher,kode_voucher,'.$id.',id_voucher',
             'pemilik' => 'required|string|max:50',
             'kategori' => 'required|integer',
             'nama_voucher' => 'required|string|max:50',
