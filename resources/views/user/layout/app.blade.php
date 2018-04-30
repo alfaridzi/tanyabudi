@@ -41,7 +41,7 @@
 @yield('content')
 
 <div class="bantuan bantuan-tengah">
-	<a href="#"><i class="fa fa-question-circle fa-lg"></i></a>
+	<a href="{{ url('bantuan') }}"><i class="fa fa-question-circle fa-lg"></i></a>
 </div>
 
 <footer>

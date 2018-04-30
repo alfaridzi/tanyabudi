@@ -70,6 +70,9 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('jabatan/edit/{kode_jabatan}', 'Admin\JabatanController@edit');
 	Route::patch('jabatan/update/{kode_jabatan}', 'Admin\JabatanController@update');
 	Route::delete('jabatan/delete/{kode_jabatan}', 'Admin\JabatanController@delete');
+
+	Route::get('pengaturan/edit-halaman-bantuan', 'Admin\PengaturanController@edit_bantuan');
+	Route::patch('pengaturan/edit-halaman-bantuan/update', 'Admin\PengaturanController@update_bantuan');
 });
 
 
@@ -123,6 +126,11 @@ Route::get('/notifikasi', function(){
 
 Route::get('/pengaturan', function(){
 	return view('umum.pengaturan');
+});
+
+Route::get('/bantuan', function(){
+	$bantuan = \DB::table('tbl_halaman_bantuan')->first();
+	return view('umum.bantuan', compact('bantuan'));
 });
 
 Route::get('/tabungan-haji-umroh', function(){

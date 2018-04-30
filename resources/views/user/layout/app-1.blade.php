@@ -34,7 +34,7 @@
 
 @yield('content')
 <div class="bantuan">
-	<a href="#"><i class="fa fa-question-circle fa-lg"></i></a>
+	<a href="{{ url('bantuan') }}"><i class="fa fa-question-circle fa-lg"></i></a>
 </div>
 <script type="text/javascript" src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/materialize/js/materialize.min.js') }}"></script>

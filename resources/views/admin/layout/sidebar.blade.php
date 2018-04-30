@@ -57,6 +57,8 @@
         <li><a href="{{ url('index/admin/karyawan') }}"><i class="fa fa-user"></i> <span>Karyawan</span></a></li>
         <li><a href="{{ url('index/admin/divisi') }}"><i class="fa fa-building"></i> <span>Divisi</span></a></li>
         <li><a href="{{ url('index/admin/jabatan') }}"><i class="fa fa-briefcase"></i> <span>Jabatan</span></a></li>
+        <li class="header">PENGATURAN</li>
+        <li><a href="{{ url('index/admin/pengaturan/edit-halaman-bantuan') }}"><i class="fa fa-question-circle"></i> <span>Edit Halaman Bantuan</span></a></li>
         {{-- <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
