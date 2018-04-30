@@ -50,6 +50,14 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('voucher/print/{id_voucher}', 'Admin\VoucherController@print');
 	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete');
 
+	Route::get('data-user/agen', 'Admin\DataUserController@index_agen');
+	Route::post('data-user/agen/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
+	Route::get('data-user/agen/search', 'Admin\DataUserController@search_agen');
+
+	Route::get('data-user/user', 'Admin\DataUserController@index_user');
+	Route::post('data-user/user/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
+	Route::get('data-user/user/search', 'Admin\DataUserController@search_user');
+
 	Route::get('karyawan', 'Admin\KaryawanController@index');
 	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
 	Route::post('karyawan/tambah/simpan', 'Admin\KaryawanController@store');

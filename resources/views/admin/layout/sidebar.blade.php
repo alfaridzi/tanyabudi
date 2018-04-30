@@ -42,13 +42,24 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-link"></i> Haji</a></li>
+            <li><a href="{{ url('index/admin/transaksi/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Umroh</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Wisata</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Sedekah</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Bayar Paket</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Top Up Bayar-bayar</a></li>
             <li><a href="#"><i class="fa fa-link"></i> PPOB</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-group"></i> <span>Data User</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('index/admin/data-user/user') }}"><i class="fa fa-link"></i> User</a></li>
+            <li><a href="{{ url('index/admin/data-user/agen') }}"><i class="fa fa-link"></i> Agen</a></li>
           </ul>
         </li>
         <li class="header">MASTER VOUCHER</li>

@@ -42,10 +42,10 @@
 		            				<td>{{ $loop->iteration }}</td>
 		            				<td>{{ $dataHaji->nama }}</td>
 		            				<td>{{ $dataHaji->desc_prod }}</td>
-		            				<td>{{ $dataHaji->harga }}</td>
+		            				<td>Rp {{ number_format($dataHaji->harga, 2, ',', '.') }}</td>
 		            				<td>{{ $dataHaji->name }}</td>
-		            				<td>{{ $dataHaji->jumlah_pembayaran }}</td>
-		            				<td>{{ Tanggal::tanggalIndonesia($dataHaji->tgl_pembayaran) }}</td>
+		            				<td>{{ number_format($dataHaji->jumlah_pembayaran, 2, ',', '.') }}</td>
+		            				<td>Rp {{ Tanggal::tanggalIndonesia($dataHaji->tgl_pembayaran) }}</td>
 		            				<td><img src="{{asset('bukti-tf/'.$dataHaji->foto)}}" class="img-responsive" width="150"></td>
 		            				<td>{{ $dataHaji->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
 		            				<td>@if($dataHaji->status_pembayaran == 0)
