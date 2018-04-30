@@ -19,6 +19,37 @@ class VoucherController extends Controller
     	return view('admin.voucher.voucher', compact('voucher'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = strtolower($request->search);
+        if ($keyword == 'haji' || $keyword == 'umroh') {
+            if ($keyword == 'haji') {
+                $keyword = 1;
+            }elseif ($keyword == 'umroh') {
+                $keyword = 2;
+            }
+            $voucher = DB::table('tbl_voucher')->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('pemilik', 'like', '%'.$keyword.'%')->orWhere('kategori', $keyword)->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%')->paginate(15);
+        }elseif($keyword == 'expired' || $keyword == 'belum expired'){
+            if ($keyword == 'expired') {
+                $keyword = 1;
+            }elseif($keyword == 'belum expired'){
+                $keyword = 2;
+            }
+            $voucher = DB::table('tbl_voucher')->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('pemilik', 'like', '%'.$keyword.'%')->orWhere('status_expired', $keyword)->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%')->paginate(15);
+        }elseif($keyword == 'terpakai' || $keyword == 'belum terpakai'){
+            if ($keyword == 'terpakai') {
+                $keyword = 1;
+            }elseif ($keyword == 'belum terpakai') {
+                $keyword = 0;
+            }
+            $voucher = DB::table('tbl_voucher')->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('pemilik', 'like', '%'.$keyword.'%')->orWhere('status_voucher', $keyword)->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%')->paginate(15);
+        }else{
+            $voucher = DB::table('tbl_voucher')->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('pemilik', 'like', '%'.$keyword.'%')->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%')->paginate(15);
+        }
+
+        return view('admin.voucher.voucher', compact('voucher'));
+    }
+
     public function create()
     {
     	return view('admin.voucher.tambah_voucher');

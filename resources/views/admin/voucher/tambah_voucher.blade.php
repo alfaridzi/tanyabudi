@@ -57,7 +57,6 @@
 		            				<option selected="" disabled="">--Pilih Salah Satu--</option>
 		            				<option value="1">Haji</option>
 		            				<option value="2">Umroh</option>
-		            				<option value="3">Wisata</option>
 		            			</select>
 		            		</div>
 		            		<div class="form-group">

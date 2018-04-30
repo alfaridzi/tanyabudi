@@ -25,7 +25,19 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<a href="{{ url('index/admin/voucher/tambah') }}" class="btn btn-primary btn-flat">Tambah Voucher</a>
+		            	<div class="pull-left">
+		            		<a href="{{ url('index/admin/voucher/tambah') }}" class="btn btn-primary btn-flat">Tambah Voucher</a>
+		            	</div>
+		            	<div class="pull-right">
+		            		<form method="get" class="form-inline" action="{{ url('index/admin/voucher/search') }}">
+		            			<div class="form-group">
+		            				<input type="search" name="search" class="form-control" placeholder="Cari...">
+		            			</div>
+		            			<div class="form-group">
+		            				<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+		            			</div>
+		            		</form>
+		            	</div>
 		            </div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
@@ -56,8 +68,6 @@
 											Haji
 											@elseif($dataVoucher->kategori == 2)
 											Umroh
-											@elseif($dataVoucher->kategori == 3)
-											Wisata
 											@endif
 										</td>
 										<td>{{ $dataVoucher->nama_voucher }}</td>
