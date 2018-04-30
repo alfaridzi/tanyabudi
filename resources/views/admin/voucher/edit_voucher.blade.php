@@ -49,6 +49,15 @@
 	            				<span class="note">*Tanpa Spasi</span>
 		            		</div>
 		            		<div class="form-group">
+		            			<label>Agen</label>
+		            			<select class="form-control select2" name="agen" id="select-agen">
+		            				<option selected="" disabled="">-- Pilih Agen--</option>
+		            				@foreach($agen as $dataAgen)
+		            				<option value="{{ $dataAgen->id }}" {{ Pemilihan::selected($dataAgen->id, $voucher->id_agen, 'selected') }}>{{ $dataAgen->email }} - {{ $dataAgen->name }}</option>
+		            				@endforeach
+		            			</select>
+		            		</div>
+		            		<div class="form-group">
 		            			<label>Pemilik</label>
 		            			<input type="text" name="pemilik" class="form-control" value="{{ $voucher->pemilik }}" placeholder="Pemilik" required>
 		            		</div>

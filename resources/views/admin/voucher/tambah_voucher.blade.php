@@ -1,9 +1,8 @@
 @extends('admin.layout.app')
 @section('title', 'Tambah Voucher')
 @push('css')
-@push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.css">
-@endpush
 <style type="text/css">
 	span.note {
 		font-size: 11px;
@@ -48,6 +47,15 @@
 	            				<span class="note">*Tanpa Spasi</span>
 		            		</div>
 		            		<div class="form-group">
+		            			<label>Agen</label>
+		            			<select class="form-control select2" name="agen" id="select-agen">
+		            				<option selected="" disabled="">-- Pilih Agen--</option>
+		            				@foreach($agen as $dataAgen)
+		            				<option value="{{ $dataAgen->id }}">{{ $dataAgen->email }} - {{ $dataAgen->name }}</option>
+		            				@endforeach
+		            			</select>
+		            		</div>
+		            		<div class="form-group">
 		            			<label>Pemilik</label>
 		            			<input type="text" name="pemilik" class="form-control" placeholder="Pemilik" required>
 		            		</div>
@@ -85,10 +93,12 @@
 </div>
 @endsection
 @push('js')
+<script type="text/javascript" src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.id.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+    	$('#select-agen').select2();
 		$('.datepicker').datepicker({
 			format: 'yyyy-mm-dd',
 			language: 'id',

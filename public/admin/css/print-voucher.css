@@ -1,0 +1,15 @@
+@media print, screen { /* Using for the screen as well */
+	.print-voucher{
+		margin: 0;
+		width: 100%;
+	}
+	.print-voucher .header-voucher{
+		display: block;
+		padding: 10px 20px;
+		background-color: #42D86C !improtant;
+		-webkit-print-color-adjust: exact; 
+		color: white;
+		font-weight: bolder;
+		font-size: 25px;
+	}
+}

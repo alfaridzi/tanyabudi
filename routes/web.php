@@ -47,6 +47,7 @@ Route::prefix('index/admin')->group(function(){
 	Route::post('voucher/tambah/simpan', 'Admin\VoucherController@store');
 	Route::get('voucher/edit/{id_voucher}', 'Admin\VoucherController@edit');
 	Route::patch('voucher/update/{id_voucher}', 'Admin\VoucherController@update');
+	Route::get('voucher/print/{id_voucher}', 'Admin\VoucherController@print');
 	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete');
 
 	Route::get('karyawan', 'Admin\KaryawanController@index');

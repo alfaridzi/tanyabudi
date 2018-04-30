@@ -211,6 +211,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Tanggal' => App\Helpers\Tanggal::class,
         'Pemilihan' => App\Helpers\Pemilihan::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];

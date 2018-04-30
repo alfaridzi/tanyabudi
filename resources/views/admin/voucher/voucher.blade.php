@@ -31,6 +31,27 @@
 		            	<div class="pull-right">
 		            		<form method="get" class="form-inline" action="{{ url('index/admin/voucher/search') }}">
 		            			<div class="form-group">
+		            				<select class="form-control" name="kategori">
+		            					<option selected="" disabled="">Kategori</option>
+		            					<option value="1">Haji</option>
+		            					<option value="2">Umroh</option>
+		            				</select>
+		            			</div>
+		            			<div class="form-group">
+		            				<select class="form-control" name="status_expired">
+		            					<option selected="" disabled="">Status Expired</option>
+		            					<option value="1">Expired</option>
+		            					<option value="0">Belum Expired</option>
+		            				</select>
+		            			</div>
+		            			<div class="form-group">
+		            				<select class="form-control" name="status_voucher">
+		            					<option selected="" disabled="">Status Voucher</option>
+		            					<option value="1">Terpakai</option>
+		            					<option value="0">Belum Terpakai</option>
+		            				</select>
+		            			</div>
+		            			<div class="form-group">
 		            				<input type="search" name="search" class="form-control" placeholder="Cari...">
 		            			</div>
 		            			<div class="form-group">
@@ -74,10 +95,10 @@
 										<td>Rp {{ number_format($dataVoucher->nominal, 2, ',', '.') }}</td>
 										<td><span class="countdown" data-tanggal-awal="{{ $dataVoucher->tanggal_mulai }}" data-tanggal-akhir="{{ $dataVoucher->tanggal_akhir }}">Mohon Tunggu..</span></td>
 										<td>{{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_mulai) }} s.d {{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_akhir) }}</td>
-										<td>{{ $dataVoucher->status_expired == 0 ? 'Belum Expired' : 'Expired' }}</td>
+										<td>{{ $dataVoucher->tanggal_akhir > date('Y-m-d H:i:s') ? 'Belum Expired' : 'Expired' }}</td>
 										<td>{{ $dataVoucher->status_voucher == 0 ? 'Belum Terpakai' : 'Terpakai' }}</td>
 										<td><a href="{{ url('index/admin/voucher/edit', $dataVoucher->id_voucher
-										) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a></td>
+										) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a> <a href="{{ url('index/admin/voucher/print', $dataVoucher->id_voucher) }}" class="btn btn-info btn-flat">Print Voucher</a></td>
 									</tr>
 									@endforeach
 								</tbody>

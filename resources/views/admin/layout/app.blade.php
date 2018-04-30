@@ -15,6 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('admin/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('admin/plugins/Ionicons/css/ionicons.min.css') }}">
+  @stack('css')
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('admin/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
@@ -32,7 +33,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  @stack('css')
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -79,13 +79,12 @@ desired effect
 <script src="{{ asset('admin/jquery/dist/jquery.min.js') }}" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('admin/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+@stack('js')
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/js/adminlte.min.js') }}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-
-@stack('js')
 </body>
 </html>
