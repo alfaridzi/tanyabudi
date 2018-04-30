@@ -94,6 +94,10 @@ Route::group(['middleware'=>'guest'], function() {
 		return view('syarat_ketentuan');
 	});
 
+	Route::get('/syarat-ketentuan-agen', function(){
+		return view('agen.syarat_ketentuan');
+	})
+
 });
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){

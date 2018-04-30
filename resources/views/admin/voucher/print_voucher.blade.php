@@ -260,9 +260,9 @@
 
 <script src="{{ asset('admin/jquery/dist/jquery.min.js') }}" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-	// $(document).ready(function(){
-	// 	window.print();
-	// });
+	$(document).ready(function(){
+		window.print();
+	});
 </script>
 </body>
 </html>

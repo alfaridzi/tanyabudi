@@ -204,7 +204,7 @@
 							<div class="col s12">
 								<label>
 							        <input required id="syarat-ketentuan" name="syarat-ketentuan" type="checkbox"/>
-							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan') }}">Syarat & Ketentuan</a></span>
+							        <span style="color: white;">Saya setuju dengan <a href="{{ url('syarat-ketentuan-agen') }}">Syarat & Ketentuan</a></span>
 							    </label>
 						    </div>
 							<div class="col s12">
