@@ -96,7 +96,7 @@ Route::group(['middleware'=>'guest'], function() {
 
 	Route::get('/syarat-ketentuan-agen', function(){
 		return view('agen.syarat_ketentuan');
-	})
+	});
 
 });
 Route::group(['middleware'=>'auth'], function() {
