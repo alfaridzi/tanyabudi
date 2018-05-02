@@ -58,6 +58,21 @@ Route::prefix('index/admin')->group(function(){
 	Route::post('data-user/user/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
 	Route::get('data-user/user/search', 'Admin\DataUserController@search_user');
 
+	Route::get('data-booking/jamaah', 'Admin\JamaahController@index');
+	Route::get('data-booking/jamaah/tambah', 'Admin\JamaahController@create');
+	Route::post('data-booking/jamaah/tambah/simpan', 'Admin\JamaahController@store');
+	Route::get('data-booking/jamaah/edit/{id_jamaah}', 'Admin\JamaahController@edit');
+	Route::patch('data-booking/jamaah/update/{id_jamaah}', 'Admin\JamaahController@update');
+	Route::delete('data-booking/jamaah/delete/{id_jamaah}', 'Admin\JamaahController@delete');
+
+	Route::get('data-booking/booking', 'Admin\BookingController@index');
+	Route::get('data-booking/booking/search', 'Admin\BookingController@search');
+	Route::get('data-booking/booking/edit/{id_booking}', 'Admin\BookingController@edit');
+	Route::patch('data-booking/booking/update/{id_booking}', 'Admin\BookingController@update');
+
+	Route::get('data-booking/paspor/edit/{id_paspor}', 'Admin\PasporController@edit');
+	Route::patch('data-booking/paspor/update/{id_paspor}', 'Admin\PasporController@update');
+
 	Route::get('karyawan', 'Admin\KaryawanController@index');
 	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
 	Route::post('karyawan/tambah/simpan', 'Admin\KaryawanController@store');

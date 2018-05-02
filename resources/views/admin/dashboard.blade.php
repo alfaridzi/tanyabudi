@@ -17,7 +17,7 @@
 	<section class="content container-fluid">
 
 		<div class="row">
-			<!-- Box total transaksi per hari -->
+			{{-- <!-- Box total transaksi per hari -->
 			<div class="col-lg-3 col-xs-6">
 				<div class="small-box bg-aqua">
 		        	<div class="inner">
@@ -44,7 +44,7 @@
 		            </div>
 		            <a href="#" class="small-box-footer">Info Lebih Lanjut <i class="fa fa-arrow-circle-right"></i></a>
 		        </div>
-			</div>
+			</div> --}}
 		</div>
 
 	</section>

@@ -16,6 +16,11 @@ class TambahVoucherRequest extends FormRequest
         return true;
     }
 
+    public function __construct(\Illuminate\Http\Request $request)
+    {
+        $request->request->add(['kode_voucher' => strtoupper(str_random(11))]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,8 +29,7 @@ class TambahVoucherRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode_voucher' => 'required|alpha_dash|unique:tbl_voucher,kode_voucher',
-            'pemilik' => 'required|string|max:50',
+            'kode_voucher' => 'required|unique:tbl_voucher,kode_voucher',
             'kategori' => 'required|integer',
             'nama_voucher' => 'required|string|max:50',
             'nominal' => 'required|numeric',

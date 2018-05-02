@@ -67,7 +67,6 @@
 									<tr>
 										<th>No</th>
 										<th>Kode Voucher</th>
-										<th>Pemilik</th>
 										<th>Kategori</th>
 										<th>Nama Voucher</th>
 										<th>Nominal</th>
@@ -82,8 +81,7 @@
 									@foreach($voucher as $dataVoucher)
 									<tr id="tr-{{ $loop->iteration }}">
 										<td>{{ $loop->iteration }}</td>
-										<td>{{ $dataVoucher->kode_voucher }}</td>
-										<td>{{ $dataVoucher->pemilik }}</td>
+										<td>{{ $dataVoucher->kode_voucher }}</td>								
 										<td>
 											@if($dataVoucher->kategori == 1)
 											Haji
@@ -98,7 +96,7 @@
 										<td>{{ $dataVoucher->tanggal_akhir > date('Y-m-d H:i:s') ? 'Belum Expired' : 'Expired' }}</td>
 										<td>{{ $dataVoucher->status_voucher == 0 ? 'Belum Terpakai' : 'Terpakai' }}</td>
 										<td><a href="{{ url('index/admin/voucher/edit', $dataVoucher->id_voucher
-										) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a> <a href="{{ url('index/admin/voucher/print', $dataVoucher->id_voucher) }}" class="btn btn-info btn-flat">Print Voucher</a></td>
+										) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a></td>
 									</tr>
 									@endforeach
 								</tbody>

@@ -12,9 +12,4 @@ class Pemilihan
 			return $hasil_lain;
 		}
 	}
-
-	public static function ifElse($arrayKondisi = array(), $arrayBanding = array(), $arrayHasil = array())
-	{
-
-	}
 }

@@ -39,13 +39,8 @@
 							  	</ul>
 							</div>
 						@endif
-		            	<form method="post" action="{{ url('index/admin/voucher/tambah/simpan') }}">
+		            	<form method="post" action="{{ url('index/admin/voucher/tambah/simpan') }}" enctype="multipart/form-data">
 		            		@csrf
-		            		<div class="form-group">
-	            				<label>Kode Voucher</label>
-	            				<input type="text" class="form-control" name="kode_voucher" placeholder="Kode Voucher" required>
-	            				<span class="note">*Tanpa Spasi</span>
-		            		</div>
 		            		<div class="form-group">
 		            			<label>Agen</label>
 		            			<select class="form-control select2" name="agen" id="select-agen">
@@ -56,12 +51,8 @@
 		            			</select>
 		            		</div>
 		            		<div class="form-group">
-		            			<label>Pemilik</label>
-		            			<input type="text" name="pemilik" class="form-control" placeholder="Pemilik" required>
-		            		</div>
-		            		<div class="form-group">
 		            			<label>Kategori</label>
-		            			<select class="form-control" name="kategori">
+		            			<select class="form-control" name="kategori" required>
 		            				<option selected="" disabled="">--Pilih Salah Satu--</option>
 		            				<option value="1">Haji</option>
 		            				<option value="2">Umroh</option>

@@ -24,8 +24,8 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-bookmark"></i> <span>Produk</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('index/admin/produk/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
@@ -38,8 +38,8 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-shopping-cart"></i> <span>Transaksi</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('index/admin/transaksi/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
@@ -54,8 +54,8 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-group"></i> <span>Data User</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('index/admin/data-user/user') }}"><i class="fa fa-link"></i> User</a></li>
@@ -64,6 +64,30 @@
         </li>
         <li class="header">MASTER VOUCHER</li>
         <li><a href="{{ url('index/admin/voucher') }}"><i class="fa fa-ticket"></i> Voucher</a></li>
+        <li class="header">MANIFEST</li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-plane"></i> <span>Data Booking</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('index/admin/data-booking/jamaah') }}"><i class="fa fa-link"></i> Jamaah</a></li>
+            <li><a href="{{ url('index/admin/data-booking/booking') }}"><i class="fa fa-link"></i> Booking</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-suitcase"></i> <span>Data Kloter</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('index/admin/data-kloter/kloter') }}"><i class="fa fa-link"></i> Kloter</a></li>
+            <li><a href="{{ url('index/admin/data-kloter/bus') }}"><i class="fa fa-link"></i> Bus</a></li>
+            <li><a href="{{ url('index/admin/data-kloter/kamar') }}"><i class="fa fa-link"></i> Kamar</a></li>
+          </ul>
+        </li>
         <li class="header">MASTER DATA</li>
         <li><a href="{{ url('index/admin/karyawan') }}"><i class="fa fa-user"></i> <span>Karyawan</span></a></li>
         <li><a href="{{ url('index/admin/divisi') }}"><i class="fa fa-building"></i> <span>Divisi</span></a></li>

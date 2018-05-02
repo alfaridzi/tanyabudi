@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\Voucher\TambahVoucherRequest;
 use App\Http\Requests\Admin\Voucher\EditVoucherRequest;
 use Carbon\Carbon;
+use File;
 
 use App\Model\Voucher;
 
@@ -34,8 +35,8 @@ class VoucherController extends Controller
 
         $voucher = DB::table('tbl_voucher')->where(function($q) use ($kategori, $status_expired, $status_voucher, $tanggal){
             $q->where('kategori', $kategori)->orWhere('status_voucher', $status_voucher)->orWhere('tanggal_akhir', $status_expired, $tanggal);
-        })->where(function($q) use($keyword){
-            $q->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('pemilik', 'like', '%'.$keyword.'%')->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%');
+        })->orWhere(function($q) use($keyword){
+            $q->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%');
         })->orderBy('id_voucher', 'desc')->paginate(15);
         return view('admin.voucher.voucher', compact('voucher'));
     }
@@ -65,7 +66,6 @@ class VoucherController extends Controller
     	$voucher->kode_voucher = $request->kode_voucher;
         $voucher->nomor_voucher = $nomor_voucher;
         $voucher->id_agen = $request->agen;
-    	$voucher->pemilik = $request->pemilik;
     	$voucher->nama_voucher = $request->nama_voucher;
     	$voucher->kategori = $request->kategori;
     	$voucher->nominal  = $request->nominal;
@@ -97,8 +97,6 @@ class VoucherController extends Controller
         $tanggal_mulai = Carbon::parse($request->tanggal_mulai)->startOfDay();
         $tanggal_akhir = Carbon::parse($request->tanggal_akhir)->endOfDay();
 
-        $voucher->kode_voucher = $request->kode_voucher;
-        $voucher->pemilik = $request->pemilik;
         $voucher->id_agen = $request->agen;
         $voucher->nama_voucher = $request->nama_voucher;
         $voucher->kategori = $request->kategori;
