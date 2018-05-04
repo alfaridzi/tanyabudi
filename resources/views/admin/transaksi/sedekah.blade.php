@@ -5,7 +5,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 	  <h1>
-	    Transaksi Haji
+	    Transaksi Sedekah
 	  </h1>
 	</section>
 
@@ -21,7 +21,7 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<div class="table-responsive">
+						<div class="table-responsive">
 			            	<table class="table table-bordered">
 			            		<thead>
 			            			<tr>
@@ -38,19 +38,19 @@
 			            			</tr>
 			            		</thead>
 			            		<tbody>
-			            			@foreach($haji as $dataHaji)
+			            			@foreach($sedekah as $dataSedekah)
 			            			<tr>
 			            				<td>{{ $loop->iteration }}</td>
-			            				<td>{{ $dataHaji->nama }}</td>
-			            				<td>{{ $dataHaji->desc_prod }}</td>
-			            				<td>Rp {{ number_format($dataHaji->harga, 2, ',', '.') }}</td>
-			            				<td>{{ $dataHaji->name }}</td>
-			            				<td>Rp {{ number_format($dataHaji->jumlah_pembayaran, 2, ',', '.') }}</td>
-			            				<td>{{ Tanggal::tanggalIndonesia($dataHaji->tgl_pembayaran) }}</td>
-			            				<td><img src="{{asset('bukti-tf/'.$dataHaji->foto)}}" class="img-responsive" width="150"></td>
-			            				<td>{{ $dataHaji->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
-			            				<td>@if($dataHaji->status_pembayaran == 0)
-			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataHaji->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
+			            				<td>{{ $dataSedekah->nama }}</td>
+			            				<td>{{ $dataSedekah->desc_prod }}</td>
+			            				<td>Rp {{ number_format($dataSedekah->harga, 2, ',', '.') }}</td>
+			            				<td>{{ $dataSedekah->name }}</td>
+			            				<td>Rp {{ number_format($dataSedekah->jumlah_pembayaran, 2, ',', '.') }}</td>
+			            				<td>{{ Tanggal::tanggalIndonesia($dataSedekah->tgl_pembayaran) }}</td>
+			            				<td><img src="{{asset('bukti-tf/'.$dataSedekah->foto)}}" class="img-responsive" width="150"></td>
+			            				<td>{{ $dataSedekah->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
+			            				<td>@if($dataSedekah->status_pembayaran == 0)
+			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataSedekah->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
 			            				@endif</td>
 			            			</tr>
 			            			@endforeach
@@ -58,7 +58,7 @@
 			            	</table>
 		            	</div>
 		            	<div class="pull-right">
-							{!! $haji->links() !!}
+							{!! $sedekah->links() !!}
 						</div>
 		            </div>
 		        </div>
@@ -79,7 +79,7 @@
             if (jawaban) {
             	var link = "{{ url('/') }}";
                 var id = $(this).data('id');
-                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/transaksi/haji/konfirmasi/') }}/'+id);
+                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/transaksi/sedekah/konfirmasi/') }}/'+id);
                 $('#frm-konfirmasi').submit();
             }
 

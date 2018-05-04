@@ -45,7 +45,7 @@
 										<th>Kode Booking</th>
 										<th>Nomor Transaksi</th>
 										<th>Nama Jamaah</th>
-										<th>Jumlah Hari</th>
+										<th>Jumlah Kursi</th>
 										<th>Nama Paket</th>
 										<th>Jenis Paket</th>
 										<th>Status Pemesan</th>
@@ -59,9 +59,15 @@
 										<td>{{ $dataBooking->kode_booking }}</td>
 										<td>{{ $dataBooking->nomor_transaksi }}</td>
 										<td>{{ $dataBooking->nama_jamaah }}</td>
-										<td>Masih Dikerjakan</td>
-										<td>Masih Dikerjakan</td>
-										<td>Masih Dikerjakan</td>
+										<td>{{ $dataBooking->kuota }}</td>
+										<td>{{ $dataBooking->nama }}</td>
+										<td>
+											@if($dataBooking->type == '1')
+											Haji
+											@elseif($dataBooking->type == '2')
+											Umroh
+											@endif
+										</td>
 										<td>
 											@if($dataBooking->status_pemesan == '0')
 											Sedang Dipesan
@@ -69,7 +75,10 @@
 											Telah Diterima
 											@endif
 										</td>
-										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> <a href="{{ url('index/admin/data-booking/booking/print-voucher') }}" class="btn btn-info btn-flat">Print Voucher</a>
+										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@if(!is_null($dataBooking->id_paket))
+											<a href="{{ url('index/admin/data-booking/booking/print-voucher', $dataBooking->id_booking) }}" class="btn btn-info btn-flat">Print Voucher</a>
+											@endif
 										</td>
 									</tr>
 									@endforeach

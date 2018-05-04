@@ -1,4 +1,4 @@
-@extends('user.layout.app')
+@extends('user.layout.app-2')
 @section('page-title', 'Tabungan Umroh')
 @section('content')
 
@@ -87,8 +87,8 @@
 					</a>
 					<a href="#">
 						<li>
-							<i class="icon icon-scan-barcode"></i>
-							<span>Scan Voucher</span>
+							<i class="icon icon-top-up"></i>
+							<span>Top Up Bayar-Bayar</span>
 						</li>
 					</a>
 					<a href="{{ url('tabungan-haji-umroh') }}">

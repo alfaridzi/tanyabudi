@@ -77,12 +77,6 @@ class VoucherController extends Controller
     	return redirect('index/admin/voucher')->withSuccess('Berhasil Menambahkan Voucher Baru');
     }
 
-    public function print($id_voucher)
-    {
-        $voucher = Voucher::findOrfail($id_voucher);
-        return view('admin.voucher.print_voucher', compact('voucher'));
-    }
-
     public function edit($id_voucher)
     {
         $voucher = Voucher::findOrFail($id_voucher);

@@ -42,10 +42,10 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('index/admin/transaksi/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> Umroh</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> Wisata</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> Sedekah</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> Bayar Paket</a></li>
+            <li><a href="{{ url('index/admin/transaksi/umroh') }}"><i class="fa fa-link"></i> Umroh</a></li>
+            <li><a href="{{ url('index/admin/transaksi/wisata') }}"><i class="fa fa-link"></i> Wisata</a></li>
+            <li><a href="{{ url('index/admin/transaksi/sedekah') }}"><i class="fa fa-link"></i> Sedekah</a></li>
+            <li><a href="{{ url('index/admin/transaksi/bayar-paket') }}"><i class="fa fa-link"></i> Bayar Paket</a></li>
             <li><a href="#"><i class="fa fa-link"></i> Top Up Bayar-bayar</a></li>
             <li><a href="#"><i class="fa fa-link"></i> PPOB</a></li>
           </ul>

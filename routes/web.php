@@ -31,7 +31,15 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('ajax/detail_karyawan/{id_karyawan}', 'Admin\AjaxController@detail_karyawan');
 
 	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
-	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_haji');
+	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm');
+	Route::get('transaksi/umroh', 'Admin\TransaksiController@umroh');
+	Route::post('transaksi/umroh/konfirmasi/{id}', 'Admin\TransaksiController@konfirm');
+	Route::get('transaksi/wisata', 'Admin\TransaksiController@wisata');
+	Route::post('transaksi/wisata/konfirmasi/{id}', 'Admin\TransaksiController@konfirm');
+	Route::get('transaksi/sedekah', 'Admin\TransaksiController@sedekah');
+	Route::post('transaksi/sedekah/konfirmasi/{id}', 'Admin\TransaksiController@konfirm');
+	Route::get('transaksi/bayar-paket', 'Admin\TransaksiController@bayar_paket');
+	Route::post('transaksi/bayar-paket/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_paket');
 
 	Route::get('produk/tambah', 'Admin\ProdukController@create');
 	Route::post('produk/tambah/simpan', 'Admin\ProdukController@store');
@@ -55,7 +63,6 @@ Route::prefix('index/admin')->group(function(){
 	Route::post('voucher/tambah/simpan', 'Admin\VoucherController@store');
 	Route::get('voucher/edit/{id_voucher}', 'Admin\VoucherController@edit');
 	Route::patch('voucher/update/{id_voucher}', 'Admin\VoucherController@update');
-	Route::get('voucher/print/{id_voucher}', 'Admin\VoucherController@print');
 	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete');
 
 	Route::get('data-user/agen', 'Admin\DataUserController@index_agen');
@@ -78,6 +85,7 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('data-booking/booking/search', 'Admin\BookingController@search');
 	Route::get('data-booking/booking/edit/{id_booking}', 'Admin\BookingController@edit');
 	Route::patch('data-booking/booking/update/{id_booking}', 'Admin\BookingController@update');
+	Route::get('data-booking/booking/print-voucher/{id_booking}', 'Admin\BookingController@print');
 
 	Route::get('data-booking/paspor/edit/{id_paspor}', 'Admin\PasporController@edit');
 	Route::patch('data-booking/paspor/update/{id_paspor}', 'Admin\PasporController@update');
@@ -184,8 +192,8 @@ Route::group(['middleware'=>['guest','web']], function() {
 });
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
-	return view('instruksi');
-});
+			return view('instruksi');
+		});
 
 Route::get('scan', function() {
 	return view('scan');

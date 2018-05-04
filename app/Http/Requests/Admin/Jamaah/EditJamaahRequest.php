@@ -29,6 +29,8 @@ class EditJamaahRequest extends FormRequest
                 'nomor_paspor' => 'required|string',
                 'nama' => 'required|string',
                 'jenis_kelamin' => 'required|boolean',
+                'nama_pemesan' => 'required|string',
+                'paket' => 'required|exists:tbl_produk,id',
                 'nomor_hp' => 'required|numeric',
                 'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric',
                 'status_pemesan' => 'required|boolean',
@@ -42,6 +44,8 @@ class EditJamaahRequest extends FormRequest
                     'nama' => 'required|string',
                     'jenis_kelamin' => 'required|boolean',
                     'nomor_hp' => 'required|numeric',
+                    'nama_pemesan' => 'required|string',
+                    'paket' => 'required|exists:tbl_produk,id',
                     'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric|unique:tbl_booking,id_voucher',
                     'status_pemesan' => 'required|boolean',
                 ];
@@ -52,6 +56,8 @@ class EditJamaahRequest extends FormRequest
                     'nama' => 'required|string',
                     'jenis_kelamin' => 'required|boolean',
                     'nomor_hp' => 'required|numeric',
+                    'nama_pemesan' => 'required|string',
+                    'paket' => 'required|exists:tbl_produk,id',
                     'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric|unique:tbl_booking,id_voucher,'.$id_booking->id_booking.',id_booking',
                     'status_pemesan' => 'required|boolean',
                 ];

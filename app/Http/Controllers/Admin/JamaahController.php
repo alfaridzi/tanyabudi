@@ -17,7 +17,7 @@ class JamaahController extends Controller
 {
     public function index()
     {
-    	$jamaah = DB::table('tbl_jamaah')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_booking', 'tbl_jamaah.id_jamaah', '=', 'tbl_booking.id_jamaah')->paginate(15);
+    	$jamaah = DB::table('tbl_jamaah')->addSelect('tbl_jamaah.*')->addSelect('tbl_paspor.*')->addSelect('tbl_booking.*')->addSelect('tbl_kamar.*')->addSelect('tbl_bus.*')->addSelect('tbl_produk.*')->addSelect('tbl_paket.*')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_booking', 'tbl_jamaah.id_jamaah', '=', 'tbl_booking.id_jamaah')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->leftJoin('tbl_kuota_bus', 'tbl_jamaah.id_jamaah', '=', 'tbl_kuota_bus.id_jamaah')->leftJoin('tbl_bus', 'tbl_kuota_bus.id_bus', '=', 'tbl_bus.id_bus')->leftJoin('tbl_kuota_kamar', 'tbl_jamaah.id_jamaah', '=', 'tbl_kuota_kamar.id_jamaah')->leftJoin('tbl_kamar', 'tbl_kuota_kamar.id_kamar', '=', 'tbl_kamar.id_kamar')->paginate(15);
 
     	return view('admin.data_booking.jamaah.jamaah', compact('jamaah'));
     }
@@ -40,7 +40,9 @@ class JamaahController extends Controller
     {
     	$voucher = DB::table('tbl_voucher')->addSelect('tbl_booking.*', 'tbl_booking.id_voucher as id_voucher_booking')->addSelect('tbl_voucher.*')->leftJoin('tbl_booking', 'tbl_voucher.id_voucher', '=', 'tbl_booking.id_voucher')->where('tbl_booking.id_voucher', null)->where('tanggal_akhir', '>', date('Y-m-d H:i:s'))->where('status_voucher', '0')->get();
 
-    	return view('admin.data_booking.jamaah.tambah_jamaah', compact('voucher'));
+        $paket = DB::table('tbl_produk')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->orderBy('id_paket', 'desc')->whereIn('tbl_produk.type', ['1', '2'])->get();
+
+    	return view('admin.data_booking.jamaah.tambah_jamaah', compact('voucher', 'paket'));
     }
 
     public function store(TambahJamaahRequest $request)
@@ -62,6 +64,8 @@ class JamaahController extends Controller
     	$booking->id_voucher = $request->voucher;
     	$booking->nomor_transaksi = $request->nomor_transaksi;
     	$booking->kode_booking = $kode_booking;
+        $booking->nama_pemesan = $request->nama_pemesan;
+        $booking->id_paket = $request->paket;
     	$booking->status_pemesan = $request->status_pemesan;
     	$booking->save();
 
@@ -82,7 +86,9 @@ class JamaahController extends Controller
 
     	$voucher = DB::table('tbl_voucher')->addSelect('tbl_booking.*', 'tbl_booking.id_voucher as id_voucher_booking')->addSelect('tbl_voucher.*')->leftJoin('tbl_booking', 'tbl_voucher.id_voucher', '=', 'tbl_booking.id_voucher')->where('tbl_booking.id_jamaah', $id_jamaah)->orWhere('tbl_booking.id_voucher', null)->where('tanggal_akhir', '>', date('Y-m-d H:i:s'))->where('status_voucher', '0')->get();
 
-    	return view('admin.data_booking.jamaah.edit_jamaah', compact('jamaah', 'voucher'));
+        $paket = DB::table('tbl_produk')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->orderBy('id_paket', 'desc')->whereIn('tbl_produk.type', ['1', '2'])->get();
+
+    	return view('admin.data_booking.jamaah.edit_jamaah', compact('jamaah', 'voucher', 'paket'));
     }
 
     public function update(EditJamaahRequest $request, $id_jamaah)
@@ -95,6 +101,8 @@ class JamaahController extends Controller
     	$booking = Booking::where('id_jamaah', $id_jamaah)->first();
     	$booking->id_voucher = $request->voucher;
     	$booking->nomor_transaksi = $request->nomor_transaksi;
+        $booking->nama_pemesan = $request->nama_pemesan;
+        $booking->id_paket = $request->paket;
     	$booking->status_pemesan = $request->status_pemesan;
     	$booking->save();
 
