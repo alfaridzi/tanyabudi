@@ -82,6 +82,16 @@ class KloterController extends Controller
     	return redirect('index/admin/data-kloter/kloter')->withSuccess('Berhasil Mengubah Kloter');
     }
 
+    public function delete($id_kloter)
+    {
+    	$kloter = Kloter::findOrFail($id_kloter);
+    	$bus = DB::table('tbl_bus')->where('id_kloter', $id_kloter);
+    	$kamar = DB::table('tbl_kamar')->where('id_kloter', $id_kloter);
+    	$idBus = $bus->implode('id_bus', ',');
+    	dd($idBus);
+
+    }
+
 
     /* Bagian List Kuota Kloter */
 

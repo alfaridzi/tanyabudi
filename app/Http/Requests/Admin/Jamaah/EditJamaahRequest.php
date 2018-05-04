@@ -27,6 +27,7 @@ class EditJamaahRequest extends FormRequest
             return [
                 'nomor_transaksi' => 'nullable|string',
                 'nomor_paspor' => 'required|string',
+                'user' => 'required|exists:users,id',
                 'nama' => 'required|string',
                 'jenis_kelamin' => 'required|boolean',
                 'nama_pemesan' => 'required|string',
@@ -41,6 +42,7 @@ class EditJamaahRequest extends FormRequest
                 return [
                     'nomor_transaksi' => 'nullable|string',
                     'nomor_paspor' => 'required|string',
+                    'user' => 'required|exists:users,id',
                     'nama' => 'required|string',
                     'jenis_kelamin' => 'required|boolean',
                     'nomor_hp' => 'required|numeric',
@@ -53,6 +55,7 @@ class EditJamaahRequest extends FormRequest
                 return [
                     'nomor_transaksi' => 'nullable|string',
                     'nomor_paspor' => 'required|string',
+                    'user' => 'required|exists:users,id',
                     'nama' => 'required|string',
                     'jenis_kelamin' => 'required|boolean',
                     'nomor_hp' => 'required|numeric',

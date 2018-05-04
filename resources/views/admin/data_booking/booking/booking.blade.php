@@ -58,7 +58,7 @@
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataBooking->kode_booking }}</td>
 										<td>{{ $dataBooking->nomor_transaksi }}</td>
-										<td>{{ $dataBooking->nama_jamaah }}</td>
+										<td>{{ $dataBooking->nama_paspor }}</td>
 										<td>{{ $dataBooking->kuota }}</td>
 										<td>{{ $dataBooking->nama }}</td>
 										<td>
@@ -76,7 +76,7 @@
 											@endif
 										</td>
 										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
-											@if(!is_null($dataBooking->id_paket))
+											@if(!is_null($dataBooking->id_voucher))
 											<a href="{{ url('index/admin/data-booking/booking/print-voucher', $dataBooking->id_booking) }}" class="btn btn-info btn-flat">Print Voucher</a>
 											@endif
 										</td>

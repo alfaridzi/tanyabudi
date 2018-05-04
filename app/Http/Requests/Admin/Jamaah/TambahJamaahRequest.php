@@ -25,6 +25,7 @@ class TambahJamaahRequest extends FormRequest
     {
         return [
             'nomor_transaksi' => 'nullable|string',
+            'user' => 'required|exists:users,id',
             'nomor_paspor' => 'required|string',
             'nama' => 'required|string',
             'jenis_kelamin' => 'required|boolean',

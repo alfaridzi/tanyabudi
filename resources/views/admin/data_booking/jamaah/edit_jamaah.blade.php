@@ -47,13 +47,21 @@
 	            				<input type="text" class="form-control" name="nomor_transaksi" value="{{ $jamaah->nomor_transaksi }} " placeholder="Nomor Transaksi">
 		            		</div>
 		            		<div class="form-group">
+		            			<label>User</label>
+		            			<select name="user" id="select-user" class="form-control" required>
+		            				<option selected="" disabled="">--Pilih User yang Akan Dijadikan Jamaah--</option>
+		            				@foreach($user as $dataUser)
+		            				<option value="{{ $dataUser->id }}" {{ Pemilihan::selected($dataUser->id, $jamaah->id_user, 'selected') }}>{{ $dataUser->name }} - {{ $dataUser->email }}</option>
+		            				@endforeach
+		            			</select>
+		            		</div>
+		            		<div class="form-group">
 		            			<label>Nomor Paspor</label>
 		            			<input type="text" class="form-control" name="nomor_paspor" value="{{ $jamaah->nomor_paspor }}" placeholder="Nomor Paspor" required>
 		            		</div>
 		            		<div class="form-group">
-		            			<label>Nama</label>
-		            			<input type="text" name="nama" class="form-control" value="{{ $jamaah->nama_jamaah }}" placeholder="Nama" required>
-		            			<span class="note">* Field ini untuk mengubah nama jamaah, bukan untuk mengubah nama di paspor</span>
+		            			<label>Nama Paspor</label>
+		            			<input type="text" name="nama" class="form-control" value="{{ $jamaah->nama_paspor }}" placeholder="Nama" required>
 		            		</div>
 		            		<div class="form-group">
 	            				<label>Jenis Kelamin</label><br>
@@ -65,9 +73,8 @@
 	            				</label>
 		            		</div>
 		            		<div class="form-group">
-		            			<label>Nomor HP</label>
-		            			<input type="number" name="nomor_hp" class="form-control" placeholder="Nomor HP" value="{{ $jamaah->no_hp_jamaah }}">
-		            			<span class="note">* Field ini untuk mengubah nomor hp jamaah, bukan untuk mengubah nomor hp di paspor</span>
+		            			<label>Nomor HP Paspor</label>
+		            			<input type="number" name="nomor_hp" class="form-control" placeholder="Nomor HP" value="{{ $jamaah->no_hp_paspor }}">
 		            		</div>
 		            		<hr>
 		            		<div class="form-group">
@@ -119,6 +126,7 @@
 	$(document).ready(function(){
 		$('#select-voucher').select2();
 		$('#select-paket').select2();
+		$('#select-user').select2();
 		$('.datepicker').datepicker({
 			format: 'yyyy-mm-dd',
 			language: 'id',

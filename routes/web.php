@@ -216,9 +216,8 @@ Route::get('/notifikasi', function(){
 	return view('umum.notifikasi');
 });
 
-Route::get('/pengaturan', function(){
-	return view('umum.pengaturan');
-});
+Route::get('/pengaturan', 'ProfileController@edit');
+Route::patch('pengaturan/update', 'ProfileController@update');
 
 Route::get('/bantuan', function(){
 	$bantuan = \DB::table('tbl_halaman_bantuan')->first();

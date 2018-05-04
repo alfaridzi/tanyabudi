@@ -77,7 +77,7 @@
 											{{ $dataJamaah->nomor_paspor }}
 											<a href="{{ url('index/admin/data-booking/paspor/edit', $dataJamaah->id_paspor) }}" class="btn btn-info btn-flat">Edit Paspor</a>
 										</td>
-										<td>{{ $dataJamaah->nama_jamaah }}</td>
+										<td>{{ $dataJamaah->name }}</td>
 										<td>{{ $dataJamaah->kuota }}</td>
 										<td>{{ $dataJamaah->nama }}</td>
 										<td>

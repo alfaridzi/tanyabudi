@@ -13,7 +13,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-    	$booking = DB::table('tbl_booking')->join('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->paginate(15);
+    	$booking = DB::table('tbl_booking')->rightJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->rightJoin('tbl_paspor', 'tbl_paspor.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->paginate(15);
 
     	return view('admin.data_booking.booking.booking', compact('booking'));
     }
