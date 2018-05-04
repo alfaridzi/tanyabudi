@@ -29,6 +29,8 @@ class TambahJamaahRequest extends FormRequest
             'nama' => 'required|string',
             'jenis_kelamin' => 'required|boolean',
             'nomor_hp' => 'required|numeric',
+            'nama_pemesan' => 'required|string',
+            'paket' => 'required|exists:tbl_produk,id',
             'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric',
             'status_pemesan' => 'required|boolean',
         ];

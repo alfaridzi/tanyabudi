@@ -13,7 +13,7 @@ class BookingController extends Controller
 {
     public function index()
     {
-    	$booking = DB::table('tbl_booking')->join('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->paginate(15);
+    	$booking = DB::table('tbl_booking')->join('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->paginate(15);
 
     	return view('admin.data_booking.booking.booking', compact('booking'));
     }
@@ -44,5 +44,14 @@ class BookingController extends Controller
     	$booking->save();
 
     	return redirect('index/admin/data-booking/booking')->withSuccess('Berhasil Mengubah Data Booking');
+    }
+
+    public function print($id_booking)
+    {
+        $booking = Booking::findOrFail($id_booking);
+
+        $voucher = DB::table('tbl_booking')->addSelect('tbl_booking.*')->addSelect('tbl_jamaah.*')->addSelect('tbl_paspor.*')->addSelect('tbl_voucher.*')->addSelect('tbl_produk.*')->addSelect('tbl_paket.*')->addSelect('provinces.*', 'provinces.name as nama_provinsi')->addSelect('regencies.*', 'regencies.name as nama_kota')->leftJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_produk', 'tbl_booking.id_paket', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->leftJoin('tbl_voucher', 'tbl_booking.id_voucher', 'tbl_voucher.id_voucher')->leftJoin('provinces', 'tbl_paspor.provinsi', '=', 'provinces.id')->leftJoin('regencies', 'tbl_paspor.kota', '=', 'regencies.id')->where('tbl_booking.id_booking', $id_booking)->first();
+        
+        return view('admin.voucher.print_voucher', compact('voucher'));
     }
 }

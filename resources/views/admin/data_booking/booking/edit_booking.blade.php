@@ -46,7 +46,7 @@
 		            				<option disabled="" selected="">--Pilih Voucher--</option>
 		            				<option value="">Tidak Punya Voucher</option>
 		            				@foreach($voucher as $dataVoucher)
-		            				<option value="{{ $dataVoucher->id_voucher }}" {{ Pemilihan::selected($dataVoucher->id_voucher, $booking->id_voucher, 'selected') }}>{{ $dataVoucher->kode_voucher }} - Rp {{ number_format($dataVoucher->nominal, 2, ',','.') }}</option>
+		            				<option value="{{ $dataVoucher->id_voucher }}" {{ Pemilihan::selected($dataVoucher->id_voucher, $booking->id_voucher, 'selected') }}>{{ $dataVoucher->kode_voucher }} - Rp {{ number_format($dataVoucher->nominal, 2, ',','.') }} - {{ $dataVoucher->nama_voucher }}</option>
 		            				@endforeach
 		            			</select>
 		            		</div>

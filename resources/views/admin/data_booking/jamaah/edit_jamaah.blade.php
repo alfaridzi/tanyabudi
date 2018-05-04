@@ -71,12 +71,25 @@
 		            		</div>
 		            		<hr>
 		            		<div class="form-group">
+		            			<label>Nama Pemesan</label>
+		            			<input type="text" name="nama_pemesan" class="form-control" placeholder="Nama Pemesan" required>
+		            		</div>
+		            		<div class="form-group">
+		            			<label>Paket</label>
+		            			<select name="paket" id="select-paket" class="form-control" required>
+		            				<option selected="" disabled="">--Pilih Voucher--</option>
+		            				@foreach($paket as $dataPaket)
+		            				<option value="{{ $dataPaket->id_produk }}">{{ $dataPaket->nama }} - Rp.{{ number_format($dataPaket->harga, 2, ',', '.') }} - {{$dataPaket->nama_travel}} - {{ $dataPaket->type == '1' ? 'Haji' : 'Umroh'}}</option>
+		            				@endforeach
+		            			</select>
+		            		</div>
+		            		<div class="form-group">
 		            			<label>Voucher</label>
 		            			<select name="voucher" id="select-voucher" class="form-control">
 		            				<option disabled="" selected="">--Pilih Voucher--</option>
 		            				<option value="">Tidak Ada Voucher</option>
 		            				@foreach($voucher as $dataVoucher)
-		            				<option value="{{ $dataVoucher->id_voucher }}" {{ Pemilihan::selected($jamaah->id_voucher, $dataVoucher->id_voucher, 'selected') }}>{{ $dataVoucher->kode_voucher }} - Rp {{ number_format($dataVoucher->nominal, 2, ',','.') }}</option>
+		            				<option value="{{ $dataVoucher->id_voucher }}" {{ Pemilihan::selected($jamaah->id_voucher, $dataVoucher->id_voucher, 'selected') }}>{{ $dataVoucher->kode_voucher }} - Rp {{ number_format($dataVoucher->nominal, 2, ',','.') }} - {{ $dataVoucher->nama_voucher }}</option>
 		            				@endforeach
 		            			</select>
 		            		</div>
@@ -105,6 +118,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#select-voucher').select2();
+		$('#select-paket').select2();
 		$('.datepicker').datepicker({
 			format: 'yyyy-mm-dd',
 			language: 'id',

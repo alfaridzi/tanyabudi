@@ -5,7 +5,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 	  <h1>
-	    Transaksi Haji
+	    Transaksi Wisata
 	  </h1>
 	</section>
 
@@ -38,27 +38,27 @@
 			            			</tr>
 			            		</thead>
 			            		<tbody>
-			            			@foreach($haji as $dataHaji)
+			            			@foreach($wisata as $dataWisata)
 			            			<tr>
 			            				<td>{{ $loop->iteration }}</td>
-			            				<td>{{ $dataHaji->nama }}</td>
-			            				<td>{{ $dataHaji->desc_prod }}</td>
-			            				<td>Rp {{ number_format($dataHaji->harga, 2, ',', '.') }}</td>
-			            				<td>{{ $dataHaji->name }}</td>
-			            				<td>Rp {{ number_format($dataHaji->jumlah_pembayaran, 2, ',', '.') }}</td>
-			            				<td>{{ Tanggal::tanggalIndonesia($dataHaji->tgl_pembayaran) }}</td>
-			            				<td><img src="{{asset('bukti-tf/'.$dataHaji->foto)}}" class="img-responsive" width="150"></td>
-			            				<td>{{ $dataHaji->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
-			            				<td>@if($dataHaji->status_pembayaran == 0)
-			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataHaji->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
+			            				<td>{{ $dataWisata->nama }}</td>
+			            				<td>{{ $dataWisata->desc_prod }}</td>
+			            				<td>Rp {{ number_format($dataWisata->harga, 2, ',', '.') }}</td>
+			            				<td>{{ $dataWisata->name }}</td>
+			            				<td>Rp {{ number_format($dataWisata->jumlah_pembayaran, 2, ',', '.') }}</td>
+			            				<td>{{ Tanggal::tanggalIndonesia($dataWisata->tgl_pembayaran) }}</td>
+			            				<td><img src="{{asset('bukti-tf/'.$dataWisata->foto)}}" class="img-responsive" width="150"></td>
+			            				<td>{{ $dataWisata->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
+			            				<td>@if($dataWisata->status_pembayaran == 0)
+			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataWisata->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
 			            				@endif</td>
 			            			</tr>
 			            			@endforeach
 			            		</tbody>
 			            	</table>
-		            	</div>
+						</div>
 		            	<div class="pull-right">
-							{!! $haji->links() !!}
+							{!! $wisata->links() !!}
 						</div>
 		            </div>
 		        </div>
@@ -79,7 +79,7 @@
             if (jawaban) {
             	var link = "{{ url('/') }}";
                 var id = $(this).data('id');
-                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/transaksi/haji/konfirmasi/') }}/'+id);
+                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/transaksi/wisata/konfirmasi/') }}/'+id);
                 $('#frm-konfirmasi').submit();
             }
 
@@ -87,4 +87,3 @@
 	});
 </script>
 @endpush
-			

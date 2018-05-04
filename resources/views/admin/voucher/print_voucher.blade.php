@@ -56,7 +56,7 @@
 		}
 
 		.bagian-kiri .footer .gambar-sponsor {
-			width: 24%;
+			width: 21%;
 			padding-top: 5px;
 			float: right;
 			display: inline-block;
@@ -100,7 +100,7 @@
 			padding-left: 15px;
 			height: 45px;
 			line-height: 45px;
-			background-color: {{ $voucher->kategori == 1 ? '#87C50A' : '#27A3BB' }} !important;
+			background-color: {{ $voucher->type == 1 ? '#87C50A' : '#27A3BB' }} !important;
 			color: white !important;
 			font-weight: bolder;
 			font-size: 20px;
@@ -110,7 +110,7 @@
 			width: 100%;
 			height: 340px;
 			margin: 0;
-			background-color: {{ $voucher->kategori == 1 ? '#87C50A' : '#27A3BB' }} !important;
+			background-color: {{ $voucher->type == 1 ? '#87C50A' : '#27A3BB' }} !important;
 			border-bottom: 1px black dashed;
 		}
 
@@ -151,7 +151,7 @@
 		<div class="row">
 			<div class="bagian-kiri">
 				<div class="judul-voucher">
-					Voucher {{ $voucher->kategori == 1 ? 'Haji' : 'Umroh' }} Rp {{ number_format($voucher->nominal, 0, ',', '.') }}
+					{{ $voucher->nama_voucher }} Rp {{ number_format($voucher->nominal, 0, ',', '.') }}
 				</div>
 				<div class="content">
 					<div class="pojok-kanan">
@@ -166,38 +166,41 @@
 						<table>
 							<tr>
 								<td>Nama Jamaah</td>
-								<td>&nbsp;:</td>
+								<td>&nbsp;: {{ $voucher->nama_jamaah }}</td>
 							</tr>
 							<tr>
 								<td>Alamat</td>
-								<td>&nbsp;:</td>
+								<td>&nbsp;: {{ $voucher->alamat}}</td>
 							</tr>
 							<tr>
 								<td>No HP</td>
-								<td>&nbsp;:</td>
+								<td>&nbsp;: {{ $voucher->no_hp_jamaah }}</td>
 							</tr>
 							<tr>
 								<td>Provinsi dan Kab/Kota</td>
-								<td>&nbsp;:</td>
+								<td>&nbsp;: {{ $voucher->nama_provinsi }}, {{ $voucher->nama_kota }}</td>
 							</tr>
 							<tr>
 								<td></td>
 							</tr>
 						</table>
-						<p>Nama yang memberangkatkan <b>{{ $voucher->pemilik }}</b> / izin {{ $voucher->kategori == 1 ? 'haji' : 'umroh' }} Kemenag RI No.490/2017</p>
+						<p>Nama yang memberangkatkan <b>{{ $voucher->nama_travel }}</b> / izin 
+						 @if($voucher->type == '1')
+						 Haji
+						 @elseif($voucher->type == '2')
+						 Umroh
+						 @endif Kemenag RI No.490/2017</p>
 					</div>
 					<div class="qr-code-1">
-						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->nomor_voucher) !!}
+						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate(Request::url('redeemVoucher/'.$voucher->kode_voucher)) !!}
 					</div>
 					<div class="footer">
 						<div class="nomor-dan-gambar">
 							<img src="{{ asset('assets/images/logo/logo-up.png') }}" width="80">
-							<div class="nomor-agen">Nomor ID Agen :</div>
+							<div class="nomor-agen">Nomor ID Agen : {{ $voucher->id_agen }}</div>
 						</div>
 						<div class="gambar-sponsor">
-							<img src="{{ asset('assets/images/logo/logo.png') }}" width="35">
-							&nbsp;&nbsp;
-							<img src="{{ asset('assets/images/logo/logo.png') }}" width="35">
+							<img src="{{ asset('admin/images/logo_travel/'.$voucher->gambar_travel) }}" width="35">
 						</div>
 					</div>
 				</div>
@@ -208,27 +211,25 @@
 				</div>
 				<div class="content">
 					<div class="qr-code-2">
-						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->nomor_voucher) !!}
+						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->kode_voucher) !!}
 					</div>
 					<div class="sub-judul">
-						Voucher Haji
+						{{ $voucher->nama_voucher }}
 						<p>Rp {{ number_format($voucher->nominal, 0, ',', '.') }}</p>
 					</div>
 					<table>
 						<tr>
 							<td>No. Seri Voucher</td>
-							<td>&nbsp; :</td>
+							<td>&nbsp; : {{ $voucher->nomor_voucher }}</td>
 						</tr>
 						<tr>
 							<td>ID Agen</td>
-							<td>&nbsp; :</td>
+							<td>&nbsp; : {{ $voucher->id_agen }}</td>
 						</tr>
 					</table>
 					<div class="footer">
 						<div class="gambar-sponsor">
-							<img src="{{ asset('assets/images/logo/logo.png') }}" width="35">
-							&nbsp;&nbsp;
-							<img src="{{ asset('assets/images/logo/logo.png') }}" width="35">
+							<img src="{{ asset('admin/images/logo_travel/'.$voucher->gambar_travel) }}" width="35">
 						</div>
 					</div>
 				</div>

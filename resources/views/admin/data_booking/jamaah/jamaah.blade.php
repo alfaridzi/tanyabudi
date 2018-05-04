@@ -57,7 +57,7 @@
 										<th>Nomor Transaksi</th>
 										<th>Nomor Paspor</th>
 										<th>Nama Jamaah</th>
-										<th>Jumlah Hari</th>
+										<th>Jumlah Kursi</th>
 										<th>Nama Paket</th>
 										<th>Jenis Paket</th>
 										<th>Status Mahrom</th>
@@ -78,9 +78,15 @@
 											<a href="{{ url('index/admin/data-booking/paspor/edit', $dataJamaah->id_paspor) }}" class="btn btn-info btn-flat">Edit Paspor</a>
 										</td>
 										<td>{{ $dataJamaah->nama_jamaah }}</td>
-										<td>Masih Dikerjakan</td>
-										<td>Masih Dikerjakan</td>
-										<td>Masih Dikerjakan</td>
+										<td>{{ $dataJamaah->kuota }}</td>
+										<td>{{ $dataJamaah->nama }}</td>
+										<td>
+											@if($dataJamaah->type == '1')
+											Haji
+											@elseif($dataJamaah->type == '2')
+											Umroh
+											@endif
+										</td>
 										<td>
 											@if($dataJamaah->status_mahrom == '0')
 											Bukan Mahrom
@@ -90,8 +96,8 @@
 											Belum Ditentukan
 											@endif
 										</td>
-										<td>Masih Dikerjakan</td>
-										<td>Masih Dikerjakan</td>
+										<td>{{ $dataJamaah->kode_bus }}</td>
+										<td>{{ $dataJamaah->kode_kamar }}</td>
 										<td><a href="{{ url('index/admin/data-booking/jamaah/edit', $dataJamaah->id_jamaah) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-jamaah" data-id-jamaah="{{ $dataJamaah->id_jamaah }}" class="btn btn-danger btn-flat">Delete</a>
 										</td>
 									</tr>

@@ -66,6 +66,8 @@ class ProdukController extends Controller
     	$produk->desc_prod = $request->desc_prod;
     	$produk->type = $request->tipe;
 
+        $tipe_produk = $request->tipe;
+
        	$produk->save();
 
        	if ($tipe_produk == 3) {
