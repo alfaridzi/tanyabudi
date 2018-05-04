@@ -76,7 +76,7 @@ desired effect
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="{{ asset('admin/jquery/dist/jquery.min.js') }}" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="{{ asset('admin/jquery/dist/jquery.min.js') }}" crossorigin="anonymous"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('admin/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 @stack('js')

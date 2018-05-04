@@ -61,9 +61,10 @@ class ProdukController extends Controller
     public function store(TambahProdukRequest $request)
     {
     	$produk = new produk;
-
+        $tipe_produk =$request->tipe;
     	$produk->nama = $request->nama_produk;
     	$produk->desc_prod = $request->desc_prod;
+        $produk->harga = $request->harga;
     	$produk->type = $request->tipe;
 
        	$produk->save();
@@ -92,6 +93,7 @@ class ProdukController extends Controller
     	$produk->updated_at = Carbon::now();
 
     	$tipe_produk = $produk->type;
+        $produk->harga = $request->harga;
 
        	$produk->save();
 
