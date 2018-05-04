@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
+
+
+	public function index() {
+		return Redirect('test')->withSuccess('sada');
+    
+	}
     public function sendResponse($result, $message)
     {
     	$response = [

@@ -61,14 +61,7 @@
 					<th><b>No Voucher</b></th>
 					<th class="right-align"><b>Status</b></th>
 				</tr>
-				<tr>
-					<td>6261-2128-2392</td>
-					<td class="right-align" style="color:#2F0F62; font-weight: bold;">Belum Terpakai</td>
-				</tr>
-				<tr>
-					<td>2321-3458-2392</td>
-					<td class="right-align" style="color:#2F0F62; font-weight: bold;">Sudah Terpakai</td>
-				</tr>
+				
 			</table>
 		</div>
 	</div>

@@ -1,0 +1,60 @@
+[33mcommit 08a6b773eea0a98246205da90bc61ff7d5965902[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: alfaridzi <alfaridzi48@gmail.com>
+Date:   Fri Apr 27 17:58:18 2018 +0700
+
+    test
+
+[33mcommit c31d8d890f0015828b7c6e92ef5bfd98a8f0a504[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Thu Apr 19 21:06:56 2018 +0700
+
+    install laravel passport
+
+[33mcommit 44432ef7373a2fd242ad735f020312990831b343[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Thu Apr 19 00:35:49 2018 +0700
+
+    desain final (belum revisi)
+
+[33mcommit a3c91ffe4c10f6daf87a7947cebb0a298f2eba14[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Fri Apr 13 19:26:45 2018 +0700
+
+    desain-part2,1
+
+[33mcommit f8e4fa0613af15a9182088bb43b8e8a545f02296[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Fri Apr 13 19:15:54 2018 +0700
+
+    desain-part2
+
+[33mcommit acbd4706501dce9fc04fcd3fb74036cfdd965b56[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Wed Apr 11 03:01:37 2018 +0700
+
+    setengah desain page haji
+
+[33mcommit 880f0642d2cc741338691c5bb9ce039bbae00ae5[m
+Merge: 6b96169 f80ce01
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Sat Apr 7 16:34:22 2018 +0700
+
+    fix merge
+
+[33mcommit 6b9616948eaf68b6fd46ba23f8772ef9f8028b6f[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Sat Apr 7 16:27:02 2018 +0700
+
+    Commit Pertama
+
+[33mcommit 9d27d97005f2dc1ff54ed87ee624c80c5b5e53aa[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Sat Apr 7 15:35:28 2018 +0700
+
+    Commit Pertama
+
+[33mcommit f80ce01b99bc3c6e65c16a435e1e35cac560e0ee[m
+Author: Ridwan Alamsyah <ridwanalamsyah96@gmail.com>
+Date:   Fri Apr 6 19:59:53 2018 +0700
+
+    Initial commit

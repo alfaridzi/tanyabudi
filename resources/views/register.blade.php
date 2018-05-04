@@ -106,6 +106,11 @@
 <body>
 
 <div id="form-pilihan" class="valign-wrapper" style="width:100%;height:100%; margin-top:30px;">
+
+
+
+	
+
 	<div class="valign" style="width:100%;">
 		<div class="container">
 			<div class="row">
@@ -137,6 +142,27 @@
 					</div>
 					<form method="post" id="form-user" action="{{ url('api/register') }}">
 						@csrf
+
+
+ @if($errors->any())
+						<div class="card red darken-1">
+   <div class="row">
+    <div class="col s12 m10">
+      <div class="card-content white-text">
+						@foreach($errors->all() as $error)
+
+							<p>{{ $error }}</p>
+
+
+						@endforeach
+						</div>
+  </div>
+  
+  </div>
+  </div>
+
+						@endif
+
 						<input type="hidden" name="tipe_user" value="1">
 						<div class="row">
 							<div class="input-field col s12">
@@ -172,7 +198,33 @@
 						</div>
 					</form>
 					<form method="post" id="form-agen" action="{{ url('api/register') }}">
+
+
+
+						@if($errors->any())
+						<div class="card red darken-1">
+   <div class="row">
+    <div class="col s12 m10">
+      <div class="card-content white-text">
+						@foreach($errors->all() as $error)
+
+							<p>{{ $error }}</p>
+
+
+						@endforeach
+						</div>
+  </div>
+ 
+  </div>
+  </div>
+
+						@endif
+
+
+
 						@csrf
+
+
 						<input type="hidden" name="tipe_user" value="2">
 						<div class="row">
 							<div class="input-field col s12">
@@ -225,6 +277,24 @@
 <script type="text/javascript" src="{{ asset('assets/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/materialize/js/materialize.min.js') }}"></script>
 <script type="text/javascript">
+
+
+	function getParam(param){
+	  return new URLSearchParams(window.location.search).get(param);
+	}
+
+
+	
+
+
+
+	function insertParam(key,value) {
+      if (history.pushState) {
+          var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' +key+'='+value;
+          window.history.pushState({path:newurl},'',newurl);
+      }
+    }
+
 	$('#form-page').hide();
 	$(document).ready(function(){
     	$('select').formSelect();
@@ -235,6 +305,8 @@
 			$('#form-page').show();
 			$('#form-user').show();
 			$('#form-agen').hide();
+
+			insertParam('view','user');
 		});
 
 		$('#btn-batal').on('click', function(){
@@ -251,7 +323,17 @@
 			$('#form-page').show();
 			$('#form-agen').show();
 			$('#form-user').hide();
+			insertParam('view','agen');
 		});
+
+
+
+		if(getParam('view') == 'user') {
+			$('#btn-user').click();
+		}else if(getParam('view') == 'agen') {
+			$('#btn-agen').click();
+		}
+
 	});
 </script>
 </body>
