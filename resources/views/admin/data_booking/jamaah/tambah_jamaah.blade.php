@@ -40,11 +40,20 @@
 	            				<input type="text" class="form-control" name="nomor_transaksi" placeholder="Nomor Transaksi">
 		            		</div>
 		            		<div class="form-group">
+		            			<label>User</label>
+		            			<select name="user" id="select-user" class="form-control" required>
+		            				<option selected="" disabled="">--Pilih User yang Akan Dijadikan Jamaah--</option>
+		            				@foreach($user as $dataUser)
+		            				<option value="{{ $dataUser->id }}">{{ $dataUser->name }} - {{ $dataUser->email }}</option>
+		            				@endforeach
+		            			</select>
+		            		</div>
+		            		<div class="form-group">
 		            			<label>Nomor Paspor</label>
 		            			<input type="text" class="form-control" name="nomor_paspor" placeholder="Nomor Paspor" required>
 		            		</div>
 		            		<div class="form-group">
-		            			<label>Nama</label>
+		            			<label>Nama Paspor</label>
 		            			<input type="text" name="nama" class="form-control" placeholder="Nama" required>
 		            		</div>
 		            		<div class="form-group">
@@ -110,6 +119,7 @@
 	$(document).ready(function(){
 		$('#select-voucher').select2();
 		$('#select-paket').select2();
+		$('#select-user').select2();
 		$('.datepicker').datepicker({
 			format: 'yyyy-mm-dd',
 			language: 'id',

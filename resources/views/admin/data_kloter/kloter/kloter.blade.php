@@ -87,7 +87,8 @@
 										<td>{{ $dataKloter->total_seat }}</td>
 										<td>{{ $dataKloter->total_seat - $dataKloter->hitung_seat }}</td>
 										<td>{{ $dataKloter->jumlah_hari }}</td>
-										<td><a href="{{ url('index/admin/data-kloter/kloter/edit', $dataKloter->id_kloter) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn btn-delete-kloter" data-id-kloter="{{ $dataKloter->id_kloter }}" class="btn btn-danger btn-flat">Delete</a> 
+										<td>
+											<a href="{{ url('index/admin/data-kloter/kloter/edit', $dataKloter->id_kloter) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-kloter" data-id-kloter="{{ $dataKloter->id_kloter }}" class="btn btn-danger btn-flat">Delete</a> 
 											@if(!is_null($dataKloter->total_seat) && $dataKloter->total_seat != "" && $dataKloter->total_seat != '0')
 											<a href="{{ url('index/admin/data-kloter/kloter/list-jamaah',$dataKloter->id_kloter) }}" class="btn btn-info btn-flat">List Jamaah</a></td>
 											@endif
@@ -129,7 +130,7 @@
 
             if (jawaban) {
                 var id_kloter = $(this).data('id-kloter');
-                $('#frm-delete-kloter').attr('action', '{{ url('index/admin/kloter/delete') }}/'+id_kloter);
+                $('#frm-delete-kloter').attr('action', '{{ url('index/admin/data-kloter/kloter/delete') }}/'+id_kloter);
                 $('#frm-delete-kloter').submit();
             }
         });

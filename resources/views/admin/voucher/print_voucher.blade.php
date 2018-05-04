@@ -166,7 +166,7 @@
 						<table>
 							<tr>
 								<td>Nama Jamaah</td>
-								<td>&nbsp;: {{ $voucher->nama_jamaah }}</td>
+								<td>&nbsp;: {{ $voucher->nama_paspor }}</td>
 							</tr>
 							<tr>
 								<td>Alamat</td>
@@ -174,7 +174,7 @@
 							</tr>
 							<tr>
 								<td>No HP</td>
-								<td>&nbsp;: {{ $voucher->no_hp_jamaah }}</td>
+								<td>&nbsp;: {{ $voucher->no_hp_paspor }}</td>
 							</tr>
 							<tr>
 								<td>Provinsi dan Kab/Kota</td>
@@ -192,7 +192,7 @@
 						 @endif Kemenag RI No.490/2017</p>
 					</div>
 					<div class="qr-code-1">
-						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate(Request::url('redeemVoucher/'.$voucher->kode_voucher)) !!}
+						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->kode_voucher) !!}
 					</div>
 					<div class="footer">
 						<div class="nomor-dan-gambar">
