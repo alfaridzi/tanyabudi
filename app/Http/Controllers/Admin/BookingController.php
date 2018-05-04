@@ -18,6 +18,15 @@ class BookingController extends Controller
     	return view('admin.data_booking.booking.booking', compact('booking'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+
+        $booking = DB::table('tbl_booking')->join('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->where('kode_booking', 'like', '%'.$keyword.'%')->orWhere('nomor_transaksi', 'like', '%'.$keyword.'%')->orWhere('nama_jamaah', 'like', '%'.$keyword.'%')->orderBy('id_booking', 'desc')->paginate(15);      
+        
+        return view('admin.data_booking.booking.booking', compact('booking'));  
+    }
+
     public function edit($id_booking)
     {
     	$booking = Booking::find($id_booking);

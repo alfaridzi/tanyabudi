@@ -39,7 +39,15 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('produk/{produk}/search', 'Admin\ProdukController@search');
 	Route::get('produk/edit/{id_produk}', 'Admin\ProdukController@edit');
 	Route::patch('produk/update/{id_produk}', 'Admin\ProdukController@update');
-	Route::delete('produk/update/{id_produk}', 'Admin\ProdukController@delete');
+	Route::delete('produk/delete/{id_produk}', 'Admin\ProdukController@delete');
+
+	Route::get('paket', 'Admin\PaketController@index');
+	Route::get('paket/tambah', 'Admin\PaketController@create');
+	Route::post('paket/tambah/simpan', 'Admin\PaketController@store');
+	Route::get('paket/edit/{id_produk}', 'Admin\PaketController@edit');
+	Route::patch('paket/update/{id_produk}', 'Admin\PaketController@update');
+	Route::delete('paket/delete/{id_produk}', 'Admin\PaketController@delete');
+	Route::get('paket/status/{id_produk}', 'Admin\PaketController@status');
 
 	Route::get('voucher', 'Admin\VoucherController@index');
 	Route::get('voucher/search', 'Admin\VoucherController@search');
@@ -59,6 +67,7 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('data-user/user/search', 'Admin\DataUserController@search_user');
 
 	Route::get('data-booking/jamaah', 'Admin\JamaahController@index');
+	Route::get('data-booking/jamaah/search', 'Admin\JamaahController@search');
 	Route::get('data-booking/jamaah/tambah', 'Admin\JamaahController@create');
 	Route::post('data-booking/jamaah/tambah/simpan', 'Admin\JamaahController@store');
 	Route::get('data-booking/jamaah/edit/{id_jamaah}', 'Admin\JamaahController@edit');
@@ -72,6 +81,45 @@ Route::prefix('index/admin')->group(function(){
 
 	Route::get('data-booking/paspor/edit/{id_paspor}', 'Admin\PasporController@edit');
 	Route::patch('data-booking/paspor/update/{id_paspor}', 'Admin\PasporController@update');
+
+	Route::get('data-kloter/kloter', 'Admin\KloterController@index');
+	Route::get('data-kloter/kloter/search', 'Admin\KloterController@search');
+	Route::get('data-kloter/kloter/tambah', 'Admin\KloterController@create');
+	Route::post('data-kloter/kloter/tambah/simpan', 'Admin\KloterController@store');
+	Route::get('data-kloter/kloter/edit/{id_kloter}', 'Admin\KloterController@edit');
+	Route::patch('data-kloter/kloter/update/{id_kloter}', 'Admin\KloterController@update');
+	Route::delete('data-kloter/kloter/delete/{id_kloter}', 'Admin\KloterController@delete');
+
+	Route::get('data-kloter/kloter/list-jamaah/{id_kloter}', 'Admin\KloterController@list_jamaah');
+	Route::get('data-kloter/kloter/list-jamaah/{id_kloter}/tambah', 'Admin\KloterController@isi_kuota');
+	Route::post('data-kloter/kloter/list-jamaah/{id_kloter}/tambah/simpan', 'Admin\KloterController@store_isi_kuota');
+	Route::delete('data-kloter/kloter/list-jamaah/{id_kloter}/delete', 'Admin\KloterController@delete_kuota');
+
+	Route::get('data-kloter/bus', 'Admin\BusController@index');
+	Route::get('data-kloter/bus/search', 'Admin\BusController@search');
+	Route::get('data-kloter/bus/tambah', 'Admin\BusController@create');
+	Route::post('data-kloter/bus/tambah/simpan', 'Admin\BusController@store');
+	Route::get('data-kloter/bus/edit/{id_bus}', 'Admin\BusController@edit');
+	Route::patch('data-kloter/bus/update/{id_bus}', 'Admin\BusController@update');
+	Route::delete('data-kloter/bus/delete/{id_bus}', 'Admin\BusController@delete');
+
+	Route::get('data-kloter/bus/list-jamaah/{id_bus}', 'Admin\BusController@list_jamaah');
+	Route::get('data-kloter/bus/list-jamaah/{id_bus}/tambah', 'Admin\BusController@isi_kuota');
+	Route::post('data-kloter/bus/list-jamaah/{id_bus}/tambah/simpan', 'Admin\BusController@store_isi_kuota');
+	Route::delete('data-kloter/bus/list-jamaah/{id_bus}/delete', 'Admin\BusController@delete_kuota');
+
+	Route::get('data-kloter/kamar', 'Admin\KamarController@index');
+	Route::get('data-kloter/kamar/search', 'Admin\KamarController@search');
+	Route::get('data-kloter/kamar/tambah', 'Admin\KamarController@create');
+	Route::post('data-kloter/kamar/tambah/simpan', 'Admin\KamarController@store');
+	Route::get('data-kloter/kamar/edit/{id_kamar}', 'Admin\KamarController@edit');
+	Route::patch('data-kloter/kamar/update/{id_kamar}', 'Admin\KamarController@update');
+	Route::delete('data-kloter/kamar/delete/{id_kamar}', 'Admin\KamarController@delete');
+
+	Route::get('data-kloter/kamar/list-jamaah/{id_kamar}', 'Admin\KamarController@list_jamaah');
+	Route::get('data-kloter/kamar/list-jamaah/{id_kamar}/tambah', 'Admin\KamarController@isi_kuota');
+	Route::post('data-kloter/kamar/list-jamaah/{id_kamar}/tambah/simpan', 'Admin\KamarController@store_isi_kuota');
+	Route::delete('data-kloter/kamar/list-jamaah/{id_kamar}/delete', 'Admin\KamarController@delete_kuota');
 
 	Route::get('karyawan', 'Admin\KaryawanController@index');
 	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');

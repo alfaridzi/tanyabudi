@@ -28,13 +28,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('index/admin/produk/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
-            <li><a href="{{ url('index/admin/produk/umroh') }}"><i class="fa fa-link"></i> Umroh</a></li>
             <li><a href="{{ url('index/admin/produk/wisata') }}"><i class="fa fa-link"></i> Wisata</a></li>
             <li><a href="{{ url('index/admin/produk/sedekah') }}"><i class="fa fa-link"></i> Sedekah</a></li>
-            <li><a href="{{ url('index/admin/produk/tabungan') }}"><i class="fa fa-link"></i> Tabungan</a></li>
+            <li><a href="{{ url('index/admin/produk/agen') }}"><i class="fa fa-link"></i> Agen</a></li>
           </ul>
         </li>
+        <li><a href="{{ url('index/admin/paket') }}"><i class="fa fa-plane"></i> Paket Haji & Umroh</a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-shopping-cart"></i> <span>Transaksi</span>
             <span class="pull-right-container">

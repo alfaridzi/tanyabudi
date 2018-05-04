@@ -42,18 +42,16 @@
 								<label>Tipe</label>
 								<select class="form-control" name="tipe" required>
 									<option selected="" disabled="">--Pilih Salah Satu</option>
-									<option value="1">Haji</option>
-									<option value="2">Umroh</option>
 									<option value="3">Wisata</option>
 									<option value="4">Sedekah</option>
-									<option value="3949">Tabungan</option>
+									<option value="5">Agen</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label>Nama Produk</label>
 								<input type="text" name="nama_produk" class="form-control" required>
 							</div>
-							<div class="hide-input">
+							<div class="hide-input agen">
 								<div class="form-group">
 									<label>Harga</label>
 									<input type="number" name="harga" class="form-control">
@@ -86,8 +84,9 @@
 	$(document).ready(function(){
 		$('select[name="tipe"]').on('change', function(){
 			var value = $(this).val();
-			if (value == 1 || value == 2 || value == 3) {
-				$('.hide-input').show();
+			if(value == 5){
+				$('.hide-input').hide();
+				$('.agen').show();
 				$('input[name="harga"]').attr('required', true);
 			}else{
 				$('.hide-input').hide();

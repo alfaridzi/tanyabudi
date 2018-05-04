@@ -69,7 +69,7 @@
 											Telah Diterima
 											@endif
 										</td>
-										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a>
+										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> <a href="{{ url('index/admin/data-booking/booking/print-voucher') }}" class="btn btn-info btn-flat">Print Voucher</a>
 										</td>
 									</tr>
 									@endforeach

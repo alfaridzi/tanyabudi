@@ -22,6 +22,20 @@ class JamaahController extends Controller
     	return view('admin.data_booking.jamaah.jamaah', compact('jamaah'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $status_mahrom = $request->status_mahrom;
+
+        $jamaah = DB::table('tbl_jamaah')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_booking', 'tbl_jamaah.id_jamaah', '=', 'tbl_booking.id_jamaah')->where(function($q) use($status_mahrom){
+            $q->where('status_mahrom', $status_mahrom);
+        })->where(function($q) use($keyword){
+            $q->where('kode_booking', 'like', '%'.$keyword.'%')->orWhere('nomor_transaksi', 'like', '%'.$keyword.'%')->orWhere('nomor_paspor', 'like', '%'.$keyword.'%')->orWhere('nama_jamaah', 'like', '%'.$keyword.'%');
+        })->paginate(15);
+
+        return view('admin.data_booking.jamaah.jamaah', compact('jamaah'));
+    }
+
     public function create()
     {
     	$voucher = DB::table('tbl_voucher')->addSelect('tbl_booking.*', 'tbl_booking.id_voucher as id_voucher_booking')->addSelect('tbl_voucher.*')->leftJoin('tbl_booking', 'tbl_voucher.id_voucher', '=', 'tbl_booking.id_voucher')->where('tbl_booking.id_voucher', null)->where('tanggal_akhir', '>', date('Y-m-d H:i:s'))->where('status_voucher', '0')->get();
@@ -90,5 +104,14 @@ class JamaahController extends Controller
     	$paspor->save();
 
     	return redirect('index/admin/data-booking/jamaah')->withSuccess('Berhasil Mengubah Data Jamaah');
+    }
+
+    public function delete($id_jamaah)
+    {
+    	$booking = Booking::where('id_jamaah', $id_jamaah)->delete();
+    	$paspor = Paspor::where('id_jamaah', $id_jamaah)->delete();
+    	$jamaah = Jamaah::findOrFail($id_jamaah)->delete();
+
+    	return redirect()->back()->withSuccess('Berhasil Menghapus Data Jamaah');
     }
 }

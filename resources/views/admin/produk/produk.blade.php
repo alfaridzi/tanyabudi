@@ -45,7 +45,7 @@
 		            			<tr>
 		            				<td>No</td>
 		            				<td>Nama Produk</td>
-		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3)
+		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3 || $tipe == 5)
 		            				<td>Harga</td>
 		            				@endif
 		            				<td>Deskripsi Produk</td>
@@ -57,11 +57,11 @@
 		            			<tr>
 		            				<td>{{ $loop->iteration }}</td>
 		            				<td>{{ $dataProduk->nama }}</td>
-		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3)
+		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3 || $tipe == 5)
 		            				<td>Rp {{ number_format($dataProduk->harga, 2, ',', '.') }}</td>
 		            				@endif
 		            				<td>{{ $dataProduk->desc_prod }}</td>
-		            				<td><a href="{{ url('index/admin/produk/edit', $dataProduk->id) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-produk" class="btn btn-danger btn-flat">Delete</a></td>
+		            				<td><a href="{{ url('index/admin/produk/edit', $dataProduk->id) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-produk" class="btn btn-danger btn-flat" data-id-produk="{{ $dataProduk->id }}">Delete</a></td>
 		            			</tr>
 		            			@endforeach
 		            		</tbody>
@@ -74,5 +74,20 @@
 </div>
 <form id="frm-delete-produk" method="post" action="">
 	@csrf
+	{!! method_field('delete') !!}
 </form>
 @endsection
+@push('js')
+<script type="text/javascript">
+	$(document).on('click', '#btn-delete-produk', function(e){
+        e.preventDefault();
+        var jawaban = confirm('Apakah anda yakin ingin menghapus data ini?');
+
+        if (jawaban) {
+            var id_produk = $(this).data('id-produk');
+            $('#frm-delete-produk').attr('action', '{{ url('index/admin/produk/delete') }}/'+id_produk);
+            $('#frm-delete-produk').submit();
+        }
+    });
+</script>
+@endpush

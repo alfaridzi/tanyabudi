@@ -31,6 +31,14 @@
 		            	<div class="pull-right">
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-booking/jamaah/search') }}">
 			            		<div class="form-group">
+			            			<select class="form-control" name="status_mahrom">
+			            				<option disabled="" selected="">--Pilih Status Mahrom</option>
+			            				<option value="0">Bukan Mahrom</option>
+			            				<option value="1">Mahrom</option>
+			            				<option value="">Belum Ditentukan</option>
+			            			</select>
+			            		</div>
+			            		<div class="form-group">
 			            			<input type="search" name="search" class="form-control" placeholder="Cari...">
 			            		</div>
 			            		<div class="form-group">
