@@ -607,7 +607,6 @@ div.daftar-paket ol li a .detail-paket {
 .bayar-bayar .list-produk {
 	display: block;
 	margin: 0 auto;
-	padding-top: 20px;
 	vertical-align: middle;
 	text-align: center;
 }
@@ -625,16 +624,17 @@ div.daftar-paket ol li a .detail-paket {
 	vertical-align: middle;
 	width: 55px;
 	height: 55px;
-	margin: 0;
+	margin: 5px;
 	padding-left: 0.1em;
 	padding-top: 2px;
 	border-radius: 50%;
+	margin-bottom: 20px;
 	border: 2px solid #363636;
 }
 
-.list-produk ol li:not(:first-child) {
+/*.list-produk ol li:not(:first-child) {
 	margin-left: 10px;
-}
+}*/
 
 .list-produk ol li:not(:last-child):after {
 	content: '';
@@ -695,6 +695,12 @@ div.daftar-paket ol li a .detail-paket {
 	}
 }
 
+@media only screen and (max-width: 992px) {
+	nav#navbar-atas i {
+		font-size: 30px;
+	}
+}
+
 @media only screen and (max-width: 600px) {
 	nav.nav-center {
 		line-height: 65px;
@@ -711,10 +717,14 @@ div.daftar-paket ol li a .detail-paket {
 	}
 
 	nav#navbar-atas i {
-		font-size: 20px;
+		font-size: 30px;
 	}
 
 	nav#navbar-atas .right.hide-on-large-only li a {
+		padding: 0px 6px;
+	}
+
+	nav#navbar-atas .left.hide-on-large-only li a {
 		padding: 0px 6px;
 	}
 
@@ -955,6 +965,15 @@ div.daftar-paket ol li a .detail-paket {
 }
 
 @media only screen and (max-width: 430px) {
+	nav#navbar-atas i {
+		font-size: 20px;
+	}
+
+	nav#navbar-atas .left.hide-on-large-only i {
+		padding-top: 2px;
+		font-size: 24px;
+	}
+
 	ol.circle-steps.text-steps > li {
 		position: relative;
 	}

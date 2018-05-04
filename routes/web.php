@@ -14,6 +14,89 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('index/login', function(){
+	return view('admin.login');
+});
+
+Route::prefix('index/admin')->group(function(){
+
+	Route::get('dashboard', function(){
+		return view('admin.dashboard');
+	});
+
+	Route::get('ajax/get_jabatan/{kode_divisi}', 'Admin\AjaxController@get_jabatan');
+	Route::get('ajax/get_kota/{province_id}', 'Admin\AjaxController@get_kota');
+	Route::get('ajax/get_kecamatan/{regency_id}', 'Admin\AjaxController@get_kecamatan');
+	Route::get('ajax/get_kelurahan/{district_id}', 'Admin\AjaxController@get_kelurahan');
+	Route::get('ajax/detail_karyawan/{id_karyawan}', 'Admin\AjaxController@detail_karyawan');
+
+	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
+	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_haji');
+
+	Route::get('produk/tambah', 'Admin\ProdukController@create');
+	Route::post('produk/tambah/simpan', 'Admin\ProdukController@store');
+	Route::get('produk/{produk}', 'Admin\ProdukController@index');
+	Route::get('produk/{produk}/search', 'Admin\ProdukController@search');
+	Route::get('produk/edit/{id_produk}', 'Admin\ProdukController@edit');
+	Route::patch('produk/update/{id_produk}', 'Admin\ProdukController@update');
+	Route::delete('produk/update/{id_produk}', 'Admin\ProdukController@delete');
+
+	Route::get('voucher', 'Admin\VoucherController@index');
+	Route::get('voucher/search', 'Admin\VoucherController@search');
+	Route::get('voucher/tambah', 'Admin\VoucherController@create');
+	Route::post('voucher/tambah/simpan', 'Admin\VoucherController@store');
+	Route::get('voucher/edit/{id_voucher}', 'Admin\VoucherController@edit');
+	Route::patch('voucher/update/{id_voucher}', 'Admin\VoucherController@update');
+	Route::get('voucher/print/{id_voucher}', 'Admin\VoucherController@print');
+	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete');
+
+	Route::get('data-user/agen', 'Admin\DataUserController@index_agen');
+	Route::post('data-user/agen/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
+	Route::get('data-user/agen/search', 'Admin\DataUserController@search_agen');
+
+	Route::get('data-user/user', 'Admin\DataUserController@index_user');
+	Route::post('data-user/user/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
+	Route::get('data-user/user/search', 'Admin\DataUserController@search_user');
+
+	Route::get('data-booking/jamaah', 'Admin\JamaahController@index');
+	Route::get('data-booking/jamaah/tambah', 'Admin\JamaahController@create');
+	Route::post('data-booking/jamaah/tambah/simpan', 'Admin\JamaahController@store');
+	Route::get('data-booking/jamaah/edit/{id_jamaah}', 'Admin\JamaahController@edit');
+	Route::patch('data-booking/jamaah/update/{id_jamaah}', 'Admin\JamaahController@update');
+	Route::delete('data-booking/jamaah/delete/{id_jamaah}', 'Admin\JamaahController@delete');
+
+	Route::get('data-booking/booking', 'Admin\BookingController@index');
+	Route::get('data-booking/booking/search', 'Admin\BookingController@search');
+	Route::get('data-booking/booking/edit/{id_booking}', 'Admin\BookingController@edit');
+	Route::patch('data-booking/booking/update/{id_booking}', 'Admin\BookingController@update');
+
+	Route::get('data-booking/paspor/edit/{id_paspor}', 'Admin\PasporController@edit');
+	Route::patch('data-booking/paspor/update/{id_paspor}', 'Admin\PasporController@update');
+
+	Route::get('karyawan', 'Admin\KaryawanController@index');
+	Route::get('karyawan/tambah', 'Admin\KaryawanController@create');
+	Route::post('karyawan/tambah/simpan', 'Admin\KaryawanController@store');
+	Route::get('karyawan/edit/{id_karyawan}', 'Admin\KaryawanController@edit');
+	Route::patch('karyawan/update/{id_karyawan}', 'Admin\KaryawanController@update');
+	Route::delete('karyawan/delete/{id_karyawan}', 'Admin\KaryawanController@delete');
+
+	Route::get('divisi', 'Admin\DivisiController@index');
+	Route::get('divisi/tambah', 'Admin\DivisiController@create');
+	Route::post('divisi/tambah/simpan', 'Admin\DivisiController@store');
+	Route::get('divisi/edit/{kode_divisi}', 'Admin\DivisiController@edit');
+	Route::patch('divisi/update/{kode_divisi}', 'Admin\DivisiController@update');
+	Route::delete('divisi/delete/{kode_divisi}', 'Admin\DivisiController@delete');
+
+	Route::get('jabatan', 'Admin\JabatanController@index');
+	Route::get('jabatan/tambah', 'Admin\JabatanController@create');
+	Route::post('jabatan/tambah/simpan', 'Admin\JabatanController@store');
+	Route::get('jabatan/edit/{kode_jabatan}', 'Admin\JabatanController@edit');
+	Route::patch('jabatan/update/{kode_jabatan}', 'Admin\JabatanController@update');
+	Route::delete('jabatan/delete/{kode_jabatan}', 'Admin\JabatanController@delete');
+
+	Route::get('pengaturan/edit-halaman-bantuan', 'Admin\PengaturanController@edit_bantuan');
+	Route::patch('pengaturan/edit-halaman-bantuan/update', 'Admin\PengaturanController@update_bantuan');
+});
 
 Route::group(['middleware'=>'guest'], function() {
 Route::get('test', function() {
@@ -46,6 +129,10 @@ Route::group(['middleware'=>['guest','web']], function() {
 		return view('syarat_ketentuan');
 	});
 
+	Route::get('/syarat-ketentuan-agen', function(){
+		return view('agen.syarat_ketentuan');
+	});
+
 });
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
@@ -75,6 +162,11 @@ Route::get('/notifikasi', function(){
 
 Route::get('/pengaturan', function(){
 	return view('umum.pengaturan');
+});
+
+Route::get('/bantuan', function(){
+	$bantuan = \DB::table('tbl_halaman_bantuan')->first();
+	return view('umum.bantuan', compact('bantuan'));
 });
 
 Route::get('/tabungan-haji-umroh', function(){

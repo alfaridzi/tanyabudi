@@ -4,8 +4,96 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a85796bac58083fb80eba34a8c9fcd15",
+    "content-hash": "17cceea7737926f23a9a90a5fcde9189",
     "packages": [
+        {
+            "name": "bacon/bacon-qr-code",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "5a91b62b9d37cee635bbf8d553f4546057250bee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/5a91b62b9d37cee635bbf8d553f4546057250bee",
+                "reference": "5a91b62b9d37cee635bbf8d553f4546057250bee",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": "^5.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "suggest": {
+                "ext-gd": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "BaconQrCode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "http://www.dasprids.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "time": "2017-10-17T09:59:25+00:00"
+        },
+        {
+            "name": "caouecs/laravel-lang",
+            "version": "3.0.47",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caouecs/Laravel-lang.git",
+                "reference": "9d618e137c4fd4a8e4556a69ab884aa0c413417c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/9d618e137c4fd4a8e4556a69ab884aa0c413417c",
+                "reference": "9d618e137c4fd4a8e4556a69ab884aa0c413417c",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.10"
+            },
+            "suggest": {
+                "ablunier/laravel-lang-installer": "Command for easily add languages to a Laravel project",
+                "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2018-04-24T11:50:34+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.2.0",
@@ -745,6 +833,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v5.6.20",
             "source": {
                 "type": "git",
@@ -755,6 +844,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/3c11e7acc6ad14dd86e2f9e4bf3230010c3e611c",
                 "reference": "3c11e7acc6ad14dd86e2f9e4bf3230010c3e611c",
+=======
+            "version": "v5.6.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "088f286d0b5145275ced93799e23980a81898d10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/088f286d0b5145275ced93799e23980a81898d10",
+                "reference": "088f286d0b5145275ced93799e23980a81898d10",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
                 "shasum": ""
             },
             "require": {
@@ -880,7 +981,11 @@
                 "framework",
                 "laravel"
             ],
+<<<<<<< HEAD
             "time": "2018-05-02T15:22:18+00:00"
+=======
+            "time": "2018-04-26T13:25:23+00:00"
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
         },
         {
             "name": "laravel/passport",
@@ -1945,6 +2050,67 @@
             "time": "2018-01-20T00:28:24+00:00"
         },
         {
+            "name": "simplesoftwareio/simple-qrcode",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SimpleSoftwareIO/simple-qrcode.git",
+                "reference": "90b2282dd29be1e52565e9832dc23af41610ea07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SimpleSoftwareIO/simple-qrcode/zipball/90b2282dd29be1e52565e9832dc23af41610ea07",
+                "reference": "90b2282dd29be1e52565e9832dc23af41610ea07",
+                "shasum": ""
+            },
+            "require": {
+                "bacon/bacon-qr-code": "1.0.*",
+                "ext-gd": "*",
+                "illuminate/support": ">=5.0.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
+                    ],
+                    "aliases": {
+                        "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "SimpleSoftwareIO\\QrCode\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simple Software LLC",
+                    "email": "support@simplesoftware.io"
+                }
+            ],
+            "description": "Simple QrCode is a QR code generator made for Laravel.",
+            "homepage": "http://www.simplesoftware.io",
+            "keywords": [
+                "Simple",
+                "generator",
+                "laravel",
+                "qrcode",
+                "wrapper"
+            ],
+            "time": "2017-11-26T15:27:12+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.0.2",
             "source": {
@@ -2001,7 +2167,11 @@
         },
         {
             "name": "symfony/console",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -2069,7 +2239,11 @@
         },
         {
             "name": "symfony/css-selector",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
@@ -2122,7 +2296,11 @@
         },
         {
             "name": "symfony/debug",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -2178,7 +2356,11 @@
         },
         {
             "name": "symfony/event-dispatcher",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2241,7 +2423,11 @@
         },
         {
             "name": "symfony/finder",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -2290,7 +2476,11 @@
         },
         {
             "name": "symfony/http-foundation",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
@@ -2343,6 +2533,7 @@
         },
         {
             "name": "symfony/http-kernel",
+
             "version": "v4.0.9",
             "source": {
                 "type": "git",
@@ -2353,6 +2544,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/http-kernel/zipball/8333264b6de323ea27a08627d5396aa564fb9c25",
                 "reference": "8333264b6de323ea27a08627d5396aa564fb9c25",
+
                 "shasum": ""
             },
             "require": {
@@ -2425,7 +2617,11 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2018-04-30T19:45:57+00:00"
+=======
+            "time": "2018-04-06T16:25:03+00:00"
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2543,7 +2739,11 @@
         },
         {
             "name": "symfony/process",
+<<<<<<< HEAD
             "version": "v4.0.9",
+=======
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -2652,6 +2852,7 @@
         },
         {
             "name": "symfony/routing",
+<<<<<<< HEAD
             "version": "v4.0.9",
             "source": {
                 "type": "git",
@@ -2662,6 +2863,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/routing/zipball/1dfbfdf060bbc80da8dedc062050052e694cd027",
                 "reference": "1dfbfdf060bbc80da8dedc062050052e694cd027",
+=======
+            "version": "v4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/routing.git",
+                "reference": "0663036dd57dbfd4e9ff29f75bbd5dd3253ebe71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/0663036dd57dbfd4e9ff29f75bbd5dd3253ebe71",
+                "reference": "0663036dd57dbfd4e9ff29f75bbd5dd3253ebe71",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
                 "shasum": ""
             },
             "require": {
@@ -2726,11 +2939,19 @@
                 "uri",
                 "url"
             ],
+<<<<<<< HEAD
             "time": "2018-04-20T06:20:23+00:00"
         },
         {
             "name": "symfony/translation",
             "version": "v4.0.9",
+=======
+            "time": "2018-04-04T13:50:32+00:00"
+        },
+        {
+            "name": "symfony/translation",
+            "version": "v4.0.8",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -2798,6 +3019,7 @@
         },
         {
             "name": "symfony/var-dumper",
+<<<<<<< HEAD
             "version": "v4.0.9",
             "source": {
                 "type": "git",
@@ -2808,6 +3030,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/var-dumper/zipball/3c34cf3f4bbac9e003d9325225e9ef1a49180a18",
                 "reference": "3c34cf3f4bbac9e003d9325225e9ef1a49180a18",
+=======
+            "version": "v4.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "e1b4d008100f4d203cc38b0d793ad6252d8d8af0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e1b4d008100f4d203cc38b0d793ad6252d8d8af0",
+                "reference": "e1b4d008100f4d203cc38b0d793ad6252d8d8af0",
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
                 "shasum": ""
             },
             "require": {
@@ -2863,7 +3097,11 @@
                 "debug",
                 "dump"
             ],
+<<<<<<< HEAD
             "time": "2018-04-26T16:12:06+00:00"
+=======
+            "time": "2018-04-04T05:10:37+00:00"
+>>>>>>> fa4c8178e6a75e70a70ec67fcf25c456351a336b
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
