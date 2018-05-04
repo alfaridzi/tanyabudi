@@ -34,8 +34,6 @@ class RegisterController extends Controller
 	    $model->save();
 	    return Redirect('/')->withSuccess('Konfirmasi berhasil Silahkan login!');
 	}
-
-
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -45,30 +43,18 @@ class RegisterController extends Controller
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
-
-
         if($validator->fails()){
         	$ids = $request->tipe_user;
 			if($ids == 2) {
-
-
-
 				return Redirect('register?view=agen')->withErrors($validator->errors())->withInput(Input::all());
 			} else {
 				return Redirect('register?view=user')->withErrors($validator->errors())->withInput(Input::all());
 			}
                   
         }
-
-
-
-
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $input['token_register'] = str_random(190);
-       
-     
-
         event(new Registered($user = User::create($input)));
 
         $success['token'] =  $user->createToken('MyApp')->accessToken;
