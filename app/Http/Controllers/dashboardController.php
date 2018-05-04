@@ -15,3 +15,4 @@ class dashboardController extends Controller
     	}
     }
 }
+

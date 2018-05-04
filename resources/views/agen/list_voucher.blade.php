@@ -62,7 +62,6 @@
 					<th class="right-align"><b>Status</b></th>
 				</tr>
 				
-			
 			</table>
 		</div>
 	</div>

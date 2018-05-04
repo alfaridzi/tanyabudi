@@ -146,9 +146,17 @@ Route::prefix('index/admin')->group(function(){
 	Route::patch('pengaturan/edit-halaman-bantuan/update', 'Admin\PengaturanController@update_bantuan');
 });
 
+Route::group(['middleware'=>'guest'], function() {
+Route::get('test', function() {
+	 dd(Session::all());
+	});
+});
+Route::post('api/register', 'API\RegisterController@register');
+Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
+
 
 	Route::get('/logout','Auth\LoginController@logout');
-Route::group(['middleware'=>'guest'], function() {
+Route::group(['middleware'=>['guest','web']], function() {
 
 
 
@@ -164,6 +172,7 @@ Route::group(['middleware'=>'guest'], function() {
 
 	Route::post('/login','Auth\LoginController@login');
 
+
 	Route::get('/syarat-ketentuan', function(){
 		return view('syarat_ketentuan');
 	});
@@ -176,6 +185,10 @@ Route::group(['middleware'=>'guest'], function() {
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
 	return view('instruksi');
+});
+
+Route::get('scan', function() {
+	return view('scan');
 });
 
 Route::get('/detail-paket/{id}', 'produkController@detail_produk');

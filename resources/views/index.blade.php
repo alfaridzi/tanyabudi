@@ -84,6 +84,23 @@
 					<form method="post" action="{{ url('login') }}">
 
 
+					@if(Session::has('success'))
+
+					<div class="card green darken-1">
+						   <div class="row">
+						    <div class="col s12 m10">
+						      <div class="card-content white-text">
+						      	<p>{{ Session::get('success') }}</p>
+												</div>
+						  </div>
+						  <div class="col s12 m2">
+						    <i class="fa fa-times icon_style"                             id="alert_close" aria-hidden="true"></i>
+						  </div>
+						  </div>
+						  </div>
+
+
+					@endif
 						@if($errors->any())
 						<div class="card red darken-1">
    <div class="row">
