@@ -68,6 +68,8 @@ Route::prefix('index/admin')->group(function(){
 	Route::get('data-user/agen', 'Admin\DataUserController@index_agen');
 	Route::post('data-user/agen/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
 	Route::get('data-user/agen/search', 'Admin\DataUserController@search_agen');
+	Route::get('data-user/agen/{id_agen}/list-transaksi', 'Admin\DataUserController@list_trx_agen');
+	Route::get('data-user/agen/{id_agen}/list-transaksi/search', 'Admin\DataUserController@search_transaksi');
 
 	Route::get('data-user/user', 'Admin\DataUserController@index_user');
 	Route::post('data-user/user/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');

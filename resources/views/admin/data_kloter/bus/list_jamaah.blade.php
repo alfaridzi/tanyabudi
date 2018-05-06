@@ -105,9 +105,12 @@
 		});
 
 		$(document).on('click', '#deleteAll', function(){
+			var isExists = $("#table-list-jamaah .jamaah").find();
 			if ($(this).is(':checked')) {
-				$('.jamaah').prop('checked', true);
-				$('#btn-delete-jamaah').removeClass('disabled');
+				if (isExists.prevObject.length != 0) {
+					$('.jamaah').prop('checked', true);
+					$('#btn-delete-jamaah').removeClass('disabled');	
+				}
 			}else{
 				$('.jamaah').prop('checked', false);
 				$('#btn-delete-jamaah').addClass('disabled');
