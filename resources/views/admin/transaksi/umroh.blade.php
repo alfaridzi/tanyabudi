@@ -34,7 +34,9 @@
 			            				<th>Tanggal Pembayaran</th>
 			            				<th>Bukti Pembayaran</th>
 			            				<th>Status</th>
+			            				@can('konfirmasi transaksi')
 			            				<th>Aksi</th>
+			            				@endcan
 			            			</tr>
 			            		</thead>
 			            		<tbody>
@@ -49,9 +51,13 @@
 			            				<td>{{ Tanggal::tanggalIndonesia($dataUmroh->tgl_pembayaran) }}</td>
 			            				<td><img src="{{asset('bukti-tf/'.$dataUmroh->foto)}}" class="img-responsive" width="150"></td>
 			            				<td>{{ $dataUmroh->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
-			            				<td>@if($dataUmroh->status_pembayaran == 0)
+			            				@can('konfirmasi transaksi')
+			            				<td>
+			            				@if($dataUmroh->status_pembayaran == 0)
 			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataUmroh->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
-			            				@endif</td>
+			            				@endif
+			            				</td>
+			            				@endcan
 			            			</tr>
 			            			@endforeach
 			            		</tbody>

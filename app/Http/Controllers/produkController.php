@@ -86,7 +86,12 @@ class produkController extends Controller
 		}
 		
 		
-
+		$cek = Payment::orderBy('counter','asc')->get()->last();
+		if(is_null($cek)) {
+			$last = 1;
+		} else {
+			$last = $cek->counter + 1;
+		}
 		$datas['id_user'] = Auth::user()->id;
 		$datas['title'] = $title;
 		$datas['info'] = $info;
@@ -94,6 +99,8 @@ class produkController extends Controller
 		$datas['tanggal'] = $date;
 		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
 		$data['foto'] = $imageName;
+		$data['id'] = 'TRX'.$last.$id.'.'.date('Ymd').'.'.Auth::user()->id;
+		$data['counter'] = $last;
         request()->foto->move(public_path('bukti-tf'), $imageName);
         payment::create($data);
         history::create($datas);
@@ -101,3 +108,4 @@ class produkController extends Controller
         return view('pendaftaran_berhasil');
 	}
 }
+

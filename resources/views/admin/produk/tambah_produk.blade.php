@@ -87,10 +87,17 @@
 			if(value == 5){
 				$('.hide-input').hide();
 				$('.agen').show();
-				$('input[name="harga"]').attr('required', true);
+				$('input[name="harga"]').prop('required', true);
+				$('input[name="gambar"]').prop('required', false);
+			}else if(value == 3){
+				$('.hide-input').show();
+				$('.agen').show();
+				$('input[name="harga"]').prop('required', true);
+				$('input[name="gambar"]').prop('required', true);
 			}else{
 				$('.hide-input').hide();
-				$('input[name="harga"]').attr('required', false);
+				$('input[name="harga"]').prop('required', false);
+				$('input[name="gambar"]').prop('required', false);
 			}
 		});
 	});

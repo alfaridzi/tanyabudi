@@ -7,9 +7,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 use App\User;
+use App\Model\Admin\Log;
 
 class DataUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu data user']);
+    }
+
     public function index_agen()
     {
     	$user = DB::table('users')->where('type', 2)->orderBy('id')->paginate(15);
@@ -82,6 +88,11 @@ class DataUserController extends Controller
     {
     	$user = User::find($id_user);
     	$user->update(['status' => 1]);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengkonfirmasi user dengan nama '.$user->name;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Mengubah Status User');
     }

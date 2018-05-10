@@ -65,6 +65,11 @@
 		            			<label>Wilayah</label>
 		            			<input type="text" name="wilayah" class="form-control" placeholder="Wilayah">
 		            		</div>
+		            		<div class="form-group">
+		            			<label>Kode Cabang</label>
+		            			<input type="text" name="kode_cabang" class="form-control" placeholder="Kode Cabang">
+		            			<span class="note">*contoh: MKS = untuk makasar</span>
+		            		</div>
 	            			<button type="submit" class="btn btn-primary btn-flat">Tambah</button>
 		            	</form>
 		            </div>

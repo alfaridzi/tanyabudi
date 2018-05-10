@@ -42,7 +42,7 @@
 		            		<div class="form-group">
 	            				<label>Kode Divisi</label>
 	            				<input type="text" class="form-control" name="kode_divisi" placeholder="Kode Divisi" required>
-	            				<span>*Tanpa Spasi</span>
+	            				<span class="note">*Tanpa Spasi</span>
 		            		</div>
 		            		<div class="form-group">
 	            				<label>Nama Divisi</label>

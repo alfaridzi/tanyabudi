@@ -34,7 +34,9 @@
 			            				<th>Tanggal Pembayaran</th>
 			            				<th>Bukti Pembayaran</th>
 			            				<th>Status</th>
+			            				@can('konfirmasi transaksi')
 			            				<th>Aksi</th>
+			            				@endcan
 			            			</tr>
 			            		</thead>
 			            		<tbody>
@@ -49,9 +51,11 @@
 			            				<td>{{ Tanggal::tanggalIndonesia($dataSedekah->tgl_pembayaran) }}</td>
 			            				<td><img src="{{asset('bukti-tf/'.$dataSedekah->foto)}}" class="img-responsive" width="150"></td>
 			            				<td>{{ $dataSedekah->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
+			            				@can('konfirmasi transaksi')
 			            				<td>@if($dataSedekah->status_pembayaran == 0)
 			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataSedekah->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
 			            				@endif</td>
+			            				@endcan
 			            			</tr>
 			            			@endforeach
 			            		</tbody>

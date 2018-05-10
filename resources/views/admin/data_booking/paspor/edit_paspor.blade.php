@@ -120,7 +120,7 @@
 		            		</div>
 		            		<div class="form-group">
 		            			<label>Keterangan</label>
-		            			<textarea class="form-control" name="keterangan" placeholder="Keterangan"></textarea>
+		            			<textarea class="form-control" name="keterangan" placeholder="Keterangan">{{ $paspor->keterangan }}</textarea>
 		            		</div>
 	            			<button type="submit" class="btn btn-primary btn-flat">Edit</button>
 		            	</form>

@@ -8,9 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Paspor\EditPasporRequest;
 
 use App\Model\Admin\Paspor;
+use App\Model\Admin\Log;
 
 class PasporController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu jamaah']);
+    }
+
     public function edit($id_paspor)
     {
     	$paspor = Paspor::findOrFail($id_paspor);
@@ -55,9 +61,14 @@ class PasporController extends Controller
     	$paspor->alamat = $request->alamat;
     	$paspor->tanggal_issued = $request->tanggal_issued;
     	$paspor->tanggal_expired = $request->tanggal_expired;
-    	$paspor->keterangan;
+    	$paspor->keterangan = $request->keterangan;
 
     	$paspor->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data paspor jamaah '.$paspor->nama_paspor;
+        $log->save();
     	
     	return redirect('index/admin/data-booking/jamaah')->withSuccess('Berhasil Mengubah Data Paspor');
     }

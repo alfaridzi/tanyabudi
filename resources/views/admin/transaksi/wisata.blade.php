@@ -34,7 +34,9 @@
 			            				<th>Tanggal Pembayaran</th>
 			            				<th>Bukti Pembayaran</th>
 			            				<th>Status</th>
+			            				@can('konfirmasi transaksi')
 			            				<th>Aksi</th>
+			            				@endcan
 			            			</tr>
 			            		</thead>
 			            		<tbody>
@@ -49,9 +51,11 @@
 			            				<td>{{ Tanggal::tanggalIndonesia($dataWisata->tgl_pembayaran) }}</td>
 			            				<td><img src="{{asset('bukti-tf/'.$dataWisata->foto)}}" class="img-responsive" width="150"></td>
 			            				<td>{{ $dataWisata->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
+			            				@can('konfirmasi transaksi')
 			            				<td>@if($dataWisata->status_pembayaran == 0)
 			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataWisata->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
 			            				@endif</td>
+			            				@endcan
 			            			</tr>
 			            			@endforeach
 			            		</tbody>

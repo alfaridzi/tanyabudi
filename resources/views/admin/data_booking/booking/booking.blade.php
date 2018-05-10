@@ -69,10 +69,15 @@
 											Telah Diterima
 											@endif
 										</td>
-										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
+										<td>
+											@can('edit booking')
+											<a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('print voucher')
 											@if(!is_null($dataBooking->id_voucher))
 											<a href="{{ url('index/admin/data-booking/booking/print-voucher', $dataBooking->id_booking) }}" class="btn btn-info btn-flat">Print Voucher</a>
 											@endif
+											@endcan
 										</td>
 									</tr>
 									@endforeach

@@ -9,9 +9,15 @@ use App\Http\Requests\Admin\Kamar\EditKamarRequest;
 use App\Http\Controllers\Controller;
 
 use App\Model\Admin\Kamar;
+use App\Model\Admin\Log;
 
 class KamarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu kamar']);
+    }
+
     public function index()
     {
     	$kamar = DB::table('tbl_kamar as t1')->leftJoin('tbl_kuota_kamar as t2', 't1.id_kamar', '=', 't2.id_kamar')->leftJoin('tbl_kloter as t3', 't1.id_kloter', '=', 't3.id_kloter')->select('t1.*', 't3.*', DB::raw("count(t2.id_kamar) as hitung_kuota"))->groupBy('t1.id_kamar')->orderBy('t1.id_kamar', 'desc')->paginate(15);
@@ -35,6 +41,11 @@ class KamarController extends Controller
     	$kamar->kuota = $request->kuota;
     	$kamar->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan kamar baru dengan kode kamar '.$kamar->kode_kamar;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kamar')->withSuccess('Berhasil Menambahkan Kamar Baru');
     }
 
@@ -55,14 +66,25 @@ class KamarController extends Controller
     	$kamar->kuota = $request->kuota;
     	$kamar->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data kamar dengan kode kamar '.$kamar->kode_kamar;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kamar')->withSuccess('Berhasil Mengubah Kamar');
     }
 
     public function delete($id_kamar)
     {
     	$kamar = Kamar::findOrFail($id_kamar);
+        $kode_kamar = $kamar->kode_kamar;
     	$kamar->delete();
     	$kuota_kamar = DB::table('tbl_kuota_kamar')->where('id_kamar', $id_kamar)->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus kamar dengan kode kamar '.$kode_kamar;
+        $log->save();
 
     	return redirect('index/admin/data-kloter/kamar')->withSuccess('Berhasil Menghapus Kamar');
     }
@@ -97,6 +119,7 @@ class KamarController extends Controller
 
     public function store_isi_kuota(Request $request, $id_kamar)
     {
+        $kamar = Kamar::findOrFail($id_kamar);
     	$jamaah = explode(',', $request->tampungJamaah);
 
     	$arrayJamaah = array();
@@ -105,14 +128,26 @@ class KamarController extends Controller
     	}
 
     	DB::table('tbl_kuota_kamar')->insert($arrayJamaah);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan kuota kamar baru dengan kode kamar '.$kamar->kode_kamar;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kamar/list-jamaah/'.$id_kamar)->withSuccess('Berhasil Menambahkan Jamaah');
     }
 
-    public function delete_kuota(Request $request)
+    public function delete_kuota(Request $request, $id_kamar)
     {
+        $kamar = Kamar::findOrFail($id_kamar);
     	$jamaah = explode(',', $request->tampungJamaah);
-    	$kloter = DB::table('tbl_kuota_kamar')->whereIn('id_jamaah', $jamaah);
-    	$kloter->delete();
+    	$kuota = DB::table('tbl_kuota_kamar')->whereIn('id_jamaah', $jamaah);
+    	$kuota->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus kuota kamar dengan kode kamar '.$kamar->kode_kamar;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Menghapus Jamaah');
     }

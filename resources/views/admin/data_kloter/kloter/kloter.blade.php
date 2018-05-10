@@ -38,29 +38,27 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<div class="row">
-			            	<div class="col-md-2 col-sm-12 col-xs-12">
-			            		<a href="{{ url('index/admin/data-kloter/kloter/tambah') }}" class="btn btn-primary btn-flat">Tambah Kloter</a>
-			            	</div>
-		            		<div class="col-md-10 col-sm-12 col-xs-12">
-			            		<div class="pull-right">
-					            	<form class="form-inline" method="get" action="{{ url('index/admin/data-kloter/kloter/search') }}">
-					            		<div class="form-group">
-					            			<input type="text" name="tanggal_keberangkatan" class="form-control datepicker" placeholder="Tanggal Keberangkatan">
-					            		</div>
-					            		<div class="form-group">
-					            			<input type="text" name="tanggal_kepulangan" class="form-control datepicker" placeholder="Tanggal Kepulangan">
-					            		</div>
-					            		<div class="form-group">
-					            			<input type="search" name="search" class="form-control" placeholder="Cari...">
-					            		</div>
-					            		<div class="form-group">
-					            			<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-					            		</div>
-					            	</form>
-					            </div>
-			            	</div>
+	            		@can('tambah kloter')
+		            	<div class="pull-left">
+		            		<a href="{{ url('index/admin/data-kloter/kloter/tambah') }}" class="btn btn-primary btn-flat">Tambah Kloter</a>
 		            	</div>
+		            	@endcan
+	            		<div class="pull-right">
+			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-kloter/kloter/search') }}">
+			            		<div class="form-group">
+			            			<input type="text" name="tanggal_keberangkatan" class="form-control datepicker" placeholder="Tanggal Keberangkatan">
+			            		</div>
+			            		<div class="form-group">
+			            			<input type="text" name="tanggal_kepulangan" class="form-control datepicker" placeholder="Tanggal Kepulangan">
+			            		</div>
+			            		<div class="form-group">
+			            			<input type="search" name="search" class="form-control" placeholder="Cari...">
+			            		</div>
+			            		<div class="form-group">
+			            			<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+			            		</div>
+			            	</form>
+			            </div>
 		            </div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
@@ -98,7 +96,12 @@
 										<td>{{ $dataKloter->total_seat - $dataKloter->hitung_seat }}</td>
 										<td>{{ $dataKloter->jumlah_hari }}</td>
 										<td>
-											<a href="{{ url('index/admin/data-kloter/kloter/edit', $dataKloter->id_kloter) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-kloter" data-id-kloter="{{ $dataKloter->id_kloter }}" class="btn btn-danger btn-flat">Delete</a> 
+											@can('edit kloter')
+											<a href="{{ url('index/admin/data-kloter/kloter/edit', $dataKloter->id_kloter) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('delete kloter')
+											<a href="javascript:;" id="btn-delete-kloter" data-id-kloter="{{ $dataKloter->id_kloter }}" class="btn btn-danger btn-flat">Delete</a>
+											@endcan
 											@if(!is_null($dataKloter->total_seat) && $dataKloter->total_seat != "" && $dataKloter->total_seat != '0')
 											<a href="{{ url('index/admin/data-kloter/kloter/list-jamaah',$dataKloter->id_kloter) }}" class="btn btn-info btn-flat">List Jamaah</a></td>
 											@endif

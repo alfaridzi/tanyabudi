@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class PengaturanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu edit bantuan']);
+    }
+
     public function edit_bantuan()
     {
     	$bantuan = DB::table('tbl_halaman_bantuan')->first();
@@ -18,6 +23,12 @@ class PengaturanController extends Controller
     {
     	$bantuan = DB::table('tbl_halaman_bantuan')->where('id_bantuan', '1');
     	$bantuan->update(['konten' => $request->konten]);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah halaman bantuan';
+        $log->save();
+
     	return redirect()->back()->withSuccess('Berhasil Mengubah Bantuan');
     }
 }

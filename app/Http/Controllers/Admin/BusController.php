@@ -8,10 +8,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Bus\TambahBusRequest;
 use App\Http\Requests\Admin\Bus\EditBusRequest;
 
+use App\Model\Admin\Log;
 use App\Model\Admin\Bus;
 
 class BusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu bus']);
+    }
+    
     public function index()
     {
     	$bus = DB::table('tbl_bus as t1')->leftJoin('tbl_kuota_bus as t2', 't1.id_bus', '=', 't2.id_bus')->leftJoin('tbl_kloter as t3', 't1.id_kloter', '=', 't3.id_kloter')->select('t1.*', 't3.*', DB::raw("count(t2.id_bus) as hitung_seat"))->groupBy('t1.id_bus')->orderBy('t1.id_bus', 'desc')->paginate(15);
@@ -45,6 +51,11 @@ class BusController extends Controller
     	$bus->seat_bus = $request->seat_bus;
     	$bus->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan bus baru dengan kode bus '.$bus->kode_bus;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/bus')->withSuccess('Berhasil Menambahkan Bus Baru');
     }
 
@@ -65,14 +76,25 @@ class BusController extends Controller
     	$bus->seat_bus = $request->seat_bus;
     	$bus->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data bus dengan kode bus '.$bus->kode_bus;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/bus')->withSuccess('Berhasil Mengubah Bus');
     }
 
     public function delete($id_bus)
     {
     	$bus = Bus::findOrFail($id_bus);
+        $kode_bus = $bus->kode_bus;
     	$bus->delete();
     	$kuota_bus = DB::table('tbl_kuota_bus')->where('id_bus', $id_bus)->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus data bus dengan kode bus '.$kode_bus;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Delete Bus');
     }
@@ -108,6 +130,7 @@ class BusController extends Controller
 
     public function store_isi_kuota(Request $request, $id_bus)
     {
+        $bus = Bus::findOrFail($id_bus);
     	$jamaah = explode(',', $request->tampungJamaah);
 
     	$arrayJamaah = array();
@@ -116,14 +139,26 @@ class BusController extends Controller
     	}
 
     	DB::table('tbl_kuota_bus')->insert($arrayJamaah);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan kuota bus baru dengan kode bus'.$bus->kode_bus;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/bus/list-jamaah/'.$id_bus)->withSuccess('Berhasil Menambahkan Jamaah');
     }
 
-    public function delete_kuota(Request $request)
+    public function delete_kuota(Request $request, $id_bus)
     {
+        $bus = Bus::findOrFail($id_bus);
     	$jamaah = explode(',', $request->tampungJamaah);
-    	$kloter = DB::table('tbl_kuota_bus')->whereIn('id_jamaah', $jamaah);
-    	$kloter->delete();
+    	$kuota = DB::table('tbl_kuota_bus')->whereIn('id_jamaah', $jamaah);
+    	$kuota->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus kuota bus dengan kode bus '.$bus->kode_bus;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Menghapus Jamaah');
     }

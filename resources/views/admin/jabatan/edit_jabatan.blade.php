@@ -66,7 +66,12 @@
 		            			<label>Wilayah</label>
 		            			<input type="text" name="wilayah" value="{{ $jabatan->wilayah }}" class="form-control" placeholder="Wilayah">
 		            		</div>
-	            			<button type="submit" class="btn btn-primary btn-flat">Tambah</button>
+		            		<div class="form-group">
+		            			<label>Kode Cabang</label>
+		            			<input type="text" name="kode_cabang" class="form-control" placeholder="Kode Cabang" value="{{ $jabatan->kode_cabang }}">
+		            			<span class="note">*contoh: MKS = untuk makasar</span>
+		            		</div>
+	            			<button type="submit" class="btn btn-primary btn-flat">Edit</button>
 		            	</form>
 		            </div>
 		        </div>

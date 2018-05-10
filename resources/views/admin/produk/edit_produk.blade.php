@@ -57,15 +57,8 @@
 								<div class="form-group">
 									<label>Gambar</label>
 									<div class="field-foto">
-										@if($produk->type == 1)
-										<img src="{{ asset('assets/images/paket/haji/'.$produk->gambar) }}" height="200" class="img-responsive" id="show-gambar">
-										@elseif($produk->type == 2)
-										<img src="{{ asset('assets/images/paket/umroh/'.$produk->gambar) }}" height="200" class="img-responsive" id="show-gambar">
-										@elseif($produk->type == 3)
 										<img src="{{ asset('assets/images/paket/wisata/'.$produk->gambar) }}" height="200" class="img-responsive" id="show-gambar">
-										@else
 										<img src="" height="200" class="img-responsive" id="show-gambar">
-										@endif
 									</div>
 									<input type="file" name="gambar" id="gambar">
 								</div>
@@ -83,16 +76,20 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var tipe = '{{ $produk->type }}';
-		if (tipe == 1 || tipe == 2 || tipe == 3) {
-			$('.hide-input').show();
-			$('input[name="harga"]').attr('required', true);
-		}else if(tipe == 5){
+		if(value == 5){
 			$('.hide-input').hide();
 			$('.agen').show();
-			$('input[name="harga"]').attr('required', true);
+			$('input[name="harga"]').prop('required', true);
+			$('input[name="gambar"]').prop('required', false);
+		}else if(value == 3){
+			$('.hide-input').show();
+			$('.agen').show();
+			$('input[name="harga"]').prop('required', true);
+			$('input[name="gambar"]').prop('required', true);
 		}else{
 			$('.hide-input').hide();
-			$('input[name="harga"]').attr('required', false);
+			$('input[name="harga"]').prop('required', false);
+			$('input[name="gambar"]').prop('required', false);
 		}
 	});
 </script>

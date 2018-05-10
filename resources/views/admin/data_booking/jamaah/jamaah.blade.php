@@ -25,9 +25,11 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('tambah jamaah')
 		            	<div class="pull-left">
 		            		<a href="{{ url('index/admin/data-booking/jamaah/tambah') }}" class="btn btn-primary btn-flat">Tambah Jamaah</a>
 		            	</div>
+		            	@endcan
 		            	<div class="pull-right">
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-booking/jamaah/search') }}">
 			            		<div class="form-group">
@@ -57,27 +59,28 @@
 										<th>Nomor Transaksi</th>
 										<th>Nomor Paspor</th>
 										<th>Nama Jamaah</th>
-										<th>Jumlah Kursi</th>
+										<th>Jumlah Kuota</th>
 										<th>Nama Paket</th>
 										<th>Jenis Paket</th>
 										<th>Status Mahrom</th>
 										<th>Bus</th>
 										<th>Nomor Kamar</th>
 										<th>Aksi</th>
-										{{-- <th>Aksi</th>
-	 --}}								</tr>
+									</tr>
 								</thead>
 								<tbody>
 									@foreach($jamaah as $dataJamaah)
 									<tr>
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataJamaah->kode_booking }}</td>
-										<td>{{ $dataJamaah->nomor_transaksi }}</td>
+										<td>{{ $dataJamaah->id_transaksi }}</td>
 										<td>
-											{{ $dataJamaah->nomor_paspor }}
+											{{ $dataJamaah->nomor_paspor }}<br>
+											@can('edit paspor')
 											<a href="{{ url('index/admin/data-booking/paspor/edit', $dataJamaah->id_paspor) }}" class="btn btn-info btn-flat">Edit Paspor</a>
+											@endcan
 										</td>
-										<td>{{ $dataJamaah->name }}</td>
+										<td>{{ $dataJamaah->nama_paspor }}</td>
 										<td>{{ $dataJamaah->kuota }}</td>
 										<td>{{ $dataJamaah->nama }}</td>
 										<td>
@@ -98,7 +101,13 @@
 										</td>
 										<td>{{ $dataJamaah->kode_bus }}</td>
 										<td>{{ $dataJamaah->kode_kamar }}</td>
-										<td><a href="{{ url('index/admin/data-booking/jamaah/edit', $dataJamaah->id_jamaah) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-jamaah" data-id-jamaah="{{ $dataJamaah->id_jamaah }}" class="btn btn-danger btn-flat">Delete</a>
+										<td>
+											@can('edit jamaah')
+											<a href="{{ url('index/admin/data-booking/jamaah/edit', $dataJamaah->id_jamaah) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('delete jamaah')
+											<a href="javascript:;" id="btn-delete-jamaah" data-id-jamaah="{{ $dataJamaah->id_jamaah }}" class="btn btn-danger btn-flat">Delete</a>
+											@endcan
 										</td>
 									</tr>
 									@endforeach
@@ -116,6 +125,7 @@
 </div>
 <form id="frm-delete-jamaah" action="" method="post">
 	@csrf
+	{!! method_field('delete') !!}
 </form>
 @endsection
 @push('js')
@@ -126,7 +136,7 @@
             var jawaban = confirm('Apakah anda yakin ingin menghapus data ini?');
 
             if (jawaban) {
-                var id_jamaah = $(this).data('id-user');
+                var id_jamaah = $(this).data('id-jamaah');
                 $('#frm-delete-jamaah').attr('action', '{{ url('index/admin/data-booking/jamaah/delete') }}/'+id_jamaah);
                 $('#frm-delete-jamaah').submit();
             }

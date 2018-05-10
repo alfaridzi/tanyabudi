@@ -123,7 +123,7 @@
 		            			<textarea class="form-control" name="alamat" placeholder="Alamat"></textarea>
 		            		</div>
 		            		<div class="form-group">
-		            			<label>Kode POST</label>
+		            			<label>Kode POS</label>
 		            			<input type="text" name="kode_pos" class="form-control" placeholder="Kode POS">
 		            		</div>
 		            		<div class="form-group">

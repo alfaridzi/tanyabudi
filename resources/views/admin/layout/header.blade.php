@@ -48,18 +48,17 @@
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{ asset('admin/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+              <img src="{{ asset('assets/images/user-1.png') }}" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{ Auth::guard('admin')->user()->get_karyawan->nama }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{ asset('admin/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('assets/images/user-1.png') }}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  {{ Auth::guard('admin')->user()->get_karyawan->nama }} - {{ ucwords(str_replace('-', ' ', Auth::guard('admin')->user()->getRoleNames()[0])) }}
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -68,7 +67,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="javascript:;" id="btn-logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -77,3 +76,6 @@
       </div>
     </nav>
   </header>
+  <form id="frm-logout" action="{{ url('index/admin/logout') }}" method="post">
+    @csrf
+  </form>

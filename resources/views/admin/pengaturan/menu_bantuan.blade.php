@@ -16,7 +16,7 @@
 	    Edit Halaman Bantuan
 	  </h1>
 	  <ol class="breadcrumb">
-	    <li><a href="#"><i class="fa fa-help-o"></i> Halaman Bantuan</a></li>
+	    <li><a href="#"><i class="fa fa-question-circle"></i> Halaman Bantuan</a></li>
 	  </ol>
 	</section>
 
