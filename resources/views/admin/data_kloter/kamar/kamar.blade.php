@@ -25,21 +25,21 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<div class="col-md-2 col-sm-12 col-xs-12">
+		            	@can('tambah kamar')
+		            	<div class="pull-left">
 		            		<a href="{{ url('index/admin/data-kloter/kamar/tambah') }}" class="btn btn-primary btn-flat">Tambah Kamar</a>
 		            	</div>
-	            		<div class="col-md-10 col-sm-12 col-xs-12">
-		            		<div class="pull-right">
-				            	<form class="form-inline" method="get" action="{{ url('index/admin/data-kloter/bus/search') }}">
-				            		<div class="form-group">
-				            			<input type="search" name="search" class="form-control" placeholder="Cari...">
-				            		</div>
-				            		<div class="form-group">
-				            			<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
-				            		</div>
-				            	</form>
-				            </div>
-		            	</div>
+		            	@endcan
+	            		<div class="pull-right">
+			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-kloter/bus/search') }}">
+			            		<div class="form-group">
+			            			<input type="search" name="search" class="form-control" placeholder="Cari...">
+			            		</div>
+			            		<div class="form-group">
+			            			<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
+			            		</div>
+			            	</form>
+			            </div>
 		            </div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
@@ -66,7 +66,13 @@
 										<td>{{ $dataKamar->tipe_kamar }}</td>
 										<td>{{ $dataKamar->kuota }}</td>
 										<td>{{ $dataKamar->kuota - $dataKamar->hitung_kuota }}</td>
-										<td><a href="{{ url('index/admin/data-kloter/kamar/edit', $dataKamar->id_kamar) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-kamar" data-id-kamar="{{ $dataKamar->id_kamar }}" class="btn btn-danger btn-flat">Delete</a> 
+										<td>
+											@can('edit kamar')
+											<a href="{{ url('index/admin/data-kloter/kamar/edit', $dataKamar->id_kamar) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('delete kamar')
+											<a href="javascript:;" id="btn-delete-kamar" data-id-kamar="{{ $dataKamar->id_kamar }}" class="btn btn-danger btn-flat">Delete</a> 
+											@endcan
 											@if(!is_null($dataKamar->kuota) && $dataKamar->kuota != "" && $dataKamar->kuota != '0')
 											<a href="{{ url('index/admin/data-kloter/kamar/list-jamaah',$dataKamar->id_kamar) }}" class="btn btn-info btn-flat">List Jamaah</a></td>
 											@endif</td>

@@ -160,7 +160,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+
         alfrdxyz\portalpulsa\PulsaServiceProvider::class
+
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 

@@ -24,14 +24,12 @@ class TambahJamaahRequest extends FormRequest
     public function rules()
     {
         return [
-            'nomor_transaksi' => 'nullable|string',
-            'user' => 'required|exists:users,id',
+            'nomor_transaksi' => 'required|unique:tbl_booking,id_transaksi|exists:tbl_payment,id',
             'nomor_paspor' => 'required|string',
             'nama' => 'required|string',
+            'nama_pemesan' => 'required|string',
             'jenis_kelamin' => 'required|boolean',
             'nomor_hp' => 'required|numeric',
-            'nama_pemesan' => 'required|string',
-            'paket' => 'required|exists:tbl_produk,id',
             'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric',
             'status_pemesan' => 'required|boolean',
         ];

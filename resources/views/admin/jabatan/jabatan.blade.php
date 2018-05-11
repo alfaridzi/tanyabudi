@@ -25,7 +25,9 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('tambah jabatan')
 		            	<a href="{{ url('index/admin/jabatan/tambah') }}" class="btn btn-primary btn-flat">Tambah Jabatan</a>
+		            	@endcan
 		            </div>
 		            <div class="box-body">
 						<table class="table table-responsive">
@@ -37,6 +39,7 @@
 									<th>Nama Jabatan</th>
 									<th>Deskripsi</th>
 									<th>Wilayah</th>
+									<th>Kode Cabang</th>
 									<th>Tanggal Dibuat</th>
 									<th>Aksi</th>
 								</tr>
@@ -50,8 +53,16 @@
 									<td>{{ $dataJabatan->nama_jabatan }}</td>
 									<td>{{ $dataJabatan->deskripsi }}</td>
 									<td>{{ $dataJabatan->wilayah }}</td>
+									<td>{{ strtoupper($dataJabatan->kode_cabang) }}</td>
 									<td>{{ Tanggal::tanggalIndonesiaLengkap($dataJabatan->created_at) }}</td>
-									<td><a href="{{ url('index/admin/jabatan/edit', $dataJabatan->kode_jabatan) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-jabatan" data-kode-jabatan="{{ $dataJabatan->kode_jabatan }}" class="btn btn-danger btn-flat">Delete</a></td>
+									<td>
+										@can('edit jabatan')
+										<a href="{{ url('index/admin/jabatan/edit', $dataJabatan->kode_jabatan) }}" class="btn btn-warning btn-flat">Edit</a> 
+										@endcan
+										@can('delete jabatan')
+										<a href="javascript:;" id="btn-delete-jabatan" data-kode-jabatan="{{ $dataJabatan->kode_jabatan }}" class="btn btn-danger btn-flat">Delete</a>
+										@endcan
+									</td>
 								</tr>
 								@endforeach
 							</tbody>

@@ -54,6 +54,7 @@
 									<th>Paket Agen</th>
 									<th>Saldo Bayar-Bayar</th>
 									<th>Fee</th>
+									<th>Status</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -69,10 +70,15 @@
 									<td>masih dikerjakan</td>
 									<td>
 									@if($dataUser->status == 0)
+									@can('konfirmasi agen')
 									<a href="javascript:;" data-id-user="{{ $dataUser->id }}" class="btn btn-success btn-flat" id="btn-konfirmasi">Konfirmasi</a>
+									@endcan
 									@elseif($dataUser->status == 1)
 									Sudah Dikonfirmasi
 									@endif
+									</td>
+									<td>
+										<a href="{{ url('index/admin/data-user/agen/'.$dataUser->id.'/list-transaksi') }}" class="btn btn-info btn-flat">List Transaksi</a>
 									</td>
 								</tr>
 								@endforeach

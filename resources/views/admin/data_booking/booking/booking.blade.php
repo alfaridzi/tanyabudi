@@ -19,12 +19,6 @@
 			<div class="col-md-12">
 				<div class="box box-primary">
 		            <div class="box-header">
-		            	@if(Session::has('success'))
-		            	<div class="alert alert-success alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						  	<strong>{{ Session::get('success') }}</strong>
-						</div>
-		            	@endif
 		            	<div class="col-md-12">
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-booking/booking/search') }}">
 			            		<div class="form-group">
@@ -75,10 +69,15 @@
 											Telah Diterima
 											@endif
 										</td>
-										<td><a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
+										<td>
+											@can('edit booking')
+											<a href="{{ url('index/admin/data-booking/booking/edit', $dataBooking->id_booking) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('print voucher')
 											@if(!is_null($dataBooking->id_voucher))
 											<a href="{{ url('index/admin/data-booking/booking/print-voucher', $dataBooking->id_booking) }}" class="btn btn-info btn-flat">Print Voucher</a>
 											@endif
+											@endcan
 										</td>
 									</tr>
 									@endforeach

@@ -1,5 +1,8 @@
 @extends('admin.layout.app')
 @section('title', 'Tambah Jamaah')
+@push('meta')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
 @push('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.css">
@@ -37,16 +40,7 @@
 		            		@csrf
 		            		<div class="form-group">
 	            				<label>Nomor Transaksi</label>
-	            				<input type="text" class="form-control" name="nomor_transaksi" placeholder="Nomor Transaksi">
-		            		</div>
-		            		<div class="form-group">
-		            			<label>User</label>
-		            			<select name="user" id="select-user" class="form-control" required>
-		            				<option selected="" disabled="">--Pilih User yang Akan Dijadikan Jamaah--</option>
-		            				@foreach($user as $dataUser)
-		            				<option value="{{ $dataUser->id }}">{{ $dataUser->name }} - {{ $dataUser->email }}</option>
-		            				@endforeach
-		            			</select>
+	            				<input type="text" class="form-control typeahead" name="nomor_transaksi" data-provide="typeahead" id="nomor_transaksi" placeholder="Nomor Transaksi" autocomplete="off" required>
 		            		</div>
 		            		<div class="form-group">
 		            			<label>Nomor Paspor</label>
@@ -71,19 +65,6 @@
 		            		</div>
 		            		<hr>
 		            		<div class="form-group">
-		            			<label>Nama Pemesan</label>
-		            			<input type="text" name="nama_pemesan" class="form-control" placeholder="Nama Pemesan" required>
-		            		</div>
-		            		<div class="form-group">
-		            			<label>Paket</label>
-		            			<select name="paket" id="select-paket" class="form-control">
-		            				<option selected="" disabled="">--Pilih Voucher--</option>
-		            				@foreach($paket as $dataPaket)
-		            				<option value="{{ $dataPaket->id_produk }}">{{ $dataPaket->nama }} - Rp.{{ number_format($dataPaket->harga, 2, ',', '.') }} - {{$dataPaket->nama_travel}} - {{ $dataPaket->type == '1' ? 'Haji' : 'Umroh'}}</option>
-		            				@endforeach
-		            			</select>
-		            		</div>
-		            		<div class="form-group">
 		            			<label>Voucher</label>
 		            			<select name="voucher" id="select-voucher" class="form-control" required>
 		            				<option selected="" disabled="">--Pilih Voucher--</option>
@@ -92,6 +73,10 @@
 		            				<option value="{{ $dataVoucher->id_voucher }}">{{ $dataVoucher->kode_voucher }} - Rp {{ number_format($dataVoucher->nominal, 2, ',','.') }} - {{ $dataVoucher->nama_voucher }}</option>
 		            				@endforeach
 		            			</select>
+		            		</div>
+		            		<div class="form-group">
+		            			<label>Nama Pemesan</label>
+		            			<input type="text" name="nama_pemesan" class="form-control" placeholder="Nama Pemesan" required>
 		            		</div>
 		            		<div class="form-group">
 	            				<label>Status Pemesan</label><br>
@@ -115,7 +100,13 @@
 <script type="text/javascript" src="{{ asset('admin/plugins/select2/js/select2.full.min.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.id.min.js"></script>
+<script type="text/javascript" src="{{ asset('admin/plugins/bootstrap3-typeahead/bootstrap3-typeahead.min.js') }}"></script>
 <script type="text/javascript">
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
 	$(document).ready(function(){
 		$('#select-voucher').select2();
 		$('#select-paket').select2();
@@ -124,6 +115,53 @@
 			format: 'yyyy-mm-dd',
 			language: 'id',
 		});
+
+		// $.get('{{ url('index/admin/ajax/get_transaksi') }}', function(data){
+		// 	$('#nomor_transaksi').typeahead({
+		// 		source: data,
+		// 		autoselect: true,
+		// 		displayText: function(item) {
+		// 			return item.id_payment +' - '+ item.nama +' - '+ item.email;
+		// 		},
+		// 		afterSelect: function(item) {
+		// 			this.$element[0].value = item.id_payment;
+		// 		}
+		// 	});
+		// });
+
+		$('#nomor_transaksi').typeahead({
+			source: function(query, process) {
+				return $.get('{{ url('/') }}'+'/index/admin/ajax/get_transaksi/'+query, function(data){
+					return process(data);
+				});
+			},
+			autoselect: true,
+			minLength: 3,
+			displayText: function(item) {
+				return item.id_payment +' - '+ item.nama +' - '+ item.email;
+			},
+			afterSelect: function(item) {
+				this.$element[0].value = item.id_payment;
+			}
+		});
+
+		// $.ajax({
+		// 	type: 'get',
+		// 	url: get_url,
+		// 	data: '',
+		// 	success:function(result){
+		// 		$('#nomor_transaksi').typeahead({
+		// 			source: result,
+		// 			autoselect: true,
+		// 			displayText: function(item) {
+		// 				return item.id_payment +' - '+ item.nama +' - '+ item.email;
+		// 			},
+		// 			afterSelect: function(item) {
+		// 				this.$element[0].value = item.id_payment;
+		// 			}
+		// 		});
+		// 	}
+		// });
 	});
 </script>
 @endpush

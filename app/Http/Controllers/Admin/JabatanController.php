@@ -9,9 +9,15 @@ use App\Http\Requests\Admin\Jabatan\EditJabatanRequest;
 
 use App\Model\Admin\Jabatan;
 use App\Model\Admin\Divisi;
+use App\Model\Admin\Log;
 
 class JabatanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu jabatan']);
+    }
+
     public function index()
     {
     	$jabatan = Jabatan::paginate(5);
@@ -33,7 +39,13 @@ class JabatanController extends Controller
     	$jabatan->nama_jabatan = $request->nama_jabatan;
     	$jabatan->deskripsi = $request->deskripsi;
     	$jabatan->wilayah = $request->wilayah;
+        $jabatan->kode_cabang = $request->kode_cabang;
     	$jabatan->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan jabatan baru dengan kode jabatan '.$jabatan->kode_jabatan;
+        $log->save();
     	
     	return redirect('index/admin/jabatan')->withSuccess('Berhasil Menambahkan Jabatan Baru');
     }
@@ -54,7 +66,13 @@ class JabatanController extends Controller
     	$jabatan->nama_jabatan = $request->nama_jabatan;
     	$jabatan->deskripsi = $request->deskripsi;
     	$jabatan->wilayah = $request->wilayah;
+        $jabatan->kode_cabang = $request->kode_cabang;
     	$jabatan->update();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data jabatan dengan kode jabatan '.$jabatan->kode_jabatan;
+        $log->save();
 
     	return redirect('index/admin/jabatan')->withSuccess('Berhasil Mengubah Jabatan');
     }
@@ -62,7 +80,14 @@ class JabatanController extends Controller
     public function delete($kode_jabatan)
     {
     	$jabatan = Jabatan::findOrFail($kode_jabatan);
+        $kode_jabatan = $jabatan->kode_jabatan;
 		$jabatan->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus jabatan dengan kode jabatan '.$kode_jabatan;
+        $log->save();
+
 		return redirect()->back()->withSuccess('Berhasil Menghapus Jabatan');
     }
 }

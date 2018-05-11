@@ -11,9 +11,15 @@ use File;
 
 use App\Model\Admin\Paket;
 use App\produk;
+use App\Model\Admin\Log;
 
 class PaketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu paket haji umroh']);
+    }
+
     public function index()
     {
     	$produk = DB::table('tbl_produk')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->whereIn('tbl_produk.type', ['1', '2'])->orderBy('id_paket', 'desc')->paginate(15);
@@ -23,10 +29,10 @@ class PaketController extends Controller
 
     public function status($id_produk)
     {
-    	$produk = Paket::where('id_produk', $id_produk)->first();
-    	if (!$produk) {
-    		abort(404);
-    	}
+        $produk = Paket::where('id_produk', $id_produk)->first();
+        if (!$produk) {
+            abort(404);
+        }
 
 		if ($produk->status_paket == '0') {
     		$status_paket = '1';
@@ -35,6 +41,11 @@ class PaketController extends Controller
     	}
 
     	$produk->update(['status_paket' => $status_paket]);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah status paket haji umroh dengan nama paket '.$produk->nama;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Mengubah Data');
     }
@@ -87,6 +98,11 @@ class PaketController extends Controller
 		$paket->tanggal_mulai = $request->tanggal_mulai;
 		$paket->tanggal_akhir = $request->tanggal_akhir;
 		$paket->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan paket haji umroh baru dengan nama paket '.$produk->nama;
+        $log->save();
 
 		return redirect('index/admin/paket')->withSuccess('Berhasil Menambahkan Paket');
     }
@@ -153,18 +169,29 @@ class PaketController extends Controller
 		$paket->tanggal_akhir = $request->tanggal_akhir;
 		$paket->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data paket haji umroh dengan nama paket '.$produk->nama;
+        $log->save();
+
 		return redirect('index/admin/paket')->withSuccess('Berhasil Mengubah Paket');
     }
 
     public function delete($id_produk)
     {
     	$produk = Produk::findOrFail($id_produk);
+        $nama_produk = $produk->nama;
     	$paket = Paket::where('id_produk', $id_produk)->first();
     	if (File::exists('admin/images/logo_travel/'.$paket->gambar_travel)) {
 			File::delete('admin/images/logo_travel/'.$paket->gambar_travel);
 		}
 		$produk->delete();
 		$paket->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus paket haji umroh dengan nama paket '.$nama_produk;
+        $log->save();
 
 		return redirect()->back()->withSuccess('Berhasil Menghapus Paket');
     }

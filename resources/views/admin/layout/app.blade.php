@@ -10,6 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>@yield('title') | Tanyabudi</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  @stack('meta')
   <link rel="stylesheet" href="{{ asset('admin/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('admin/font-awesome/css/font-awesome.min.css') }}">
@@ -86,5 +87,12 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('click', '#btn-logout', function(){
+      $('#frm-logout').submit();
+    });
+  });
+</script>
 </body>
 </html>

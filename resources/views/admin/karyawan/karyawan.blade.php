@@ -25,7 +25,9 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('tambah karyawan')
 		            	<a href="{{ url('index/admin/karyawan/tambah') }}" class="btn btn-primary btn-flat">Tambah Karyawan</a>
+		            	@endcan
 		            </div>
 		            <div class="box-body">
 						<table class="table table-responsive">
@@ -51,7 +53,20 @@
 									<td>{{ $dataKaryawan->kode_jabatan }}</td>
 									<td>{{ $dataKaryawan->no_hp }}</td>
 									<td>{{ $dataKaryawan->status == 0 ? 'Tidak Aktif' : 'Aktif' }}</td>
-									<td><a href="{{ url('index/admin/karyawan/edit', $dataKaryawan->id_karyawan) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-karyawan" class="btn btn-danger btn-flat" data-id-karyawan="{{ $dataKaryawan->id_karyawan }}">Delete</a> <a href="javascript:;" id="btn-detail-karyawan" data-id-karyawan="{{ $dataKaryawan->id_karyawan }}" class="btn btn-info btn-flat">Detail</a></td>
+									<td>
+										@can('edit karyawan')
+										<a href="{{ url('index/admin/karyawan/edit', $dataKaryawan->id_karyawan) }}" class="btn btn-warning btn-flat">Edit</a> 
+										@endcan
+										@can('delete karyawan')
+										<a href="javascript:;" id="btn-delete-karyawan" class="btn btn-danger btn-flat" data-id-karyawan="{{ $dataKaryawan->id_karyawan }}">Delete</a> 
+										@endcan
+										<a href="javascript:;" id="btn-detail-karyawan" data-id-karyawan="{{ $dataKaryawan->id_karyawan }}" class="btn btn-info btn-flat">Detail</a>
+										@if(is_null($dataKaryawan->id_admin))
+										@can('tambah admin')
+										<a href="{{ url('index/admin/user/'.$dataKaryawan->id_karyawan.'/tambah') }}" class="btn btn-success btn-flat">Buat User</a>
+										@endif
+										@endcan
+									</td>
 								</tr>
 								@endforeach
 							</tbody>

@@ -25,7 +25,9 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('tambah divisi')
 		            	<a href="{{ url('index/admin/divisi/tambah') }}" class="btn btn-primary btn-flat">Tambah Divisi</a>
+		            	@endcan
 		            </div>
 		            <div class="box-body">
 						<table class="table table-responsive">
@@ -47,7 +49,13 @@
 									<td>{{ $dataDivisi->nama_divisi }}</td>
 									<td>{{ Tanggal::tanggalIndonesiaLengkap($dataDivisi->created_at) }}</td>
 									<td>{{ Tanggal::tanggalIndonesiaLengkap($dataDivisi->updated_at) }}</td>
-									<td><a href="{{ url('index/admin/divisi/edit', $dataDivisi->kode_divisi) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-divisi" class="btn btn-danger btn-flat" data-kode-divisi="{{ $dataDivisi->kode_divisi }}">Delete</a></td>
+									<td>
+										@can('edit divisi')
+										<a href="{{ url('index/admin/divisi/edit', $dataDivisi->kode_divisi) }}" class="btn btn-warning btn-flat">Edit</a> 
+										@endcan
+										@can('delete divisi')
+										<a href="javascript:;" id="btn-delete-divisi" class="btn btn-danger btn-flat" data-kode-divisi="{{ $dataDivisi->kode_divisi }}">Delete</a></td>
+										@endcan
 								</tr>
 								@endforeach
 							</tbody>

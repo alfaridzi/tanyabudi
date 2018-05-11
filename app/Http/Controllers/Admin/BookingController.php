@@ -8,9 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Booking\EditBookingRequest;
 
 use App\Model\Admin\Booking;
+use App\Model\Admin\Log;
 
 class BookingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu booking']);
+    }
+
     public function index()
     {
     	$booking = DB::table('tbl_booking')->rightJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->rightJoin('tbl_paspor', 'tbl_paspor.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->paginate(15);
@@ -42,6 +48,11 @@ class BookingController extends Controller
     	$booking->nomor_transaksi = $request->nomor_transaksi;
     	$booking->status_pemesan = $request->status_pemesan;
     	$booking->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data booking dengan kode booking '.$booking->kode_booking;
+        $log->save();
 
     	return redirect('index/admin/data-booking/booking')->withSuccess('Berhasil Mengubah Data Booking');
     }

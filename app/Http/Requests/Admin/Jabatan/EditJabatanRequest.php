@@ -30,6 +30,7 @@ class EditJabatanRequest extends FormRequest
             'nama_jabatan' => 'required|string',
             'deskripsi' => 'required|string',
             'wilayah' => 'required|string',
+            'kode_cabang' => 'required|max:5',
         ];
     }
 }

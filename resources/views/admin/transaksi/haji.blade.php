@@ -34,7 +34,9 @@
 			            				<th>Tanggal Pembayaran</th>
 			            				<th>Bukti Pembayaran</th>
 			            				<th>Status</th>
+			            				@can('konfirmasi transaksi')
 			            				<th>Aksi</th>
+			            				@endcan
 			            			</tr>
 			            		</thead>
 			            		<tbody>
@@ -49,9 +51,13 @@
 			            				<td>{{ Tanggal::tanggalIndonesia($dataHaji->tgl_pembayaran) }}</td>
 			            				<td><img src="{{asset('bukti-tf/'.$dataHaji->foto)}}" class="img-responsive" width="150"></td>
 			            				<td>{{ $dataHaji->status_pembayaran == 0 ? 'Belum Dikonfirmasi' : 'Sudah Dikonfirmasi' }}</td>
-			            				<td>@if($dataHaji->status_pembayaran == 0)
+			            				@can('konfirmasi transaksi')
+			            				<td>
+			            				@if($dataHaji->status_pembayaran == 0)
 			            					<a href="javascript:;" id="btn-konfirmasi" data-id="{{ $dataHaji->id_payment }}" class="btn btn-success btn-flat">Konfirmasi</a>
-			            				@endif</td>
+			            				@endif
+			            				</td>
+			            				@endcan
 			            			</tr>
 			            			@endforeach
 			            		</tbody>

@@ -96,7 +96,6 @@
 					hitung += 1;
 					alert('Tidak bisa menambahkan jamaah lagi');
 					$(this).prop('checked', false);
-					$('#btn-isi-kuota').addClass('disabled');
 				}else{
 					$('#btn-isi-kuota').removeClass('disabled');
 				}

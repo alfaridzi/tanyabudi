@@ -100,7 +100,7 @@
 			padding-left: 15px;
 			height: 45px;
 			line-height: 45px;
-			background-color: {{ $voucher->type == 1 ? '#87C50A' : '#27A3BB' }} !important;
+			background-color: {{ $voucher->kategori == 1 ? '#87C50A' : '#27A3BB' }} !important;
 			color: white !important;
 			font-weight: bolder;
 			font-size: 20px;
@@ -110,7 +110,7 @@
 			width: 100%;
 			height: 340px;
 			margin: 0;
-			background-color: {{ $voucher->type == 1 ? '#87C50A' : '#27A3BB' }} !important;
+			background-color: {{ $voucher->kategori == 1 ? '#87C50A' : '#27A3BB' }} !important;
 			border-bottom: 1px black dashed;
 		}
 
@@ -178,16 +178,16 @@
 							</tr>
 							<tr>
 								<td>Provinsi dan Kab/Kota</td>
-								<td>&nbsp;: {{ $voucher->nama_provinsi }}, {{ $voucher->nama_kota }}</td>
+								<td>&nbsp;: {{ ucwords(strtolower($voucher->nama_provinsi)) }}, {{ ucwords(strtolower($voucher->nama_kota)) }}</td>
 							</tr>
 							<tr>
 								<td></td>
 							</tr>
 						</table>
 						<p>Nama yang memberangkatkan <b>{{ $voucher->nama_travel }}</b> / izin 
-						 @if($voucher->type == '1')
+						 @if($voucher->kategori == '1')
 						 Haji
-						 @elseif($voucher->type == '2')
+						 @elseif($voucher->kategori == '2')
 						 Umroh
 						 @endif Kemenag RI No.490/2017</p>
 					</div>

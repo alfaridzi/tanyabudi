@@ -11,9 +11,15 @@ use Carbon\Carbon;
 use File;
 
 use App\Model\Voucher;
+use App\Model\Admin\Log;
 
 class VoucherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu voucher']);
+    }
+
     public function index()
     {
         $voucher = DB::table('tbl_voucher')->orderBy('id_voucher', 'desc')->paginate(15);
@@ -74,6 +80,11 @@ class VoucherController extends Controller
 
     	$voucher->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan voucher baru dengan kode voucher '.$voucher->kode_voucher;
+        $log->save();
+
     	return redirect('index/admin/voucher')->withSuccess('Berhasil Menambahkan Voucher Baru');
     }
 
@@ -100,13 +111,24 @@ class VoucherController extends Controller
 
         $voucher->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data voucher dengan kode voucher '.$voucher->kode_voucher;
+        $log->save();
+
         return redirect('index/admin/voucher')->withSuccess('Berhasil Mengubah Voucher');
     }
 
     public function delete($id_voucher)
     {
         $voucher = Voucher::findOrFail($id_voucher);
+        $kode_voucher = $voucher->kode_voucher;
         $voucher->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus voucher dengan kode voucher '.$kode_voucher;
+        $log->save();
 
         return redirect()->back()->withSuccess('Berhasil Menghapus Voucher');
     }

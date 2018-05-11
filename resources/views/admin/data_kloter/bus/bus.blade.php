@@ -25,10 +25,12 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<div class="col-md-2 col-sm-12 col-xs-12">
+		            	@can('tambah bus')
+		            	<div class="pull-left">
 		            		<a href="{{ url('index/admin/data-kloter/bus/tambah') }}" class="btn btn-primary btn-flat">Tambah Bus</a>
 		            	</div>
-	            		<div class="col-md-10 col-sm-12 col-xs-12">
+		            	@endcan
+	            		<div class="pull-right">
 		            		<div class="pull-right">
 				            	<form class="form-inline" method="get" action="{{ url('index/admin/data-kloter/bus/search') }}">
 				            		<div class="form-group">
@@ -66,7 +68,13 @@
 										<td>{{ $dataBus->nama_bus }}</td>
 										<td>{{ $dataBus->seat_bus }}</td>
 										<td>{{ $dataBus->seat_bus - $dataBus->hitung_seat }}</td>
-										<td><a href="{{ url('index/admin/data-kloter/bus/edit', $dataBus->id_bus) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-bus" data-id-bus="{{ $dataBus->id_bus }}" class="btn btn-danger btn-flat">Delete</a> 
+										<td>
+											@can('edit bus')
+											<a href="{{ url('index/admin/data-kloter/bus/edit', $dataBus->id_bus) }}" class="btn btn-warning btn-flat">Edit</a> 
+											@endcan
+											@can('delete bus')
+											<a href="javascript:;" id="btn-delete-bus" data-id-bus="{{ $dataBus->id_bus }}" class="btn btn-danger btn-flat">Delete</a>
+											@endcan
 											@if(!is_null($dataBus->total_seat) && $dataBus->total_seat != "" && $dataBus->total_seat != '0')
 											<a href="{{ url('index/admin/data-kloter/bus/list-jamaah',$dataBus->id_bus) }}" class="btn btn-info btn-flat">List Jamaah</a></td>
 											@endif</td>

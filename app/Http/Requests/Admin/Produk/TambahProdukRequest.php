@@ -24,14 +24,12 @@ class TambahProdukRequest extends FormRequest
     public function rules()
     {
         $tipe = $this->tipe;
-        $agen = $this->agen;
-        if ($tipe == 1 || $tipe == 2 || $tipe == 3) {
+        if ($tipe == 3 || $tipe == 5) {
             return [
                 'nama_produk' => 'required|string',
-                'agen' => 'required|exists:tbl_users,id,'.$agen.',type',
                 'harga' => 'required|numeric',
                 'desc_prod' => 'required|string',
-                'gambar' => 'required|image|mimes:png,jpg,jpeg|dimensions:min_height=500',
+                'gambar' => 'required_if:tipe,3|image|mimes:png,jpg,jpeg|dimensions:min_height=500',
                 'tipe' => 'required|integer',
             ];
         }else{

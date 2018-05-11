@@ -28,9 +28,11 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('tambah paket haji umroh')
 		            	<div class="pull-left">
 		            		<a href="{{ url('index/admin/paket/tambah') }}" class="btn btn-primary btn-flat">Tambah Paket</a>
 		            	</div>
+		            	@endcan
 		            	<div class="pull-right">
 		            		{{-- <form method="get" class="form-inline" action="{{ url('index/admin/paket/search') }}">
 		            			<div class="form-group">
@@ -93,8 +95,16 @@
 			            				<td>{{ Tanggal::tanggalIndonesia($dataProduk->tanggal_akhir) }}</td>
 			            				<td>{{ $dataProduk->desc_prod }}</td>
 			            				<td>{{ $dataProduk->status_paket == '0' ? 'Non Aktif' : 'Aktif' }}</td>
-			            				<td><a href="{{ url('index/admin/paket/edit', $dataProduk->id) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-produk" class="btn btn-danger btn-flat">Delete</a>
+			            				<td>
+			            				@can('edit paket haji umroh')
+			            				<a href="{{ url('index/admin/paket/edit', $dataProduk->id) }}" class="btn btn-warning btn-flat">Edit</a> 
+			            				@endcan
+			            				@can('delete paket haji umroh')
+			            				<a href="javascript:;" id="btn-delete-produk" class="btn btn-danger btn-flat">Delete</a>
+			            				@endcan
+			            				@can('status paket haji umroh')
 			            				<a href="{{ url('index/admin/paket/status',$dataProduk->id) }}" onclick="return confirm('Apakah anda yakin ingin mengubah status data ini?')" class="btn btn-info btn-flat">Ganti Status</a>
+			            				@endcan
 			            				</td>
 			            			</tr>
 			            			@endforeach

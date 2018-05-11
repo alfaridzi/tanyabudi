@@ -26,7 +26,9 @@
 						</div>
 		            	@endif
 		            	<div class="pull-left">
+		            		@can('tambah voucher')
 		            		<a href="{{ url('index/admin/voucher/tambah') }}" class="btn btn-primary btn-flat">Tambah Voucher</a>
+		            		@endcan
 		            	</div>
 		            	<div class="pull-right">
 		            		<form method="get" class="form-inline" action="{{ url('index/admin/voucher/search') }}">
@@ -95,8 +97,15 @@
 										<td>{{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_mulai) }} s.d {{ Tanggal::tanggalIndonesia($dataVoucher->tanggal_akhir) }}</td>
 										<td>{{ $dataVoucher->tanggal_akhir > date('Y-m-d H:i:s') ? 'Belum Expired' : 'Expired' }}</td>
 										<td>{{ $dataVoucher->status_voucher == 0 ? 'Belum Terpakai' : 'Terpakai' }}</td>
-										<td><a href="{{ url('index/admin/voucher/edit', $dataVoucher->id_voucher
-										) }}" class="btn btn-warning btn-flat">Edit</a> <a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a></td>
+										<td>
+										@can('edit voucher')
+										<a href="{{ url('index/admin/voucher/edit', $dataVoucher->id_voucher
+										) }}" class="btn btn-warning btn-flat">Edit</a> 
+										@endcan
+										@can('delete voucher')
+										<a href="javascript:;" id="btn-delete-voucher" data-id-voucher="{{ $dataVoucher->id_voucher }}" class="btn btn-danger btn-flat">Delete</a>
+										@endcan
+										</td>
 									</tr>
 									@endforeach
 								</tbody>

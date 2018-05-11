@@ -39,18 +39,22 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
+		            	@can('isi kuota')
 		            	<div class="row">
 			            	<div class="col-md-2 col-sm-12 col-xs-12">
 			            		<a href="{{ url('index/admin/data-kloter/kloter/list-jamaah/'.$id_kloter.'/tambah') }}" class="btn btn-primary btn-flat">Isi Kuota</a>
 			            	</div>
 		            	</div>
+		            	@endcan
 		            </div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
 							<table id="table-list-jamaah" class="table">
 								<thead>
 									<tr>
+										@can('delete kuota')
 										<th class="no-sort"><input type="checkbox" name="deleteAll" id="deleteAll"></th>
+										@endcan
 										<th>No</th>
 										<th>Nomor Paspor</th>
 										<th>Nama Jamaah</th>
@@ -61,7 +65,9 @@
 								<tbody>
 									@foreach($kloter as $dataKloter)
 									<tr>
+										@can('delete kuota')
 										<td><input type="checkbox" class="jamaah" value="{{ $dataKloter->id_jamaah }}"></td>
+										@endcan
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataKloter->nomor_paspor }}</td>
 										<td>{{ $dataKloter->nama_paspor }}</td>
@@ -77,7 +83,9 @@
 									@endforeach
 								</tbody>
 							</table>
+							@can('delete kuota')
 							<a href="javascript:;" class="btn btn-danger btn-flat disabled" id="btn-delete-jamaah">Delete Jamaah</a>
+							@endcan
 						</div>
 					</div>
 				</div>
@@ -105,14 +113,18 @@
 		});
 
 		$(document).on('click', '#deleteAll', function(){
+			var isExists = $("#table-list-jamaah .jamaah").find();
 			if ($(this).is(':checked')) {
-				$('.jamaah').prop('checked', true);
-				$('#btn-delete-jamaah').removeClass('disabled');
+				if (isExists.prevObject.length != 0) {
+					$('.jamaah').prop('checked', true);
+					$('#btn-delete-jamaah').removeClass('disabled');	
+				}
 			}else{
 				$('.jamaah').prop('checked', false);
 				$('#btn-delete-jamaah').addClass('disabled');
 			}
 		});
+
 
 		$(".jamaah").on('change',function(){
 			if($(this).is(':checked')){

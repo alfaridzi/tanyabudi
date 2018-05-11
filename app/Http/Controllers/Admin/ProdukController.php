@@ -11,9 +11,15 @@ use File;
 use Carbon\Carbon;
 
 use App\produk;
+use App\Model\Admin\Log;
 
 class ProdukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu produk']);
+    }
+
     public function index($produk)
     {
     	$namaProduk = $produk;
@@ -64,12 +70,27 @@ class ProdukController extends Controller
         $tipe_produk =$request->tipe;
     	$produk->nama = $request->nama_produk;
     	$produk->desc_prod = $request->desc_prod;
-        $produk->harga = $request->harga;
-    	$produk->type = $request->tipe;
 
+        if (!is_null($request->file('gambar'))) { // jika gambar tidak kosong
+            $gambar = $request->file('gambar');
+            $extension = $gambar->getClientOriginalExtension();
+            $namaFile = str_slug($request->nama_produk).'-'.str_random(5).'.'.$extension;
+            $gambar->move('assets/images/paket/wisata/',$namaFile);
+            $produk->gambar = $namaFile;
+        }else{
+            $produk->gambar = null;
+        }
+
+    	$produk->type = $request->tipe;
+        $produk->harga = $request->harga;
         $tipe_produk = $request->tipe;
 
        	$produk->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan produk baru dengan nama '.$produk->nama;
+        $log->save();
 
        	if ($tipe_produk == 3) {
 			return redirect('index/admin/produk/wisata')->withSuccess('Berhasil Menambahkan Produk Baru');
@@ -92,12 +113,27 @@ class ProdukController extends Controller
 
     	$produk->nama = $request->nama_produk;
     	$produk->desc_prod = $request->desc_prod;
+        if (!is_null($request->file('gambar'))) { // jika gambar tidak kosong
+            if (File::exists('assets/images/paket/wisata/'.$produk->gambar)) {
+                File::delete('assets/images/paket/wisata/'.$produk->gambar);
+            }
+            $gambar = $request->file('gambar');
+            $extension = $gambar->getClientOriginalExtension();
+            $namaFile = str_slug($request->nama_paket).'-'.str_random(5).'.'.$extension;
+            $gambar->move('assets/images/paket/wisata/',$namaFile);
+            $produk->gambar = $namaFile;
+        }
     	$produk->updated_at = Carbon::now();
-
+        $produk->harga = $request->harga;
     	$tipe_produk = $produk->type;
         $produk->harga = $request->harga;
 
        	$produk->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data produk dengan nama '.$produk->nama;
+        $log->save();
 
        	if ($tipe_produk == 3) {
 			return redirect('index/admin/produk/wisata')->withSuccess('Berhasil Mengubah Produk');
@@ -111,8 +147,15 @@ class ProdukController extends Controller
     public function delete($id)
     {
     	$produk = produk::findOrFail($id);
+        $nama = $produk->nama;
 
 		$produk->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus produk dengan nama '.$nama;
+        $log->save();
+
 		return redirect()->back()->withSuccess('Berhasil Menghapus Produk');
     }
 }

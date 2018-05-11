@@ -1,5 +1,13 @@
 @extends('admin.layout.app')
 @section('title', 'Edit Divisi')
+@push('css')
+<style type="text/css">
+	span.note {
+		font-size: 11px;
+		color: red;
+	}
+</style>
+@endpush
 @section('content')
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -35,12 +43,13 @@
 		            		<div class="form-group">
 	            				<label>Kode Divisi</label>
 	            				<input type="text" class="form-control" value="{{ $divisi->kode_divisi }}" name="kode_divisi" placeholder="Kode Divisi" required>
+	            				<span class="note">*Tanpa Spasi</span>
 		            		</div>
 		            		<div class="form-group">
 	            				<label>Nama Divisi</label>
 	            				<input type="text" class="form-control" value="{{ $divisi->nama_divisi }}" name="nama_divisi" placeholder="Nama Divisi" required>
 		            		</div>
-	            			<button type="submit" class="btn btn-primary btn-flat">Tambah</button>
+	            			<button type="submit" class="btn btn-primary btn-flat">Edit</button>
 		            	</form>
 		            </div>
 		        </div>

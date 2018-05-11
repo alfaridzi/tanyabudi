@@ -98,13 +98,6 @@ class produkController extends Controller
 		} else {
 			$last = $cek->counter + 1;
 		}
-		
-		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
-		$data['foto'] = $imageName;
-		$data['id'] = 'TRX'.$last.$id.'.'.date('Ymd').'.'.Auth::user()->id;
-		$data['counter'] = $last;
-
-
 
 		$datas['id_user'] = Auth::user()->id;
 		$datas['title'] = $title;
@@ -114,6 +107,10 @@ class produkController extends Controller
 		$datas['jam'] = $jam;
 		$datas['tanggal'] = $date;
 
+		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
+		$data['foto'] = $imageName;
+		$data['id'] = 'TRX'.$last.$id.'.'.date('Ymd').'.'.Auth::user()->id;
+		$data['counter'] = $last;
 
         request()->foto->move(public_path('bukti-tf'), $imageName);
         payment::create($data);

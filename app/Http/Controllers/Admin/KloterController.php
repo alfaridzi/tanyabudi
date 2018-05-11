@@ -7,11 +7,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Kloter\TambahKloterRequest;
 use App\Http\Requests\Admin\Kloter\EditKloterRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 use App\Model\Admin\Kloter;
+use App\Model\Admin\Log;
 
 class KloterController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['permission:menu kloter']);
+    }
+
     public function index()
     {
     	$kloter = DB::table('tbl_kloter as t1')->leftJoin('tbl_kuota_kloter as t2', 't1.id_kloter', '=', 't2.id_kloter')->select('t1.*', DB::raw("count(t2.id_kloter) as hitung_seat"))->groupBy('t1.id_kloter')->orderBy('t1.id_kloter', 'desc')->paginate(15);
@@ -54,6 +61,11 @@ class KloterController extends Controller
     	$kloter->jumlah_hari = $request->jumlah_hari;
     	$kloter->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan kloter baru dengan nama kloter '.$kloter->nama_kloter;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kloter')->withSuccess('Berhasil Menambahkan Kloter Baru');
     }
 
@@ -79,17 +91,68 @@ class KloterController extends Controller
     	$kloter->jumlah_hari = $request->jumlah_hari;
     	$kloter->save();
 
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah data kloter dengan nama kloter '.$kloter->nama_kloter;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kloter')->withSuccess('Berhasil Mengubah Kloter');
     }
 
     public function delete($id_kloter)
     {
-    	$kloter = Kloter::findOrFail($id_kloter);
-    	$bus = DB::table('tbl_bus')->where('id_kloter', $id_kloter);
-    	$kamar = DB::table('tbl_kamar')->where('id_kloter', $id_kloter);
-    	$idBus = $bus->implode('id_bus', ',');
-    	dd($idBus);
+        DB::beginTransaction();
+        try {
+            $kloter = Kloter::findOrFail($id_kloter);
+            $nama_kloter = $kloter->nama_kloter;
+            $bus = DB::table('tbl_bus')->where('id_kloter', $kloter->id_kloter);
+            $kamar = DB::table('tbl_kamar')->where('id_kloter', $kloter->id_kloter);
 
+            $dataBus = $bus->implode('id_bus', ',');
+            $dataKamar = $kamar->implode('id_kamar', ',');
+
+            $kuotaKamar = DB::table('tbl_kuota_kamar')->whereIn('id_kamar', [$dataKamar])->delete();
+            $kamar->delete();
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withErrors($e->getErrors());
+        } catch(\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        try {
+            $kuotaBus = DB::table('tbl_kuota_bus')->whereIn('id_bus', [$dataBus])->delete();
+            $bus->delete();
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withErrors($e->getErrors());
+        } catch(\Execption $e){
+            DB::rollback();
+            throw $e;
+        }
+
+        try {
+            $kuotaKloter = DB::table('tbl_kuota_kloter')->where('id_kloter', $id_kloter)->delete();
+            $kloter->delete();
+        } catch (ValidationException $e) {
+            DB::rollback();
+            return redirect()->back()
+                ->withErrors($e->getErrors());
+        } catch(\Execption $e){
+            DB::rollback();
+            throw $e;
+        }
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus kloter dengan nama kloter '.$nama_kloter;
+        $log->save();
+
+        DB::commit();
+        return redirect()->back()->withSuccess('Berhasil Menghapus Data');
     }
 
 
@@ -121,6 +184,7 @@ class KloterController extends Controller
 
     public function store_isi_kuota(Request $request, $id_kloter)
     {
+        $kloter = Kloter::findOrFail($id_kloter);
     	$jamaah = explode(',', $request->tampungJamaah);
 
     	$arrayJamaah = array();
@@ -129,17 +193,32 @@ class KloterController extends Controller
     	}
 
     	DB::table('tbl_kuota_kloter')->insert($arrayJamaah);
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menambahkan kuota kloter baru dengan nama kloter '.$kloter->nama_kloter;
+        $log->save();
+
     	return redirect('index/admin/data-kloter/kloter/list-jamaah/'.$id_kloter)->withSuccess('Berhasil Menambahkan Jamaah');
     }
 
-    public function delete_kuota(Request $request)
+    public function delete_kuota(Request $request, $id_kloter)
     {
+        $nama_kloter = Kloter::findOrFail($id_kloter)->nama_kloter;
     	$jamaah = explode(',', $request->tampungJamaah);
     	$kloter = DB::table('tbl_kuota_kloter')->whereIn('id_jamaah', $jamaah);
     	$kloter->delete();
 
-    	$bus = DB::table('tbl_kuota_kloter')->whereIn('id_jamaah', $jamaah);
+    	$bus = DB::table('tbl_kuota_bus')->whereIn('id_jamaah', $jamaah);
     	$bus->delete();
+
+        $kamar = DB::table('tbl_kuota_kamar')->whereIn('id_jamaah', $jamaah);
+        $kamar->delete();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Menghapus kuota kloter dengan nama kloter '.$nama_kloter;
+        $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Menghapus Jamaah');
     }
