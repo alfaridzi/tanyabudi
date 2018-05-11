@@ -1,29 +1,43 @@
 @extends('user.layout.app-1')
-@section('page-title', 'Pembayaran PLN')
+@section('page-title', 'Pembelian '.$name)
 @section('content')
 <div class="container">
 	<div class="row">
-		<h5>PLN</h5>
-		<form method="post">
+		<h5>PEMBELIAN {{ $name }}</h5>
+		<form method="post" action="{{ url('pln/proses') }}">
 			@csrf
+			@if(Session::has('success'))
+			<div class="card green darken-1">
+						   <div class="row">
+						    <div class="col s12 m10">
+						      <div class="card-content white-text">
+						      	<p>{{ Session::get('success') }}</p>
+												</div>
+						  </div>
+						  
+						  </div>
+						  </div>
+			@endif
 			<div class="row">
+
 				<div class="input-field col s12">
-					<input type="text" class="validate" name="nomor_listrik" placeholder="Nomor Meter / ID Pelanggan">
+					<input type="text" class="validate" name="custnomor" placeholder="Nomor Meter / ID Pelanggan">
+				</div>
+
+
+				<div class="input-field col s12">
+					<input type="text" class="validate" name="nomor" placeholder="No. Handphone">
 				</div>
 				<div class="input-field col s12">
-					<select>
-						<option disabled="" selected="">Nominal</option>
-						<option>Token PLN 10.000</option>
-						<option>Token PLN 30.000</option>
-						<option>Token PLN 50.000</option>
-						<option>Token PLN 100.000</option>
+					<select name="code">
+
+						@foreach($pulsa as $item)
+						<option value="{{ $item->code}}">{{ $item->description }} - Rp. {{ number_format($item->price,0,'.','.') }}</option>
+						@endforeach
 					</select>
 				</div>
-				<div class="input-field col s12">
-					<input type="text" class="validate" name="nomor_hp" placeholder="Nomor HP Pelanggan">
-				</div>
 				<div class="col s12 center-align">
-					<a href="{{ url('berhasil') }}" class="btn-konfirmasi">Bayar Tagihan</a>
+					<button type="submit" class="btn-konfirmasi">Bayar Tagihan</button>
 				</div>
 			</div>
 		</form>

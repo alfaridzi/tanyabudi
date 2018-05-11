@@ -222,6 +222,9 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::post('logout', 'Admin\LoginController@logout');
 });
 
+
+});
+
 Route::group(['middleware'=>'guest'], function() {
 Route::get('test', function() {
 	 dd(Session::all());
@@ -344,11 +347,7 @@ Route::get('/pembayaran/bpjs', function(){
 Route::get('/pembayaran/pdam', function(){
 	return view('umum.bayar-bayar.pdam');
 });
-
-Route::get('/pembayaran/pln', function(){
-	return view('umum.bayar-bayar.pln');
-});
-
+Route::get('/pembayaran/pln', 'pulsaController@pln');
 Route::get('/pembayaran/telkom', function(){
 	return view('umum.bayar-bayar.telkom');
 });
@@ -363,8 +362,9 @@ Route::get('/pembelian/pulsa/axis', 'PulsaController@axis');
 
 Route::get('/pembelian/grab', 'PulsaController@grab');
 Route::get('/pembelian/gojek', 'PulsaController@gojek');
+Route::get('/pembelian/pln', 'PulsaController@pln');
 Route::post('/pulsa/proses', 'PulsaController@proses');
-
+Route::post('/pln/proses', 'PulsaController@proses_pln');
 
 Route::get('/berhasil', function(){
 	return view('umum.pemberitahuan_berhasil');

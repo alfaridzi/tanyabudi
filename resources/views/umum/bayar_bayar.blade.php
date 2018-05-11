@@ -10,7 +10,7 @@
 					<h5>Bayar Tagihan</h5>
 					<ol>
 						<li>
-							<a href="{{ url('pembayaran/bpjs') }}">
+							<a href="">
 								<img src="{{ asset('assets/images/bayar-bayar/bpjs.png') }}" class="img-responsive">
 								<span class="nama-produk">BPJS</span>
 							</a>
@@ -22,13 +22,13 @@
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembayaran/pdam') }}">
+							<a href="">
 								<img src="{{ asset('assets/images/bayar-bayar/pdam.png') }}" class="img-responsive">
 								<span class="nama-produk">PDAM</span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembayaran/telkom') }}">
+							<a href="">
 								<img src="{{ asset('assets/images/bayar-bayar/telkom.png') }}" class="img-responsive">
 								<span class="nama-produk">TELKOM</span>
 							</a>
