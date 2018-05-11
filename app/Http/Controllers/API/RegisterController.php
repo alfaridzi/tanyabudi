@@ -85,7 +85,7 @@ class RegisterController extends Controller
         }
         $input = $request->all();
         if($request->type == '2') {
-        	$input['referal_main'] = rand(10,11);
+        	$input['referal_main'] = str_random(10,11);
         } else {
         	$input['referal_main'] = NULL;
         }
