@@ -22,7 +22,7 @@
 	    	<a href="{{ url('dashboard') }}" class="brand-logo"><img class="responsive-img" src="{{ asset('assets/images/logo/logo-horizontal-1.png') }}"></a>
 	    	<ul id="nav-mobile" class="right hide-on-med-and-down">
 	      		<li><a href="{{ url('notifikasi') }}"><i class="icon icon-notifikasi"></i></a></li>
-	      		<li><a href="{{ url('pengaturan') }}"><i class="icon icon-konfigurasi"></i></a></li>
+	      		<!--<li><a href="#"><i class="icon icon-konfigurasi"></i></a></li>-->
 	      		<li><a href="{{ url('logout') }}"><i class="icon icon-logout"></i></a></li>
 	      	</ul>
 	      	<ul class="left hide-on-large-only">

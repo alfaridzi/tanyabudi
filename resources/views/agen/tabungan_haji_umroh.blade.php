@@ -107,7 +107,7 @@ $countdown = $paket_aktif->tgl_pembayaran;
 							<span>Bayar Paket</span>
 						</li>
 					</a>
-					<a href="#">
+					<a href="{{ url('scan') }}">
 						<li>
 							<i class="icon icon-scan-barcode"></i>
 							<span>Scan Voucher</span>

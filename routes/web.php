@@ -31,6 +31,24 @@ Route::post('index/admin', 'Admin\LoginController@login');
 Route::post('paket/upload/{id}','API\RegisterController@uploadtf');
 
 
+
+
+
+
+
+
+
+
+Route::post('api/register', 'API\RegisterController@register');
+Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
+
+Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
+
+	Route::get('/logout','Auth\LoginController@logout');
+
+
+
+
 Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 
 
@@ -62,6 +80,7 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::post('transaksi/top-up/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_topup')->middleware(['permission:konfirmasi transaksi']);
 	Route::get('transaksi/konfirmasi-user', 'Admin\TransaksiController@user');
 	Route::get('transaksi/konfirmasi-user/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_user')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/ppob', 'Admin\TransaksiController@ppob');
 
 	Route::get('kwitansi', 'Admin\KwitansiController@index');
 	Route::get('kwitansi/buat-transaksi', 'Admin\KwitansiController@buat_transaksi')->middleware(['permission:buat transaksi']);
@@ -226,16 +245,8 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::post('logout', 'Admin\LoginController@logout');
 });
 
-Route::group(['middleware'=>'guest'], function() {
-Route::get('test', function() {
-	 dd(Session::all());
-	});
-});
-Route::post('api/register', 'API\RegisterController@register');
-Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
-Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
 
-	Route::get('/logout','Auth\LoginController@logout');
+
 Route::group(['middleware'=>['guest','web']], function() {
 
 
@@ -262,6 +273,7 @@ Route::group(['middleware'=>['guest','web']], function() {
 	});
 
 });
+
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
 			return view('instruksi');
@@ -305,9 +317,7 @@ Route::get('/total-bonus', function(){
 	return view('agen.total_bonus');
 });
 
-Route::get('/bayar-bayar', function() {
-	return view('umum.bayar_bayar');
-});
+Route::get('/bayar-bayar', 'pulsaController@index');
 
 Route::get('/history', function(){
 	return view('user.history');
@@ -400,3 +410,7 @@ Route::post('/intruksi/{id}', 'produkController@intruksi_wisata');
 Route::post('/selesai/{id}', 'produkController@selesai');
 Route::post('sedekah/konfirmasi', 'produkController@konfirmasi_sedekah');
 });
+
+
+
+

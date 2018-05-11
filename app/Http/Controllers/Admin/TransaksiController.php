@@ -111,6 +111,13 @@ class TransaksiController extends Controller
         return view('admin.transaksi.top_up', compact('top_up'));
     }
 
+    public function ppob()
+    {
+        $ppob = DB::table('tbl_pulsa')->leftJoin('users', 'tbl_pulsa.id_user', '=', 'users.id')->paginate(15);
+
+        return view('admin.transaksi.ppob', compact('ppob'));
+    }
+
     public function konfirm($id)
     {
         $payment = payment::findOrFail($id);
