@@ -11,4 +11,4 @@ class referalController extends Controller
     	$user = User::where('referal',Auth::user()->referal_main)->get();
     	return view('agen/list_referral', compact('user'));
     }
-}
+}//
