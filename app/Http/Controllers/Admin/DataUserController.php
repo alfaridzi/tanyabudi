@@ -18,7 +18,11 @@ class DataUserController extends Controller
 
     public function index_agen()
     {
-    	$user = DB::table('users')->where('type', 2)->orderBy('id')->paginate(15);
+    	$user = DB::table('users')
+                    ->leftJoin('tbl_payment', 'users.id', '=', 'tbl_payment.id_user')
+                    ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+                    ->leftJoin('tbl_saldo', 'users.id', '=', 'tbl_saldo.id_user')
+                    ->where('users.type', 2)->where('tbl_produk.type', '5')->orderBy('users.id')->paginate(15);
     	return view('admin.data_user.agen.agen', compact('user'));
     }
 
@@ -38,8 +42,10 @@ class DataUserController extends Controller
     public function list_trx_agen($id_agen)
     {
         $agen = User::findOrFail($id_agen);
-        $user = DB::table('tbl_payment')->addSelect('tbl_payment.*')->addSelect('users.*', 'users.id as id_user')
-                        ->addSelect('tbl_produk.*')->addSelect('tbl_paket.*')
+        $user = DB::table('tbl_payment')->addSelect('tbl_payment.*')
+                        ->addSelect('users.*', 'users.id as id_user')
+                        ->addSelect('tbl_produk.*')
+                        ->addSelect('tbl_paket.*')
                         ->leftJoin('users', 'tbl_payment.id_user', '=', 'users.id')
                         ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
                         ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')

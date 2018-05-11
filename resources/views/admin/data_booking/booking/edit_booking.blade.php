@@ -37,10 +37,6 @@
 		            		@csrf
 		            		{!! method_field('patch') !!}
 		            		<div class="form-group">
-	            				<label>Nomor Transaksi</label>
-	            				<input type="text" class="form-control" name="nomor_transaksi" value="{{ $booking->nomor_transaksi }}" placeholder="Nomor Transaksi">
-		            		</div>
-		            		<div class="form-group">
 		            			<label>Voucher</label>
 		            			<select name="voucher" id="select-voucher" class="form-control">
 		            				<option disabled="" selected="">--Pilih Voucher--</option>

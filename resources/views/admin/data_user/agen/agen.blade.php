@@ -65,9 +65,9 @@
 									<td>{{ $dataUser->name }}</td>
 									<td>{{ $dataUser->nohp }}</td>
 									<td>{{ $dataUser->email }}</td>
-									<td>masih dikerjakan</td>
-									<td>masih dikerjakan</td>
-									<td>masih dikerjakan</td>
+									<td>{{ $dataUser->nama }}</td>
+									<td>Rp {{ number_format($dataUser->saldo, 2, ',', '.') }}</td>
+									<td>0</td>
 									<td>
 									@if($dataUser->status == 0)
 									Tidak Aktif

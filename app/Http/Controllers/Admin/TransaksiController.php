@@ -12,6 +12,7 @@ use App\tabungan;
 use App\payment;
 use App\Model\Admin\Log;
 use App\Model\Admin\Kwitansi;
+use App\Model\Saldo;
 use App\User;
 
 class TransaksiController extends Controller
@@ -101,7 +102,13 @@ class TransaksiController extends Controller
 
     public function top_up()
     {
-        
+        $top_up = DB::table('tbl_produk')->rightJoin('tbl_payment', 'tbl_produk.id', '=', 'tbl_payment.id_prod')
+                        ->LeftJoin('users', 'tbl_payment.id_user', '=', 'users.id')
+                        ->addSelect('tbl_payment.*', 'tbl_payment.id as id_payment')
+                        ->addSelect('users.*', 'users.id as id_users')
+                        ->addSelect('tbl_payment.status', 'tbl_payment.status as status_pembayaran')
+                        ->where('tbl_payment.id_prod', '3911')->orderBy('tbl_payment.id', 'desc')->paginate(15);
+        return view('admin.transaksi.top_up', compact('top_up'));
     }
 
     public function konfirm($id)
@@ -177,7 +184,13 @@ class TransaksiController extends Controller
         }
         $user = Auth::guard('admin')->user();
         $kwitansi = Kwitansi::orderBy('id_kwitansi', 'desc')->limit(1)->first();
-        $tanggal = Carbon::parse($kwitansi->created_at)->format('Y-m-d') == date('Y-m-d') ? true : false;
+
+        if (is_null($kwitansi)) {
+            $tanggal = false;
+        }else{
+            $tanggal = Carbon::parse($kwitansi->created_at)->format('Y-m-d') == date('Y-m-d') ? true : false;
+        }
+
         $tanggal_gabung = date('y').date('m');
         if (is_null($kwitansi) || !$tanggal) {
             $nomor = '0001';
@@ -257,7 +270,13 @@ class TransaksiController extends Controller
         }
         $user = Auth::guard('admin')->user();
         $kwitansi = Kwitansi::orderBy('id_kwitansi', 'desc')->limit(1)->first();
-        $tanggal = Carbon::parse($kwitansi->created_at)->format('Y-m-d') == date('Y-m-d') ? true : false;
+
+        if (is_null($kwitansi)) {
+            $tanggal = false;
+        }else{
+            $tanggal = Carbon::parse($kwitansi->created_at)->format('Y-m-d') == date('Y-m-d') ? true : false;
+        }
+
         $tanggal_gabung = date('y').date('m');
         if (is_null($kwitansi) || !$tanggal) {
             $nomor = '0001';
@@ -324,6 +343,93 @@ class TransaksiController extends Controller
                 DB::rollback();
                 throw $e;
             }
+
+        return redirect()->back()->withSuccess('Berhasil Mengkonfirmasi Pembayaran');
+    }
+
+    public function konfirm_topup($id)
+    {
+        $payment = payment::findOrFail($id);
+        if (is_null($payment)) {
+            abort(404);
+        }
+        $user = Auth::guard('admin')->user();
+        $kwitansi = Kwitansi::orderBy('id_kwitansi', 'desc')->limit(1)->first();
+
+        if (is_null($kwitansi)) {
+            $tanggal = false;
+        }else{
+            $tanggal = Carbon::parse($kwitansi->created_at)->format('Y-m-d') == date('Y-m-d') ? true : false;
+        }
+
+        $tanggal_gabung = date('y').date('m');
+        if (is_null($kwitansi) || !$tanggal) {
+            $nomor = '0001';
+            $format_kwitansi = 'KW'.$user->id_admin.'.'.$tanggal_gabung.$user->get_karyawan->get_jabatan->kode_cabang.$nomor;
+        }elseif($tanggal){
+            $nomor_kwitansi = ++$kwitansi->nomor_kwitansi;
+            $format_kwitansi = $nomor_kwitansi;
+        }
+
+        $saldo = DB::table('tbl_saldo')->where('id_user', $payment->id_user)->first();
+        $tambah_saldo = $payment->jumlah_pembayaran + $saldo->saldo;
+
+        DB::beginTransaction();
+            try {
+                $payment->update(['status' => '1']);
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return redirect()->back()
+                    ->withErrors($e->getErrors());
+            } catch(\Execption $e){
+                DB::rollback();
+                throw $e;
+            }
+
+            try {
+                Saldo::find($saldo->id_saldo)->update(['saldo' => $tambah_saldo]);
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return redirect()->back()
+                    ->withErrors($e->getErrors());
+            } catch(\Execption $e){
+                DB::rollback();
+                throw $e;
+            }
+
+            try{
+                $kwitansi = new Kwitansi;
+                $kwitansi->id_transaksi = $payment->id;
+                $kwitansi->nomor_kwitansi = $format_kwitansi;
+                $kwitansi->pelanggan = $payment->users->name;
+                $kwitansi->metode_bayar = '1';
+                $kwitansi->jumlah = $payment->jumlah_pembayaran;
+                $kwitansi->admin_penginput = $user->username;
+                $kwitansi->status = '1';
+                $kwitansi->save();
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return redirect()->back()
+                    ->withErrors($e->getErrors());
+            } catch(\Execption $e){
+                DB::rollback();
+                throw $e;
+            }
+
+            try {
+                $log = new Log;
+                $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+                $log->isi_log = 'Mengkonfirmasi transaksi dengan nomor transaksi '.$payment->id;
+                $log->save();
+            } catch (ValidationException $e) {
+                DB::rollback();
+                return redirect()->back()
+                    ->withErrors($e->getErrors());
+            } catch(\Execption $e){
+                DB::rollback();
+                throw $e;
+            }
+        DB::commit();
 
         return redirect()->back()->withSuccess('Berhasil Mengkonfirmasi Pembayaran');
     }

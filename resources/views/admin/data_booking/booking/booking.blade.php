@@ -19,6 +19,12 @@
 			<div class="col-md-12">
 				<div class="box box-primary">
 		            <div class="box-header">
+		            	@if(Session::has('success'))
+		            	<div class="alert alert-success alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						  	<strong>{{ Session::get('success') }}</strong>
+						</div>
+		            	@endif
 		            	<div class="col-md-12">
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-booking/booking/search') }}">
 			            		<div class="form-group">
@@ -51,7 +57,7 @@
 									<tr>
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataBooking->kode_booking }}</td>
-										<td>{{ $dataBooking->nomor_transaksi }}</td>
+										<td>{{ $dataBooking->id_transaksi }}</td>
 										<td>{{ $dataBooking->nama_paspor }}</td>
 										<td>{{ $dataBooking->kuota }}</td>
 										<td>{{ $dataBooking->nama }}</td>

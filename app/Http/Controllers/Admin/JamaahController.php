@@ -46,10 +46,13 @@ class JamaahController extends Controller
         $keyword = $request->search;
         $status_mahrom = $request->status_mahrom;
 
-        $jamaah = DB::table('tbl_jamaah')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_booking', 'tbl_jamaah.id_jamaah', '=', 'tbl_booking.id_jamaah')->where(function($q) use($status_mahrom){
+        $jamaah = DB::table('tbl_jamaah')
+        ->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')
+        ->leftJoin('tbl_booking', 'tbl_jamaah.id_jamaah', '=', 'tbl_booking.id_jamaah')
+        ->where(function($q) use($status_mahrom){
             $q->where('status_mahrom', $status_mahrom);
         })->where(function($q) use($keyword){
-            $q->where('kode_booking', 'like', '%'.$keyword.'%')->orWhere('nomor_transaksi', 'like', '%'.$keyword.'%')->orWhere('nomor_paspor', 'like', '%'.$keyword.'%')->orWhere('nama_jamaah', 'like', '%'.$keyword.'%');
+            $q->where('kode_booking', 'like', '%'.$keyword.'%')->orWhere('id_transaksi', 'like', '%'.$keyword.'%')->orWhere('nomor_paspor', 'like', '%'.$keyword.'%')->orWhere('nama_jamaah', 'like', '%'.$keyword.'%');
         })->paginate(15);
 
         return view('admin.data_booking.jamaah.jamaah', compact('jamaah'));

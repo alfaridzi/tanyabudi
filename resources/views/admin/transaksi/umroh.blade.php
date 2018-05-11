@@ -26,6 +26,7 @@
 			            		<thead>
 			            			<tr>
 			            				<th>No</th>
+			            				<th>Nomor Transaksi</th>
 			            				<th>Nama Produk</th>
 			            				<th>Deskripsi Produk</th>
 			            				<th>Harga Produk</th>
@@ -43,6 +44,7 @@
 			            			@foreach($umroh as $dataUmroh)
 			            			<tr>
 			            				<td>{{ $loop->iteration }}</td>
+			            				<td>{{ $dataUmroh->id_payment }}</td>
 			            				<td>{{ $dataUmroh->nama }}</td>
 			            				<td>{{ $dataUmroh->desc_prod }}</td>
 			            				<td>Rp {{ number_format($dataUmroh->harga, 2, ',', '.') }}</td>

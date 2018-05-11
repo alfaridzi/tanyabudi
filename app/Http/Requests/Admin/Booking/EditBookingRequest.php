@@ -25,7 +25,6 @@ class EditBookingRequest extends FormRequest
     {
         if (is_null($this->voucher)) {
             return [
-                'nomor_transaksi' => 'nullable',
                 'voucher' => 'nullable|exists:tbl_voucher,id_voucher',
                 'status_pemesan' => 'required|boolean'
             ];
@@ -33,13 +32,11 @@ class EditBookingRequest extends FormRequest
             $id_booking = \DB::table('tbl_booking')->where('id_voucher', $this->voucher)->first();
             if (is_null($id_booking)) {
                 return [
-                    'nomor_transaksi' => 'nullable',
                     'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric|unique:tbl_booking,id_voucher',
                     'status_pemesan' => 'required|boolean'
                 ];
             }else{
                 return [
-                    'nomor_transaksi' => 'nullable',
                     'voucher' => 'nullable|exists:tbl_voucher,id_voucher|numeric|unique:tbl_booking,id_voucher,'.$id_booking->id_booking.',id_booking',
                     'status_pemesan' => 'required|boolean'
                 ];

@@ -23,6 +23,8 @@ Route::post('update/transaction', function() {
 	}
 });
 
+Route::get('index/voucher/{kode_voucher}', 'RedeemVoucherController@redeemVoucher');
+
 Route::get('index/login', 'Admin\LoginController@index');
 Route::post('index/admin', 'Admin\LoginController@login');
 
@@ -57,7 +59,7 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::get('transaksi/bayar-paket', 'Admin\TransaksiController@bayar_paket');
 	Route::post('transaksi/bayar-paket/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_paket')->middleware(['permission:konfirmasi transaksi']);
 	Route::get('transaksi/top-up', 'Admin\TransaksiController@top_up');
-	Route::post('transaksi/top-up/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::post('transaksi/top-up/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_topup')->middleware(['permission:konfirmasi transaksi']);
 	Route::get('transaksi/konfirmasi-user', 'Admin\TransaksiController@user');
 	Route::get('transaksi/konfirmasi-user/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_user')->middleware(['permission:konfirmasi transaksi']);
 

@@ -192,7 +192,7 @@
 						 @endif Kemenag RI No.490/2017</p>
 					</div>
 					<div class="qr-code-1">
-						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->kode_voucher) !!}
+						{!! QrCode::size(80)->errorCorrection('L')->margin(0)->generate(url('index/voucher', $voucher->kode_voucher)) !!}
 					</div>
 					<div class="footer">
 						<div class="nomor-dan-gambar">
@@ -211,7 +211,7 @@
 				</div>
 				<div class="content">
 					<div class="qr-code-2">
-						{!! QrCode::size(70)->errorCorrection('H')->margin(0)->generate($voucher->kode_voucher) !!}
+						{!! QrCode::size(70)->errorCorrection('L')->margin(0)->generate(url('index/voucher', $voucher->kode_voucher)) !!}
 					</div>
 					<div class="sub-judul">
 						{{ $voucher->nama_voucher }}

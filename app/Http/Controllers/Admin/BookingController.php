@@ -19,7 +19,14 @@ class BookingController extends Controller
 
     public function index()
     {
-    	$booking = DB::table('tbl_booking')->rightJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->rightJoin('tbl_paspor', 'tbl_paspor.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->orderBy('id_booking', 'desc')->leftJoin('tbl_produk', 'tbl_booking.id_paket', '=', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->paginate(15);
+    	$booking = DB::table('tbl_booking')
+                        ->rightJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')
+                        ->rightJoin('tbl_paspor', 'tbl_paspor.id_jamaah', '=', 'tbl_jamaah.id_jamaah')
+                        ->leftJoin('tbl_payment', 'tbl_booking.id_transaksi', '=', 'tbl_payment.id')
+                        ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+                        ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
+                        ->orderBy('id_booking', 'desc')
+                        ->paginate(15);
 
     	return view('admin.data_booking.booking.booking', compact('booking'));
     }
@@ -28,7 +35,15 @@ class BookingController extends Controller
     {
         $keyword = $request->search;
 
-        $booking = DB::table('tbl_booking')->join('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->where('kode_booking', 'like', '%'.$keyword.'%')->orWhere('nomor_transaksi', 'like', '%'.$keyword.'%')->orWhere('nama_jamaah', 'like', '%'.$keyword.'%')->orderBy('id_booking', 'desc')->paginate(15);      
+        $booking = DB::table('tbl_booking')
+                    ->rightJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')
+                    ->rightJoin('tbl_paspor', 'tbl_paspor.id_jamaah', '=', 'tbl_jamaah.id_jamaah')
+                    ->leftJoin('tbl_payment', 'tbl_booking.id_transaksi', '=', 'tbl_payment.id')
+                    ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+                    ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
+                    ->where('kode_booking', 'like', '%'.$keyword.'%')
+                    ->orWhere('id_transaksi', 'like', '%'.$keyword.'%')
+                    ->orWhere('nama_paspor', 'like', '%'.$keyword.'%')->orderBy('id_booking', 'desc')->paginate(15);
         
         return view('admin.data_booking.booking.booking', compact('booking'));  
     }
@@ -36,7 +51,13 @@ class BookingController extends Controller
     public function edit($id_booking)
     {
     	$booking = Booking::find($id_booking);
-    	$voucher = DB::table('tbl_voucher')->addSelect('tbl_booking.*', 'tbl_booking.id_voucher as id_voucher_booking')->addSelect('tbl_voucher.*')->leftJoin('tbl_booking', 'tbl_voucher.id_voucher', '=', 'tbl_booking.id_voucher')->where('tbl_booking.id_jamaah', $booking->id_jamaah)->orWhere('tbl_booking.id_voucher', null)->where('tanggal_akhir', '>', date('Y-m-d H:i:s'))->where('status_voucher', '0')->get();
+    	$voucher = DB::table('tbl_voucher')
+                        ->addSelect('tbl_booking.*', 'tbl_booking.id_voucher as id_voucher_booking')
+                        ->addSelect('tbl_voucher.*')
+                        ->leftJoin('tbl_booking', 'tbl_voucher.id_voucher', '=', 'tbl_booking.id_voucher')
+                        ->where('tbl_booking.id_jamaah', $booking->id_jamaah)
+                        ->orWhere('tbl_booking.id_voucher', null)
+                        ->where('tanggal_akhir', '>', date('Y-m-d H:i:s'))->where('status_voucher', '0')->get();
 
     	return view('admin.data_booking.booking.edit_booking', compact('booking', 'voucher'));
     }
@@ -45,7 +66,6 @@ class BookingController extends Controller
     {
     	$booking = Booking::findOrFail($id_booking);
     	$booking->id_voucher = $request->voucher;
-    	$booking->nomor_transaksi = $request->nomor_transaksi;
     	$booking->status_pemesan = $request->status_pemesan;
     	$booking->save();
 
@@ -61,7 +81,23 @@ class BookingController extends Controller
     {
         $booking = Booking::findOrFail($id_booking);
 
-        $voucher = DB::table('tbl_booking')->addSelect('tbl_booking.*')->addSelect('tbl_jamaah.*')->addSelect('tbl_paspor.*')->addSelect('tbl_voucher.*')->addSelect('tbl_produk.*')->addSelect('tbl_paket.*')->addSelect('provinces.*', 'provinces.name as nama_provinsi')->addSelect('regencies.*', 'regencies.name as nama_kota')->leftJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')->leftJoin('tbl_produk', 'tbl_booking.id_paket', 'tbl_produk.id')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->leftJoin('tbl_voucher', 'tbl_booking.id_voucher', 'tbl_voucher.id_voucher')->leftJoin('provinces', 'tbl_paspor.provinsi', '=', 'provinces.id')->leftJoin('regencies', 'tbl_paspor.kota', '=', 'regencies.id')->where('tbl_booking.id_booking', $id_booking)->first();
+        $voucher = DB::table('tbl_booking')->addSelect('tbl_booking.*')
+                        ->addSelect('tbl_jamaah.*')
+                        ->addSelect('tbl_paspor.*')
+                        ->addSelect('tbl_voucher.*')
+                        ->addSelect('tbl_produk.*')
+                        ->addSelect('tbl_paket.*')
+                        ->addSelect('provinces.*', 'provinces.name as nama_provinsi')
+                        ->addSelect('regencies.*', 'regencies.name as nama_kota')
+                        ->leftJoin('tbl_jamaah', 'tbl_booking.id_jamaah', '=', 'tbl_jamaah.id_jamaah')
+                        ->leftJoin('tbl_paspor', 'tbl_jamaah.id_jamaah', '=', 'tbl_paspor.id_jamaah')
+                        ->leftJoin('tbl_payment', 'tbl_booking.id_transaksi', '=', 'tbl_payment.id')
+                        ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+                        ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
+                        ->leftJoin('tbl_voucher', 'tbl_booking.id_voucher', 'tbl_voucher.id_voucher')
+                        ->leftJoin('provinces', 'tbl_paspor.provinsi', '=', 'provinces.id')
+                        ->leftJoin('regencies', 'tbl_paspor.kota', '=', 'regencies.id')
+                        ->where('tbl_booking.id_booking', $id_booking)->first();
         
         return view('admin.voucher.print_voucher', compact('voucher'));
     }

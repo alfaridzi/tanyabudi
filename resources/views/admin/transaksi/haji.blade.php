@@ -24,7 +24,7 @@
 						  	<strong>{{ Session::get('success') }}</strong>
 						</div>
 		            	@endif
-		            	<form method="get" action="{{ url('index/admin/transaksi/haji/search') }}" class="form-inline">
+		            	{{-- <form method="get" action="{{ url('index/admin/transaksi/haji/search') }}" class="form-inline">
 		            		<div class="form-group">
 		            			<select class="form-control" name="status">
 		            				<option selected="" disabled="">--Status--</option>
@@ -45,7 +45,7 @@
 		            		<div class="form-group">
 		            			<button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i></button>
 		            		</div>
-		            	</form>
+		            	</form> --}}
 					</div>
 		            <div class="box-body">
 		            	<div class="table-responsive">
@@ -53,6 +53,7 @@
 			            		<thead>
 			            			<tr>
 			            				<th>No</th>
+			            				<th>Nomor Transaksi</th>
 			            				<th>Nama Produk</th>
 			            				<th>Deskripsi Produk</th>
 			            				<th>Harga Produk</th>
@@ -70,6 +71,7 @@
 			            			@foreach($haji as $dataHaji)
 			            			<tr>
 			            				<td>{{ $loop->iteration }}</td>
+			            				<td>{{ $dataHaji->id_payment }}</td>
 			            				<td>{{ $dataHaji->nama }}</td>
 			            				<td>{{ $dataHaji->desc_prod }}</td>
 			            				<td>Rp {{ number_format($dataHaji->harga, 2, ',', '.') }}</td>

@@ -26,6 +26,7 @@
 			            		<thead>
 			            			<tr>
 			            				<th>No</th>
+			            				<th>Nomor Transaksi</th>
 			            				<th>Nama User</th>
 			            				<th>Jumlah Pembayaran</th>
 			            				<th>Tanggal Pembayaran</th>
@@ -40,6 +41,7 @@
 			            			@foreach($paket as $dataPaket)
 			            			<tr>
 			            				<td>{{ $loop->iteration }}</td>
+			            				<td>{{ $dataPaket->id_payment }}</td>
 			            				<td>{{ $dataPaket->name }}</td>
 			            				<td>Rp {{ number_format($dataPaket->jumlah_pembayaran, 2, ',', '.') }}</td>
 			            				<td>{{ Tanggal::tanggalIndonesia($dataPaket->tgl_pembayaran) }}</td>
