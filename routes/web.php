@@ -14,14 +14,33 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+
+Route::post('update/transaction', function() {
+	if($_SERVER['REMOTE_ADDR']=='172.104.161.223'){ 
+		file_put_contents('save.txt', $_POST['content']);
+	}
+});
+
 Route::get('index/login', 'Admin\LoginController@index');
 Route::post('index/admin', 'Admin\LoginController@login');
 
+Route::post('paket/upload/{id}','API\RegisterController@uploadtf');
+
+
+Route::prefix('index/admin')->group(function(){
+
+
 Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
+
 
 	Route::get('dashboard', function(){
 		return view('admin.dashboard');
 	});
+
+
+
 
 	Route::get('ajax/get_jabatan/{kode_divisi}', 'Admin\AjaxController@get_jabatan');
 	Route::get('ajax/get_kota/{province_id}', 'Admin\AjaxController@get_kota');
@@ -211,6 +230,9 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::post('logout', 'Admin\LoginController@logout');
 });
 
+
+});
+
 Route::group(['middleware'=>'guest'], function() {
 Route::get('test', function() {
 	 dd(Session::all());
@@ -218,7 +240,7 @@ Route::get('test', function() {
 });
 Route::post('api/register', 'API\RegisterController@register');
 Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
-
+Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
 
 	Route::get('/logout','Auth\LoginController@logout');
 Route::group(['middleware'=>['guest','web']], function() {
@@ -272,6 +294,7 @@ Route::get('/dashboard', 'dashboardController@index');
 Route::get('/notifikasi', function(){
 	return view('umum.notifikasi');
 });
+
 
 Route::get('/pengaturan', 'ProfileController@edit');
 Route::patch('pengaturan/update', 'ProfileController@update');
@@ -332,18 +355,24 @@ Route::get('/pembayaran/bpjs', function(){
 Route::get('/pembayaran/pdam', function(){
 	return view('umum.bayar-bayar.pdam');
 });
-
-Route::get('/pembayaran/pln', function(){
-	return view('umum.bayar-bayar.pln');
-});
-
+Route::get('/pembayaran/pln', 'pulsaController@pln');
 Route::get('/pembayaran/telkom', function(){
 	return view('umum.bayar-bayar.telkom');
 });
 
-Route::get('/pembelian/pulsa', function(){
-	return view('umum.bayar-bayar.pulsa');
-});
+
+Route::get('/pembelian/pulsa/tri', 'PulsaController@tri');
+Route::get('/pembelian/pulsa/telkomsel', 'PulsaController@telkomsel');
+Route::get('/pembelian/pulsa/indosat', 'PulsaController@indosat');
+Route::get('/pembelian/pulsa/smartfren', 'PulsaController@smartfren');
+Route::get('/pembelian/pulsa/xl', 'PulsaController@xl');
+Route::get('/pembelian/pulsa/axis', 'PulsaController@axis');
+
+Route::get('/pembelian/grab', 'PulsaController@grab');
+Route::get('/pembelian/gojek', 'PulsaController@gojek');
+Route::get('/pembelian/pln', 'PulsaController@pln');
+Route::post('/pulsa/proses', 'PulsaController@proses');
+Route::post('/pln/proses', 'PulsaController@proses_pln');
 
 Route::get('/berhasil', function(){
 	return view('umum.pemberitahuan_berhasil');
@@ -360,6 +389,16 @@ Route::get('/detail-paket', function(){
 Route::get('/instruksi', function() {
 	return view('umum.instruksi');
 });
+
+Route::get('topup', function() {
+return view('topup.instruksi');
+});
+
+Route::get('topup/konfirmasi', function() {
+return view('topup.konfirmasi');
+});
+
+
 Route::get('/konfirmasi', function() {
 	return view('umum.konfirmasi');
 });

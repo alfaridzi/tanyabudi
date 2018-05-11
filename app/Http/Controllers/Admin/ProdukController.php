@@ -67,9 +67,10 @@ class ProdukController extends Controller
     public function store(TambahProdukRequest $request)
     {
     	$produk = new produk;
-
+        $tipe_produk =$request->tipe;
     	$produk->nama = $request->nama_produk;
     	$produk->desc_prod = $request->desc_prod;
+
         if (!is_null($request->file('gambar'))) { // jika gambar tidak kosong
             $gambar = $request->file('gambar');
             $extension = $gambar->getClientOriginalExtension();
@@ -79,6 +80,7 @@ class ProdukController extends Controller
         }else{
             $produk->gambar = null;
         }
+
     	$produk->type = $request->tipe;
         $produk->harga = $request->harga;
         $tipe_produk = $request->tipe;
@@ -124,6 +126,7 @@ class ProdukController extends Controller
     	$produk->updated_at = Carbon::now();
         $produk->harga = $request->harga;
     	$tipe_produk = $produk->type;
+        $produk->harga = $request->harga;
 
        	$produk->save();
 

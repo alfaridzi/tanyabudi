@@ -243,10 +243,16 @@
 								<input type="password" class="validate" name="c_password" placeholder="Konfirmasi Password" required>
 							</div>
 							<div class="input-field col s12">
+								<?php
+
+
+								?>
 								<select name="paket">
-									<option selected="" disabled="">Paket Produk</option>
-									<option value="1">Basic - RP. 250.000</option>
-									<option value="2">Professional - Rp. 320.000</option>
+									<?php $paket = App\produk::where('type', 5)->orderBy('harga','desc')->get() ?>
+									@foreach($paket as $item)
+									<option value="{{ $item->id }}">{{ $item->nama.' - Rp.'.number_format($item->harga,0,'.','.') }}</option>
+									
+									@endforeach
 								</select>
 							</div>
 

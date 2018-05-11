@@ -6,7 +6,7 @@
 		<h4>Konfirmasi Pembayaran</h4>
 		<p>Silahkan melakukan konfirmasi pembayaran dengan mengisi form berikut</p>
 
-		<form method="post" enctype="multipart/form-data" method="post" action="{{ url('selesai/'.$produk->id) }}">
+		<form enctype="multipart/form-data" method="post" action="{{ url('selesai/'.$produk->id) }}">
 			@csrf
 			<div class="row">
 				<div class="input-field col s12">

@@ -160,7 +160,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
+
+        alfrdxyz\portalpulsa\PulsaServiceProvider::class
+
         Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 
@@ -213,6 +217,7 @@ return [
         'Tanggal' => App\Helpers\Tanggal::class,
         'Pemilihan' => App\Helpers\Pemilihan::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Pulsa' => alfrdxyz\portalpulsa\PortalPulsaFacade::class
     ],
 
 ];

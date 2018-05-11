@@ -9,6 +9,7 @@ class payment extends Model
     protected $table = 'tbl_payment';
 
     protected $fillable = ['id_user','id_prod','jumlah_pembayaran','tgl_pembayaran','foto','status','id','counter'];
+
     protected $primaryKey = 'id';
 
     public $incrementing = false;

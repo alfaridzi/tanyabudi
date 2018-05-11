@@ -27,7 +27,13 @@ class RegisteredListener
      */
     public function handle(Registered $event)
     {
-    
-        return Mail::to($event->user)->send(new \App\Mail\RegisterMail($event->user));
+
+       
+        if($event->user->type == 1) {
+            return Mail::to($event->user)->send(new \App\Mail\RegisterMail($event->user));
+        } else {
+             return Mail::to($event->user)->send(new \App\Mail\UploadMail($event->user));
+        }
+        
     }
 }

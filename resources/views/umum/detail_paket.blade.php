@@ -17,8 +17,8 @@
 					<option value="" disabled selected>Jumlah orang</option>
 				<option>1</option>
 				<option>2</option>
-				<option>3</option>
-
+				<option>3</option
+>
 			</select>
 		</div>
 			@endif
