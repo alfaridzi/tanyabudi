@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Auth;
+
+use App\Model\Admin\Admin;
 
 class PengaturanController extends Controller
 {
@@ -30,5 +33,29 @@ class PengaturanController extends Controller
         $log->save();
 
     	return redirect()->back()->withSuccess('Berhasil Mengubah Bantuan');
+    }
+
+    public function user()
+    {
+        return view('admin.pengaturan.user');
+    }
+
+    public function user_update(Request $request)
+    {
+        $user = Auth::guard('admin')->user();
+        $this->validate($request, [
+            'username' => 'required|string|min:6|unique:tbl_admin,username,'.$user->id_admin.',id_admin|alpha_dash',
+            'password' => 'nullable|string|min:6',
+            'password_confirmation' => 'confirmed',
+        ]);
+
+        $user->username = $request->username;
+        if (!is_null($request->password)) {
+            $user->password = bcrypt($request->password);
+
+        }
+        $user->save();
+
+        return redirect()->back()->withSuccess('Berhasil Mengubah Setting User');
     }
 }

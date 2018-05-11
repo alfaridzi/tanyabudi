@@ -30,8 +30,8 @@
 			            		<div class="form-group">
 			            			<select class="form-control" name="status">
 			            				<option>--Pilih Status--</option>
-			            				<option value="0">Belum Dikonfirmasi</option>
-			            				<option value="1">Sudah Dikonfirmasi</option>
+			            				<option value="0">Tidak Aktif</option>
+			            				<option value="1">Aktif</option>
 			            			</select>
 			            		</div>
 			            		<div class="form-group">
@@ -70,15 +70,16 @@
 									<td>masih dikerjakan</td>
 									<td>
 									@if($dataUser->status == 0)
-									@can('konfirmasi agen')
-									<a href="javascript:;" data-id-user="{{ $dataUser->id }}" class="btn btn-success btn-flat" id="btn-konfirmasi">Konfirmasi</a>
-									@endcan
+									Tidak Aktif
 									@elseif($dataUser->status == 1)
-									Sudah Dikonfirmasi
+									Aktif
 									@endif
 									</td>
 									<td>
 										<a href="{{ url('index/admin/data-user/agen/'.$dataUser->id.'/list-transaksi') }}" class="btn btn-info btn-flat">List Transaksi</a>
+										@can('ubah status user')
+										<a href="javascript:;" id="btn-ubah-status" data-id-user="{{ $dataUser->id }}" class="btn btn-warning btn-flat">Ubah Status</a>
+										@endcan
 									</td>
 								</tr>
 								@endforeach
@@ -93,21 +94,21 @@
 		</div>
 	</section>
 </div>
-<form id="frm-konfirmasi" action="" method="post">
+<form id="frm-ubah-status" action="" method="post">
 	@csrf
 </form>
 @endsection
 @push('js')
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(document).on('click', '#btn-konfirmasi', function(e){
+        $(document).on('click', '#btn-ubah-status', function(e){
             e.preventDefault();
             var jawaban = confirm('Apakah anda yakin ingin mengubah status user ini?');
 
             if (jawaban) {
                 var id_user = $(this).data('id-user');
-                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/data-user/agen/konfirmasi') }}/'+id_user);
-                $('#frm-konfirmasi').submit();
+                $('#frm-ubah-status').attr('action', '{{ url('index/admin/data-user/agen/ubah-status') }}/'+id_user);
+                $('#frm-ubah-status').submit();
             }
         });
 	});

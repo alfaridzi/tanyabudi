@@ -45,11 +45,12 @@
 									<tr>
 										<td>{{ $loop->iteration }}</td>
 										<td>{{ $dataInformasi->judul }}</td>
+										<td>{{ $dataInformasi->isi }}</td>
 										<td>{{ $dataInformasi->kategori }}</td>
 										<td>
 											@if($dataInformasi->role == '1')
 											User
-											@elseif($dataInformasi->role == '2')\
+											@elseif($dataInformasi->role == '2')
 											Agen
 											@endif
 										</td>

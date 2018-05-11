@@ -86,7 +86,7 @@ class DataUserController extends Controller
 
     public function konfirmasi($id_user)
     {
-    	$user = User::find($id_user);
+    	$user = User::findOrFail($id_user);
     	$user->update(['status' => 1]);
 
         $log = new Log;
@@ -94,6 +94,25 @@ class DataUserController extends Controller
         $log->isi_log = 'Mengkonfirmasi user dengan nama '.$user->name;
         $log->save();
 
-    	return redirect()->back()->withSuccess('Berhasil Mengubah Status User');
+    	return redirect()->back()->withSuccess('Berhasil Mengkonfirmasi User');
+    }
+
+    public function ubah_status($id_user)
+    {
+        $user = User::findOrFail($id_user);
+        $status = $user->status;
+        if ($status == '0') {
+            $user->status = '1';
+        }elseif($status == '1') {
+            $user->status = '0';
+        }
+        $user->save();
+
+        $log = new Log;
+        $log->id_admin = \Auth::guard('admin')->user()->id_admin;
+        $log->isi_log = 'Mengubah status user dengan nama '.$user->name;
+        $log->save();
+
+        return redirect()->back()->withSuccess('Berhasil Mengubah Status User');
     }
 }

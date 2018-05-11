@@ -28,6 +28,13 @@
 		            	<div class="pull-right">
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-user/user/search') }}">
 			            		<div class="form-group">
+			            			<select class="form-control" name="status">
+			            				<option>--Pilih Status--</option>
+			            				<option value="0">Tidak Aktif</option>
+			            				<option value="1">Aktif</option>
+			            			</select>
+			            		</div>
+			            		<div class="form-group">
 			            			<input type="search" name="search" class="form-control" placeholder="Cari...">
 			            		</div>
 			            		<div class="form-group">
@@ -44,8 +51,9 @@
 									<th>Nama</th>
 									<th>No HP</th>
 									<th>E-Mail</th>
-									{{-- <th>Aksi</th>
- --}}								</tr>
+									<th>Status</th>
+									<th>Aksi</th>
+								</tr>
 							</thead>
 							<tbody>
 								@foreach($user as $dataUser)
@@ -54,13 +62,18 @@
 									<td>{{ $dataUser->name }}</td>
 									<td>{{ $dataUser->nohp }}</td>
 									<td>{{ $dataUser->email }}</td>
-									{{-- <td>
-									@if($dataUser->status == 0)
-									<a href="javascript:;" data-id-user="{{ $dataUser->id }}" class="btn btn-success btn-flat" id="btn-konfirmasi">Konfirmasi</a>
-									@elseif($dataUser->status == 1)
-									Sudah Dikonfirmasi
-									@endif
-									</td> --}}
+									<td>
+										@if($dataUser->status == 0)
+										Tidak Aktif
+										@elseif($dataUser->status == 1)
+										Aktif
+										@endif
+									</td>
+									<td>
+										@can('ubah status user')
+										<a href="javascript:;" id="btn-ubah-status" data-id-user="{{ $dataUser->id }}" class="btn btn-warning btn-flat">Ubah Status</a>
+										@endcan
+									</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -74,21 +87,21 @@
 		</div>
 	</section>
 </div>
-<form id="frm-konfirmasi" action="" method="post">
+<form id="frm-ubah-status" action="" method="post">
 	@csrf
 </form>
 @endsection
 @push('js')
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(document).on('click', '#btn-konfirmasi', function(e){
+		$(document).on('click', '#btn-ubah-status', function(e){
             e.preventDefault();
             var jawaban = confirm('Apakah anda yakin ingin mengubah status user ini?');
 
             if (jawaban) {
                 var id_user = $(this).data('id-user');
-                $('#frm-konfirmasi').attr('action', '{{ url('index/admin/data-user/user/konfirmasi') }}/'+id_user);
-                $('#frm-konfirmasi').submit();
+                $('#frm-ubah-status').attr('action', '{{ url('index/admin/data-user/user/ubah-status') }}/'+id_user);
+                $('#frm-ubah-status').submit();
             }
         });
 	});

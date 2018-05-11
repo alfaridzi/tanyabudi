@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Informasi extends Model
 {
     protected $table = 'tbl_informasi';
-    protected $fillable = ['judul', 'kategori', 'role', 'updated_at'];
+    protected $fillable = ['judul', 'kategori', 'isi', 'role', 'updated_at'];
     protected $primaryKey = 'id_informasi';
 }

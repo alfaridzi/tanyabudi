@@ -31,6 +31,7 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::get('ajax/get_user/{tipe_produk}', 'Admin\AjaxController@get_user');
 	Route::get('ajax/detail_karyawan/{id_karyawan}', 'Admin\AjaxController@detail_karyawan');
 	Route::get('ajax/get_transaksi/{keyword}', 'Admin\AjaxController@get_transaksi');
+	Route::get('ajax/get_sisa_tagihan/{id_user}', 'Admin\AjaxController@get_sisa_tagihan');
 
 	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
 	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
@@ -42,6 +43,10 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::post('transaksi/sedekah/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
 	Route::get('transaksi/bayar-paket', 'Admin\TransaksiController@bayar_paket');
 	Route::post('transaksi/bayar-paket/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_paket')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/top-up', 'Admin\TransaksiController@top_up');
+	Route::post('transaksi/top-up/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/konfirmasi-user', 'Admin\TransaksiController@user');
+	Route::get('transaksi/konfirmasi-user/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_user')->middleware(['permission:konfirmasi transaksi']);
 
 	Route::get('kwitansi', 'Admin\KwitansiController@index');
 	Route::get('kwitansi/buat-transaksi', 'Admin\KwitansiController@buat_transaksi')->middleware(['permission:buat transaksi']);
@@ -73,13 +78,13 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::delete('voucher/delete/{id_voucher}', 'Admin\VoucherController@delete')->middleware(['permission:delete voucher']);
 
 	Route::get('data-user/agen', 'Admin\DataUserController@index_agen');
-	Route::post('data-user/agen/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi')->middleware(['permission:konfirmasi agen']);
+	Route::post('data-user/agen/ubah-status/{id_user}', 'Admin\DataUserController@ubah_status')->middleware(['permission:ubah status user']);
 	Route::get('data-user/agen/search', 'Admin\DataUserController@search_agen');
 	Route::get('data-user/agen/{id_agen}/list-transaksi', 'Admin\DataUserController@list_trx_agen');
 	Route::get('data-user/agen/{id_agen}/list-transaksi/search', 'Admin\DataUserController@search_transaksi');
 
 	Route::get('data-user/user', 'Admin\DataUserController@index_user');
-	Route::post('data-user/user/konfirmasi/{id}', 'Admin\DataUserController@konfirmasi');
+	Route::post('data-user/user/ubah-status/{id_user}', 'Admin\DataUserController@ubah_status')->middleware(['permission:ubah status user']);
 	Route::get('data-user/user/search', 'Admin\DataUserController@search_user');
 
 	Route::get('data-booking/jamaah', 'Admin\JamaahController@index');
@@ -199,6 +204,9 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::get('pengaturan/informasi/edit/{id_informasi}', 'Admin\InformasiController@edit')->middleware(['permission:edit informasi']);
 	Route::patch('pengaturan/informasi/update/{id_informasi}', 'Admin\InformasiController@update');
 	Route::delete('pengaturan/informasi/delete/{id_informasi}', 'Admin\InformasiController@delete')->middleware(['permission:delete informasi']);
+
+	Route::get('pengaturan/user', 'Admin\PengaturanController@user');
+	Route::patch('pengaturan/user/update', 'Admin\PengaturanController@user_update');
 
 	Route::post('logout', 'Admin\LoginController@logout');
 });

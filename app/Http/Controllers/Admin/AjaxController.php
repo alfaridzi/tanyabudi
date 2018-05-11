@@ -56,6 +56,15 @@ class AjaxController extends Controller
         return response()->json(['options' => $data]);
     }
 
+    public function get_sisa_tagihan($id_user)
+    {
+        $tabungan = DB::table('tbl_tabungan')->where('id_user', $id_user)->first();
+        $produk = DB::table('tbl_payment')->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')->where('tbl_payment.id_user', $id_user)->whereIn('type', ['1', '2'])->get()->last();
+        $sisa_tagihan = 'Rp '.number_format($produk->harga - $tabungan->tabungan, 2, ',', '.');
+
+        return response()->json($sisa_tagihan);
+    }
+
     public function detail_karyawan($id_karyawan)
     {
     	$karyawan = DB::table('tbl_karyawan')->addSelect('tbl_karyawan.*')

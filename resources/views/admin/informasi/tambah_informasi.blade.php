@@ -44,6 +44,10 @@
 	            				<input type="text" class="form-control" name="judul" placeholder="Judul" required>
 		            		</div>
 		            		<div class="form-group">
+		            			<label>Isi</label>
+		            			<textarea class="form-control" name="isi" placeholder="Isi" maxlength="150"></textarea>
+		            		</div>
+		            		<div class="form-group">
 	            				<label>Kategori</label>
 	            				<input type="text" class="form-control" name="kategori" placeholder="Kategori" required>
 		            		</div>

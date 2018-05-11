@@ -54,18 +54,19 @@
 		            		<div class="form-group hide-produk">
 		            			<label>Produk</label>
 		            			<select class="form-control" name="produk" id="produk" required>
-		            				<option selected="" disabled="">--Pilih Produk</option>
+		            				<option selected="" disabled="">--Pilih Produk--</option>
 		            			</select>
 		            		</div>
 		            		<div class="form-group hide-user">
 		            			<label>User</label>
 		            			<select class="form-control" name="user" id="user">
-		            				<option selected="" disabled="">--Pilih User</option>
+		            				<option selected="" disabled="">--Pilih User--</option>
 		            			</select>
 		            		</div>
 		            		<div class="form-group">
 		            			<label>Jumlah Bayar</label>
 		            			<input type="number" name="jumlah_bayar" class="form-control" placeholder="Jumlah Bayar">
+		            			<span class="sisa-tagihan">Sisa Tagihan Tabungan:</span>
 		            		</div>
 		            		<div class="form-group">
 		            			<label>Status</label><br>
@@ -90,6 +91,7 @@
 <script type="text/javascript">
 	$('#produk').select2();
 	$('#user').select2();
+	$('.sisa-tagihan').hide();
 
 	$('#tipe_produk').on('change', function(){
 		var value = $(this).val();
@@ -97,6 +99,7 @@
 		if (value == 5) {
 			$('.hide-produk').hide();
 			$('.hide-user').show();
+			$('.sisa-tagihan').show();
 			$('#user').prop('required', true);
 			$('#produk').prop('required', false);
 
@@ -116,6 +119,7 @@
 		    });
 		}else{
 			$('.hide-produk').show();
+			$('.sisa-tagihan').hide();
 			$('#produk').prop('required', true);
 			$('#user').prop('required', false);
 
@@ -146,6 +150,20 @@
 				}
 		    });
 		}
+	});
+
+	$('#user').on('change', function(){
+		var value = $(this).val();
+		var link = "{{ url('/') }}";
+		var link_tagihan = link + '/index/admin/ajax/get_sisa_tagihan/'+value;
+		$.ajax({
+			url: link_tagihan,
+			method: 'GET',
+			data: '',
+			success: function(data) {
+				$('span.sisa-tagihan').text('Sisa Tagihan Tabungan: '+data);
+			}
+	    });
 	});
 </script>
 @endpush

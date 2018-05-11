@@ -51,8 +51,9 @@
             <li><a href="{{ url('index/admin/transaksi/wisata') }}"><i class="fa fa-link"></i> Wisata</a></li>
             <li><a href="{{ url('index/admin/transaksi/sedekah') }}"><i class="fa fa-link"></i> Sedekah</a></li>
             <li><a href="{{ url('index/admin/transaksi/bayar-paket') }}"><i class="fa fa-link"></i> Bayar Paket</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> Top Up Bayar-bayar</a></li>
-            <li><a href="#"><i class="fa fa-link"></i> PPOB</a></li>
+            <li><a href="{{ url('index/admin/transaksi/top-up') }}"><i class="fa fa-link"></i> Top Up Bayar-bayar</a></li>
+            <li><a href="{{ url('index/admin/transaksi/konfirmasi-user') }}"><i class="fa fa-link"></i> Konfirmasi User/Agen</a></li>
+            <li><a href="{{ url('index/admin/transaksi/ppob') }}"><i class="fa fa-link"></i> PPOB</a></li>
           </ul>
         </li>
         @endcan

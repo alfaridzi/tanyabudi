@@ -45,6 +45,10 @@
 	            				<input type="text" class="form-control" name="judul" placeholder="Judul" value="{{ $informasi->judul }}" required>
 		            		</div>
 		            		<div class="form-group">
+		            			<label>Isi</label>
+		            			<textarea class="form-control" name="isi" placeholder="Isi" maxlength="150">{{ $informasi->isi }}</textarea>
+		            		</div>
+		            		<div class="form-group">
 	            				<label>Kategori</label>
 	            				<input type="text" class="form-control" name="kategori" value="{{ $informasi->kategori }}" placeholder="Kategori" required>
 		            		</div>

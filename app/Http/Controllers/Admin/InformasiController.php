@@ -32,12 +32,14 @@ class InformasiController extends Controller
     {
     	$this->validate($request,[
     		'judul' => 'required|string|max:30',
+            'isi' => 'required|string|max:150',
     		'kategori' => 'required|string|max:20',
     		'role' => ['required',Rule::in(["1", "2"])],
     	]);
 
     	$informasi = new Informasi;
     	$informasi->judul = $request->judul;
+        $informasi->isi = $request->isi;
     	$informasi->kategori = $request->kategori;
     	$informasi->role = $request->role;
     	$informasi->save();
@@ -60,12 +62,14 @@ class InformasiController extends Controller
     {
     	$this->validate($request,[
     		'judul' => 'required|string|max:30',
+            'isi' => 'required|string|max:150',
     		'kategori' => 'required|string|max:20',
     		'role' => ['required',Rule::in(["1", "2"])],
     	]);
 
     	$informasi = Informasi::findOrFail($id_informasi);
     	$informasi->judul = $request->judul;
+        $informasi->isi = $request->isi;
     	$informasi->kategori = $request->kategori;
     	$informasi->role = $request->role;
     	$informasi->save();
