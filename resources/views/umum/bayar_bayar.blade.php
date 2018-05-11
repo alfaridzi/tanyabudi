@@ -101,6 +101,47 @@
 				</div>
 			</div>
 		</div>
+
+
+
+		<div class="row">
+			<table class="table-responsive">
+				<tr>
+				
+					<th>TRX ID</th>
+					
+					<th>jumlah Pembayaran</th>
+					<th>Tgl Pembayaran</th>
+					<th>Status</th>
+				</tr>
+				@foreach($data as $item)
+
+				<tr>
+					<td>{{ $item->id_pulsa }}</td>
+					
+					<td>{{ $item->jumlah_pembayaran }}</td>
+					<td>{{ $item->tgl_pembayaran }}</td>
+					<td><?php if(Pulsa::status($item->id_pulsa)->message[0]->status == 1) {
+						echo 'Pending';
+
+					} else if(Pulsa::status($item->id_pulsa)->message[0]->status == 2) {
+						echo 'Gagal';
+					} else if(Pulsa::status($item->id_pulsa)->message[0]->status == 3) {
+						echo 'Refund';
+					} else if(Pulsa::status($item->id_pulsa)->message[0]->status == 4) {
+						echo 'Sukses';
+					}
+					;?></td>
+					
+				</tr>
+
+
+
+				@endforeach
+			</table>
+		</div>
+
+
 	</div>
 </div>
 @endsection

@@ -29,7 +29,22 @@ Route::post('index/admin', 'Admin\LoginController@login');
 Route::post('paket/upload/{id}','API\RegisterController@uploadtf');
 
 
-Route::prefix('index/admin')->group(function(){
+
+
+
+
+
+
+
+
+Route::post('api/register', 'API\RegisterController@register');
+Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
+
+Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
+
+	Route::get('/logout','Auth\LoginController@logout');
+
+
 
 
 Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
@@ -223,18 +238,7 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 });
 
 
-});
 
-Route::group(['middleware'=>'guest'], function() {
-Route::get('test', function() {
-	 dd(Session::all());
-	});
-});
-Route::post('api/register', 'API\RegisterController@register');
-Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
-Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
-
-	Route::get('/logout','Auth\LoginController@logout');
 Route::group(['middleware'=>['guest','web']], function() {
 
 
@@ -261,6 +265,7 @@ Route::group(['middleware'=>['guest','web']], function() {
 	});
 
 });
+
 Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
 			return view('instruksi');
@@ -304,9 +309,7 @@ Route::get('/total-bonus', function(){
 	return view('agen.total_bonus');
 });
 
-Route::get('/bayar-bayar', function() {
-	return view('umum.bayar_bayar');
-});
+Route::get('/bayar-bayar', 'pulsaController@index');
 
 Route::get('/history', function(){
 	return view('user.history');
@@ -399,3 +402,7 @@ Route::post('/intruksi/{id}', 'produkController@intruksi_wisata');
 Route::post('/selesai/{id}', 'produkController@selesai');
 Route::post('sedekah/konfirmasi', 'produkController@konfirmasi_sedekah');
 });
+
+
+
+

@@ -7,6 +7,7 @@ use Pulsa;
 use App\history;
 use Auth;
 use Redirect;
+use App\ppob;
 
 class PulsaController extends Controller
 {
@@ -62,10 +63,20 @@ class PulsaController extends Controller
     }
 
 
+    public function index() {
+
+    	$data = ppob::where('id_user',Auth::user()->id)->get();
+    	return view('umum.bayar_bayar', compact('data'));
+    }
+
+
     public function proses(Request $request) {
     	$code = $request->code;
     	$nomor = $request->nomor;
     	$id = 'TRX'.$code.date('Ymd').rand(0000,9999);
+
+    	$harga = Pulsa::cekHarga($code)->message[0]->price;
+
     	$pulsa = Pulsa::prosesPulsa($code, $nomor, $id);
 
     	$datas['id_user'] = Auth::user()->id;
@@ -76,6 +87,14 @@ class PulsaController extends Controller
 		$datas['jam'] = $jam;
 		$datas['tanggal'] = $date;
 		history::create($datas);
+
+		$dt['id_user'] = Auth::user()->id;
+		$dt['id_pulsa'] = $id;
+		$dt['jumlah_pembayaran'] = $harga;
+		$dt['tgl_pembayaran'] = date('Y-m-d');
+
+		
+		ppob::create($dt);
     	return Redirect::back()->withSuccess($pulsa->message);
     }
 
@@ -84,8 +103,8 @@ class PulsaController extends Controller
     	$nomor = $request->nomor;
     	$custnomor = $request->custnomor;
     	$id = 'TRX'.$code.date('Ymd').rand(0000,9999);
+    	$harga = Pulsa::cekHarga($code)->message[0]->price;
     	$pulsa = Pulsa::prosesPLN($code, $nomor, $custnomor, $id);
-
     	$datas['id_user'] = Auth::user()->id;
 		$datas['title'] = 'Pembayaran '.$id;
 		$jam = date('H:i');
@@ -93,6 +112,17 @@ class PulsaController extends Controller
 		$datas['info'] = $pulsa->message;
 		$datas['jam'] = $jam;
 		$datas['tanggal'] = $date;
+
+
+		$dt['id_user'] = Auth::user()->id;
+		$dt['id_pulsa'] = $id;
+		$dt['jumlah_pembayaran'] = $harga;
+		$dt['tgl_pembayaran'] = date('Y-m-d');
+
+		
+		ppob::create($dt);
+
+
 		history::create($datas);
     	return Redirect::back()->withSuccess($pulsa->message);
     }
@@ -107,6 +137,7 @@ class PulsaController extends Controller
 
     public function grab() {
     	$pulsa = Pulsa::cekHarga('GB')->message;
+
     	$name = 'Saldo Grab';
     	return view('umum.bayar-bayar.pulsa', compact('pulsa','name'));
     }
