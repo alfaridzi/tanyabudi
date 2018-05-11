@@ -85,7 +85,7 @@
 							<span>List Referral</span>
 						</li>
 					</a>
-					<a href="#">
+					<a href="{{ url('topup') }}">
 						<li>
 							<i class="icon icon-top-up"></i>
 							<span>Top Up Bayar-Bayar</span>

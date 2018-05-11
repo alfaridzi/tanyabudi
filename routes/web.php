@@ -315,9 +315,7 @@ Route::get('/dashboard-agen', function(){
 	return view('agen.index');
 });
 
-Route::get('/list-referral', function(){
-	return view('agen.list_referral');
-});
+Route::get('/list-referral','referalController@list');
 
 Route::get('list-voucher', function() {
 	return view('agen.list_voucher');

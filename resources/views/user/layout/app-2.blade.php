@@ -44,9 +44,9 @@
 	        <ul>
 	            <li><a href="{{ url('dashboard') }}"><i class="icon icon-home"></i></a></li>
 	            <li><a href="{{ url('haji-umroh') }}"><i class="icon icon-kabah"></i></a></li>
-	            <li><a href="#"><i class="icon icon-sedekah"></i></a></li>
-	            <li><a href="#"><i class="icon icon-pesawat-alt"></i></a></li>
-	            <li><a href="#"><i class="icon icon-store"></i></a></li>
+	            <li><a href="{{ url('sedekah') }}"><i class="icon icon-sedekah"></i></a></li>
+	            <li><a href="{{ url('paket-wisata') }}"><i class="icon icon-pesawat-alt"></i></a></li>
+	            <li><a href="{{ url('bayar-bayar') }}"><i class="icon icon-store"></i></a></li>
 	        </ul>
 	    </div>
 	</nav>

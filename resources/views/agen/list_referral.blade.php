@@ -6,6 +6,9 @@
 		List Referral
 	</div>
 	<div class="container">
+
+
+		<p>Referal ID: {{ Auth::user()->referal }}</p>
 		<div class="row">
 			<table class="table-responsive">
 				<tr>
