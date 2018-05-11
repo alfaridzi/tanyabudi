@@ -99,6 +99,11 @@ class TransaksiController extends Controller
         return view('admin.transaksi.user', compact('user'));
     }
 
+    public function top_up()
+    {
+        
+    }
+
     public function konfirm($id)
     {
         $payment = payment::findOrFail($id);

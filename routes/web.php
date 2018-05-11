@@ -29,18 +29,12 @@ Route::post('index/admin', 'Admin\LoginController@login');
 Route::post('paket/upload/{id}','API\RegisterController@uploadtf');
 
 
-Route::prefix('index/admin')->group(function(){
-
-
 Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 
 
 	Route::get('dashboard', function(){
 		return view('admin.dashboard');
 	});
-
-
-
 
 	Route::get('ajax/get_jabatan/{kode_divisi}', 'Admin\AjaxController@get_jabatan');
 	Route::get('ajax/get_kota/{province_id}', 'Admin\AjaxController@get_kota');
@@ -228,9 +222,6 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::patch('pengaturan/user/update', 'Admin\PengaturanController@user_update');
 
 	Route::post('logout', 'Admin\LoginController@logout');
-});
-
-
 });
 
 Route::group(['middleware'=>'guest'], function() {
