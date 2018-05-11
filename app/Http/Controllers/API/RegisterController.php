@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Validator;
+use App\payment;
 use Illuminate\Auth\Events\Registered;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -34,6 +35,41 @@ class RegisterController extends Controller
 	    $model->save();
 	    return Redirect('/')->withSuccess('Konfirmasi berhasil Silahkan login!');
 	}
+
+
+	public function uploadtf($id) {
+
+		$user = User::find($id);
+		$data = request()->all();
+		$data['id_user'] = $user->id;
+		$data['id_prod'] = $user->paket;
+
+
+		$cek = Payment::orderBy('counter','asc')->get()->last();
+		if(is_null($cek)) {
+			$last = 1;
+		} else {
+			$last = $cek->counter + 1;
+		}
+
+		
+		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
+		$data['foto'] = $imageName;
+		$data['id'] = 'TRX'.$last.$id.'.'.date('Ymd').'.'.$user->id;
+		$data['counter'] = $last;
+        request()->foto->move(public_path('bukti-tf'), $imageName);
+
+        payment::create($data);
+        return Redirect('/')->withSuccess('Silahkan menunggu konfirmasi admin dalam 1x24 jam.');
+	}
+
+	public function upload($token)
+	{
+	    $model = User::where('token_register', $token)->where('status', 0)->firstOrFail();
+
+	    return view('registermail', compact('model'));
+	}
+	
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [

@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','nohp','referal','status','type','token_register','active'
+        'name', 'email', 'password','nohp','referal','status','type','token_register','active','paket'
     ];
 
     /**
@@ -28,4 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function produk() {
+        return $this->hasOne('App\produk','id','paket');
+    }
 }

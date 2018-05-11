@@ -4,8 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17cceea7737926f23a9a90a5fcde9189",
+    "content-hash": "8fcd8a1ece839b490eae2f57dbb0d1cb",
     "packages": [
+        {
+            "name": "azioarv/portalpulsa",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AzioArv/Portal-Pulsa.git",
+                "reference": "400dd847dfa519344126d18d299f6ed91a31a1f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AzioArv/Portal-Pulsa/zipball/400dd847dfa519344126d18d299f6ed91a31a1f3",
+                "reference": "400dd847dfa519344126d18d299f6ed91a31a1f3",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Azio Azravi",
+                    "email": "contact@azioarv.me"
+                }
+            ],
+            "description": "Portal Pulsa API with Laravel 5",
+            "time": "2018-02-14T09:08:38+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "1.0.3",
@@ -4908,7 +4933,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "azioarv/portalpulsa": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

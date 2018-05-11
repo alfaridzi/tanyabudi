@@ -10,6 +10,8 @@ if(!is_null($tabungan)) {
 
 if(!is_null($paket_aktif)) {
 $sisa = $paket_aktif->jumlah_pembayaran - $tabungan->tabungan;
+} else {
+	$sisa = 0;
 }
 }
 
@@ -113,7 +115,7 @@ $countdown = $paket_aktif->tgl_pembayaran;
 							<span>Scan Voucher</span>
 						</li>
 					</a>
-					<a href="{{ url('instruksi') }}">
+					<a href="{{ url('topup') }}">
 						<li>
 							<i class="icon icon-top-up"></i>
 							<span>Top Up Bayar-Bayar</span>

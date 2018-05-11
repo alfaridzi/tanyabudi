@@ -41,33 +41,41 @@
 					<h5>Pembelian Pulsa</h5>
 					<ol>
 						<li>
-							<a href="{{ url('pembelian/pulsa') }}">
+							<a href="{{ url('pembelian/pulsa/telkomsel') }}">
 								<img src="{{ asset('assets/images/bayar-bayar/telkomsel.png') }}" class="img-responsive">
 								<span class="nama-produk">TELKOMSEL</span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembelian/pulsa') }}">
+							<a href="{{ url('pembelian/pulsa/tri') }}">
 								<img src="{{ asset('assets/images/bayar-bayar/three.png') }}" class="img-responsive">
 								<span class="nama-produk">TRI</span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembelian/pulsa') }}">
+							<a href="{{ url('pembelian/pulsa/indosat') }}">
 								<img src="{{ asset('assets/images/bayar-bayar/indosat.png') }}" class="img-responsive">
 								<span class="nama-produk">INDOSAT</span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembelian/pulsa') }}">
+							<a href="{{ url('pembelian/pulsa/smartfren') }}">
 								<img src="{{ asset('assets/images/bayar-bayar/smartfren.png') }}" class="img-responsive">
 								<span class="nama-produk">SMARTFREN</span>
 							</a>
 						</li>
 						<li>
-							<a href="{{ url('pembelian/pulsa') }}">
+							<a href="{{ url('pembelian/pulsa/xl') }}">
 								<img src="{{ asset('assets/images/bayar-bayar/xl.png') }}" class="img-responsive">
 								<span class="nama-produk">&nbsp;XL</span>
+							</a>
+						</li>
+
+
+						<li>
+							<a href="{{ url('pembelian/pulsa/axis') }}">
+								<img src="{{ asset('assets/images/bayar-bayar/axis.png') }}" class="img-responsive">
+								<span class="nama-produk">&nbsp;AXIS</span>
 							</a>
 						</li>
 					</ol>
@@ -78,13 +86,13 @@
 					<h5>Top Up Saldo</h5>
 					<ol>
 						<li>
-							<a href="#">
+							<a href="{{ url('pembelian/grab') }}"">
 								<img src="{{ asset('assets/images/bayar-bayar/grab.png') }}" class="img-responsive">
 								<span class="nama-produk">GRAB</span>
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="{{ url('pembelian/gojek') }}"">
 								<img src="{{ asset('assets/images/bayar-bayar/gojek.png') }}" class="img-responsive">
 								<span class="nama-produk">GO-JEK</span>
 							</a>

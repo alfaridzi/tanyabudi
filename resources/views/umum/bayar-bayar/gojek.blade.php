@@ -1,9 +1,9 @@
 @extends('user.layout.app-1')
-@section('page-title', 'Pembelian '.$name)
+@section('page-title', 'Pembelian Pulsa')
 @section('content')
 <div class="container">
 	<div class="row">
-		<h5>PEMBELIAN {{ $name }}</h5>
+		<h5>Provider</h5>
 		<form method="post" action="{{ url('pulsa/proses') }}">
 			@csrf
 			@if(Session::has('success'))

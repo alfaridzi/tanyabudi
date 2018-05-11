@@ -22,7 +22,7 @@
 							<div class="harga-paket">Rp. {{ number_format($item->harga,0,'.','.') }}</div>
 						</div>
 						<div class="cover-img">
-							<img src="{{ asset('assets/images/paket/umroh/umroh-1.png') }}">
+							<img src="{{ asset('assets/images/paket/umroh/'.$item->gambar) }}">
 						</div>
 					</a>
 				</li>

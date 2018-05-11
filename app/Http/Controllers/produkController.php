@@ -54,12 +54,15 @@ class produkController extends Controller
 
 		if($id == 'tabungan') {
 			$data['id_prod'] = '3910';
-		} else {
+		} else if($id == 'topup') {
+			$data['id_prod'] = '3911';
+		}else {
 			$data['id_prod'] = $id;
 		}
+
 		
 
-		if($id != 'tabungan') {
+		if($id != 'tabungan' || $id != 'topup') {
 			$prod = produk::find($id);
 		}
 		
@@ -69,7 +72,10 @@ class produkController extends Controller
 		if($id == 'tabungan') {
 			$title = 'Penambahan saldo tabungan';
 			$info = 'Melakukan Request Penambahan saldo Tabungan sebesar Rp.'.number_format(request()->jumlah_pembayaran,0,'.','.');
-		} else {
+		} else if($id == 'topup') {
+			$title = 'Penambahan saldo bayar bayar';
+			$info = 'Melakukan Request Penambahan saldo bayar bayar sebesar Rp.'.number_format(request()->jumlah_pembayaran,0,'.','.');
+		}else {
 			if($prod->type == 4) {
 				$title = 'Pembayaran sedekah';
 			}
@@ -86,14 +92,29 @@ class produkController extends Controller
 		}
 		
 		
+		$cek = Payment::orderBy('counter','asc')->get()->last();
+		if(is_null($cek)) {
+			$last = 1;
+		} else {
+			$last = $cek->counter + 1;
+		}
+		
+		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
+		$data['foto'] = $imageName;
+		$data['id'] = 'TRX'.$last.$id.'.'.date('Ymd').'.'.Auth::user()->id;
+		$data['counter'] = $last;
+
+
 
 		$datas['id_user'] = Auth::user()->id;
 		$datas['title'] = $title;
+		$jam = date('H:i');
+		$date = date('d-m-Y');
 		$datas['info'] = $info;
 		$datas['jam'] = $jam;
 		$datas['tanggal'] = $date;
-		$imageName = time().'.'.request()->foto->getClientOriginalExtension();
-		$data['foto'] = $imageName;
+
+
         request()->foto->move(public_path('bukti-tf'), $imageName);
         payment::create($data);
         history::create($datas);
@@ -101,3 +122,4 @@ class produkController extends Controller
         return view('pendaftaran_berhasil');
 	}
 }
+
