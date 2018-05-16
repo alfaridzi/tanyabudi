@@ -65,7 +65,7 @@ class produkController extends Controller
 		if($id != 'tabungan' || $id != 'topup') {
 			$prod = produk::find($id);
 		}
-		
+
 		$jam = date('H:i');
 		$date = date('d-m-Y');
 
@@ -85,7 +85,7 @@ class produkController extends Controller
 			}
 
 
-			if($prod->type == 2 || $prod->id == 1) {
+			if($prod->type == 2 || $prod->type == 1) {
 				$title = 'Pembayaran Umroh & Haji';
 			}
 			$info = 'Melakukan pembayaran '.$prod->nama;

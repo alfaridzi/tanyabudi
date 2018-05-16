@@ -54,7 +54,7 @@ class KwitansiController extends Controller
 		$tipe_produk = $request->tipe_produk;
 
 		if ($tipe_produk == 5) {
-			$request->produk = '3190';
+			$request->produk = '3910';
 		}
 
 		if(is_null($cek)) {
@@ -102,14 +102,28 @@ class KwitansiController extends Controller
 	        if ($tipe_produk == 1 || $tipe_produk == 2 || $tipe_produk == 5) {
 		        try {
 		        	if ($tipe_produk == 1 || $tipe_produk == 2) {
-		        		$tabungan = new tabungan;
-			        	$tabungan->id_user = $request->user;
-			        	$tabungan->tabungan = $jumlah_bayar;
-			        	$tabungan->save();
+		        		tabungan::where('id_user', $id_user)->update(['tabungan' => $request->jumlah_bayar]);
 		        	}elseif($tipe_produk == 5){
+		        		$paket = DB::table('tbl_payment')
+				                    ->addSelect('tbl_payment.*', 'tbl_payment.id as id_payment')
+				                    ->addSelect('tbl_produk.*', 'tbl_produk.id as id_produk')
+				                    ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+				                    ->where('tbl_payment.id_user', $request->user)
+				                    ->whereIn('type', ['1', '2'])
+				                    ->where('status', '1')
+				                    ->orderBy('tbl_payment.created_at', 'desc')
+				                    ->get()->last();
+
 		        		$tabungan = DB::table('tbl_tabungan')->where('id_user', $request->user)->first();
+
 	        			$tambah_tabungan = $payment->jumlah_pembayaran + $tabungan->tabungan;
 		        		tabungan::find($tabungan->id)->update(['tabungan' => $tambah_tabungan]);
+
+
+		        		if ($tambah_tabungan >= $paket->harga) {
+	                        payment::find($paket->id_payment)->update(['status' => '4']);
+	                    }
+
 		        	}
 		        } catch (ValidationException $e) {
 		            DB::rollback();

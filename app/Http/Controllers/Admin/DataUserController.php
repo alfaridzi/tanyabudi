@@ -19,10 +19,15 @@ class DataUserController extends Controller
     public function index_agen()
     {
     	$user = DB::table('users')
+                    ->addSelect('users.*')
+                    ->addSelect('tbl_produk.nama')
+                    ->addSelect('tbl_saldo.saldo')
                     ->leftJoin('tbl_payment', 'users.id', '=', 'tbl_payment.id_user')
                     ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
                     ->leftJoin('tbl_saldo', 'users.id', '=', 'tbl_saldo.id_user')
-                    ->where('users.type', 2)->where('tbl_produk.type', '5')->orderBy('users.id')->paginate(15);
+                    ->where('users.type', '2')
+                    ->where('tbl_produk.type', '5')
+                    ->orderBy('users.id', 'desc')->paginate(15);
     	return view('admin.data_user.agen.agen', compact('user'));
     }
 
@@ -31,11 +36,21 @@ class DataUserController extends Controller
         $keyword = $request->search;
         $status  = $request->status;
 
-    	$user = DB::table('users')->where('type', 2)->where(function($q) use($status){
-    		$q->where('status', $status);
-    	})->where(function($q) use($keyword){
-    		$q->where('name', 'like', '%'.$keyword.'%')->orWhere('nohp', 'like', '%'.$keyword.'%')->orWhere('email', 'like', '%'.$keyword.'%')->orWhere('name', 'like', '%'.$keyword.'%');
-    	})->paginate(15);
+    	$user = DB::table('users')
+                    ->addSelect('users.*')
+                    ->addSelect('tbl_produk.nama')
+                    ->addSelect('tbl_saldo.saldo')
+                    ->leftJoin('tbl_payment', 'users.id', '=', 'tbl_payment.id_user')
+                    ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
+                    ->leftJoin('tbl_saldo', 'users.id', '=', 'tbl_saldo.id_user')
+                    ->orWhere(function($q) use($status){
+                        if (!is_null($status)) {
+                            $q->where('users.status', $status);
+                        }
+                	})->where(function($q) use($keyword){
+                		$q->where('users.name', 'like', '%'.$keyword.'%')->orWhere('users.nohp', 'like', '%'.$keyword.'%')->orWhere('users.email', 'like', '%'.$keyword.'%');
+                    })->where('users.type', '2')->orderBy('users.id')->groupBy('users.id')->paginate(15);
+
     	return view('admin.data_user.agen.agen', compact('user'));
     }
 
@@ -49,7 +64,8 @@ class DataUserController extends Controller
                         ->leftJoin('users', 'tbl_payment.id_user', '=', 'users.id')
                         ->leftJoin('tbl_produk', 'tbl_payment.id_prod', '=', 'tbl_produk.id')
                         ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
-                        ->where('id_user', $id_agen)->paginate(15);
+                        ->where('id_user', $id_agen)
+                        ->orderBy('tbl_payment.created_at', 'desc')->paginate(15);
 
         return view('admin.data_user.agen.list_transaksi', compact('user', 'agen'));
     }
@@ -69,7 +85,7 @@ class DataUserController extends Controller
                             $q->where('tbl_payment.tgl_pembayaran', 'like', '%'.$tanggal_transaksi.'%');
                         })->where(function($q) use($keyword){
                           $q->where('users.name', 'like', '%'.$keyword.'%')->orWhere('tbl_produk.nama', 'like', '%'.$keyword.'%')->orWhere('tbl_produk.harga', 'like', '%'.$keyword.'%')->orWhere('tbl_payment.jumlah_pembayaran', 'like', '%'.$keyword.'%');  
-                        })->paginate(15);
+                        })->orderBy('tbl_payment.created_at', 'desc')->paginate(15);
 
         return view('admin.data_user.agen.list_transaksi', compact('user', 'agen'));
     }

@@ -50,7 +50,6 @@
 									<th>Tanggal Transaksi</th>
 									<th>Nama Paket</th>
 									<th>Harga</th>
-									<th>Tagihan</th>
 									<th>Pembayaran</th>
 								</tr>
 							</thead>
@@ -60,9 +59,16 @@
 									<td>{{ $loop->iteration }}</td>
 									<td>{{ $dataUser->name }}</td>
 									<td>{{ Tanggal::tanggalIndonesia($dataUser->tgl_pembayaran) }}</td>
-									<td>{{ $dataUser->nama }}</td>
+									<td>
+										@if($dataUser->id_prod == 3910)
+										Tabungan Haji/Umroh
+										@elseif($dataUser->id_prod == 3911)
+										Top Up Saldo Bayar Bayar
+										@else
+										{{ $dataUser->nama }}
+										@endif
+									</td>
 									<td>Rp {{ number_format($dataUser->harga, 2, ',', '.') }}</td>
-									<td>belum tau</td>
 									<td>Rp {{ number_format($dataUser->jumlah_pembayaran, 2, ',', '.') }}</td>
 								</tr>
 								@endforeach

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Validator;
 use App\payment;
 use Illuminate\Auth\Events\Registered;
+use App\Model\Saldo;
 
 use Illuminate\Foundation\Auth\RegistersUsers;
 class RegisterController extends Controller
@@ -96,7 +97,9 @@ class RegisterController extends Controller
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
 
-
+        $dt['saldo'] = 0;
+        $dt['id_user'] = User::all()->last();
+        Saldo::create($dt);
         return Redirect('/')->withSuccess('Register berhasil silahkan cek email anda.');
 			
         // if api

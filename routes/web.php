@@ -23,21 +23,7 @@ Route::post('update/transaction', function() {
 	}
 });
 
-Route::get('index/voucher/{kode_voucher}', 'RedeemVoucherController@redeemVoucher');
-
-Route::get('index/login', 'Admin\LoginController@index');
-Route::post('index/admin', 'Admin\LoginController@login');
-
 Route::post('paket/upload/{id}','API\RegisterController@uploadtf');
-
-
-
-
-
-
-
-
-
 
 Route::post('api/register', 'API\RegisterController@register');
 Route::get('register/{token}','API\RegisterController@activating')->name('activating-account');
@@ -46,16 +32,20 @@ Route::get('upload/{token}','API\RegisterController@upload')->name('upload-tf');
 
 	Route::get('/logout','Auth\LoginController@logout');
 
-
-
+Route::middleware('admin')->group(function(){
+	Route::get('index/login', 'Admin\LoginController@index');
+	Route::post('index/admin', 'Admin\LoginController@login');
+});
 
 Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 
 
-	Route::get('dashboard', function(){
-		return view('admin.dashboard');
-	});
+	Route::get('dashboard', 'Admin\DashboardController@index');
 
+	Route::get('ajax/dashboard_notif/{tipe}', 'Admin\AjaxController@dashboard_notif');
+	Route::get('ajax/dashboard_chart', 'Admin\AjaxController@dashboard_chart');
+	Route::get('ajax/dashboard_transaksi', 'Admin\AjaxController@dashboard_transaksi');
+	Route::get('ajax/dashboard_user', 'Admin\AjaxController@dashboard_user');
 	Route::get('ajax/get_jabatan/{kode_divisi}', 'Admin\AjaxController@get_jabatan');
 	Route::get('ajax/get_kota/{province_id}', 'Admin\AjaxController@get_kota');
 	Route::get('ajax/get_kecamatan/{regency_id}', 'Admin\AjaxController@get_kecamatan');
@@ -66,21 +56,38 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::get('ajax/get_transaksi/{keyword}', 'Admin\AjaxController@get_transaksi');
 	Route::get('ajax/get_sisa_tagihan/{id_user}', 'Admin\AjaxController@get_sisa_tagihan');
 
+	Route::post('transaksi/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+
 	Route::get('transaksi/haji', 'Admin\TransaksiController@haji');
 	Route::post('transaksi/haji/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/haji/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/umroh', 'Admin\TransaksiController@umroh');
 	Route::post('transaksi/umroh/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/umroh/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/wisata', 'Admin\TransaksiController@wisata');
 	Route::post('transaksi/wisata/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/wisata/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/sedekah', 'Admin\TransaksiController@sedekah');
 	Route::post('transaksi/sedekah/konfirmasi/{id}', 'Admin\TransaksiController@konfirm')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/sedekah/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/bayar-paket', 'Admin\TransaksiController@bayar_paket');
 	Route::post('transaksi/bayar-paket/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_paket')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/bayar-paket/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/top-up', 'Admin\TransaksiController@top_up');
 	Route::post('transaksi/top-up/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_topup')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/top-up/search', 'Admin\TransaksiController@search');
+
 	Route::get('transaksi/konfirmasi-user', 'Admin\TransaksiController@user');
-	Route::get('transaksi/konfirmasi-user/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_user')->middleware(['permission:konfirmasi transaksi']);
+	Route::post('transaksi/konfirmasi-user/konfirmasi/{id}', 'Admin\TransaksiController@konfirm_user')->middleware(['permission:konfirmasi transaksi']);
+	Route::get('transaksi/konfirmasi-user/search', 'Admin\TransaksiController@search');
+	
 	Route::get('transaksi/ppob', 'Admin\TransaksiController@ppob');
+	Route::get('transaksi/ppob/search', 'Admin\TransaksiController@search_ppob');
 
 	Route::get('kwitansi', 'Admin\KwitansiController@index');
 	Route::get('kwitansi/buat-transaksi', 'Admin\KwitansiController@buat_transaksi')->middleware(['permission:buat transaksi']);
@@ -96,6 +103,7 @@ Route::middleware(['auth:admin'])->prefix('index/admin')->group(function(){
 	Route::delete('produk/delete/{id_produk}', 'Admin\ProdukController@delete')->middleware(['permission:delete produk']);
 
 	Route::get('paket', 'Admin\PaketController@index');
+	Route::get('paket/search', 'Admin\PaketController@search');
 	Route::get('paket/tambah', 'Admin\PaketController@create')->middleware(['permission:tambah paket haji umroh']);
 	Route::post('paket/tambah/simpan', 'Admin\PaketController@store');
 	Route::get('paket/edit/{id_produk}', 'Admin\PaketController@edit')->middleware(['permission:edit paket haji umroh']);;
@@ -278,6 +286,8 @@ Route::group(['middleware'=>'auth'], function() {
        Route::get('/instruksi-bayar', function(){
 			return view('instruksi');
 		});
+
+Route::get('index/voucher/{kode_voucher}', 'RedeemVoucherController@redeemVoucher');
 
 Route::get('scan', function() {
 	return view('scan');

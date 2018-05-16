@@ -42,18 +42,50 @@
         <li class="treeview">
           <a href="#"><i class="fa fa-shopping-cart"></i> <span>Transaksi</span>
             <span class="pull-right-container">
+              <span class="badge pull-right" style="margin-top: -1px;" id="count-transaksi">{{ $count_transaksi > 99 ? '99+' : $count_transaksi }}</span>
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('index/admin/transaksi/haji') }}"><i class="fa fa-link"></i> Haji</a></li>
-            <li><a href="{{ url('index/admin/transaksi/umroh') }}"><i class="fa fa-link"></i> Umroh</a></li>
-            <li><a href="{{ url('index/admin/transaksi/wisata') }}"><i class="fa fa-link"></i> Wisata</a></li>
-            <li><a href="{{ url('index/admin/transaksi/sedekah') }}"><i class="fa fa-link"></i> Sedekah</a></li>
-            <li><a href="{{ url('index/admin/transaksi/bayar-paket') }}"><i class="fa fa-link"></i> Bayar Paket</a></li>
-            <li><a href="{{ url('index/admin/transaksi/top-up') }}"><i class="fa fa-link"></i> Top Up Bayar-bayar</a></li>
-            <li><a href="{{ url('index/admin/transaksi/konfirmasi-user') }}"><i class="fa fa-link"></i> Konfirmasi User/Agen</a></li>
-            <li><a href="{{ url('index/admin/transaksi/ppob') }}"><i class="fa fa-link"></i> PPOB</a></li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/haji') }}">
+                <i class="fa fa-link"></i> Haji <span class="pull-right badge" id="count-haji">{{ $count_haji }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/umroh') }}">
+                <i class="fa fa-link"></i> Umroh <span class="pull-right badge" id="count-umroh">{{ $count_umroh }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/wisata') }}">
+                <i class="fa fa-link"></i> Wisata <span class="pull-right badge" id="count-wisata">{{ $count_wisata }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/sedekah') }}">
+                <i class="fa fa-link"></i> Sedekah <span class="pull-right badge" id="count-sedekah">{{ $count_sedekah }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/bayar-paket') }}">
+                <i class="fa fa-link"></i> Bayar Paket <span class="pull-right badge" id="count-tabungan">{{ $count_tabungan }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/top-up') }}">
+                <i class="fa fa-link"></i> Top Up Bayar-bayar <span class="pull-right badge" id="count-top-up">{{ $count_top_up }}</span></a>
+              </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/konfirmasi-user') }}">
+                <i class="fa fa-link"></i> Konfirmasi User/Agen <span class="pull-right badge" id="count-user">{{ $count_user }}</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('index/admin/transaksi/ppob') }}">
+                <i class="fa fa-link"></i> PPOB
+              </a>
+            </li>
           </ul>
         </li>
         @endcan
@@ -62,7 +94,7 @@
         @endcan
         @can('menu data user')
         <li class="treeview">
-          <a href="#"><i class="fa fa-group"></i> <span>Data User</span>
+          <a href="#"><i class="fa fa-group"></i> <span>Data User </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

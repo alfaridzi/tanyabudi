@@ -164,6 +164,7 @@ return [
         alfrdxyz\portalpulsa\PulsaServiceProvider::class,
 
         Spatie\Permission\PermissionServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
 
     ],

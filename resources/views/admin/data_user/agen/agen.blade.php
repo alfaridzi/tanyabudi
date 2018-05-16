@@ -29,7 +29,7 @@
 			            	<form class="form-inline" method="get" action="{{ url('index/admin/data-user/agen/search') }}">
 			            		<div class="form-group">
 			            			<select class="form-control" name="status">
-			            				<option>--Pilih Status--</option>
+			            				<option selected="" disabled="">--Pilih Status--</option>
 			            				<option value="0">Tidak Aktif</option>
 			            				<option value="1">Aktif</option>
 			            			</select>

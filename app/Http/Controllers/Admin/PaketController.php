@@ -22,9 +22,52 @@ class PaketController extends Controller
 
     public function index()
     {
-    	$produk = DB::table('tbl_produk')->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')->whereIn('tbl_produk.type', ['1', '2'])->orderBy('id_paket', 'desc')->paginate(15);
+    	$produk = DB::table('tbl_produk')
+                    ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
+                    ->whereIn('tbl_produk.type', ['1', '2'])->orderBy('id_paket', 'desc')
+                    ->paginate(15);
 
     	return view('admin.paket.paket', compact('produk'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $status = $request->status_paket;
+        $tanggal_mulai = $request->tanggal_mulai;
+        $tanggal_akhir = $request->tanggal_akhir;
+        $kategori = $request->kategori;
+
+        $produk = DB::table('tbl_produk')
+                    ->leftJoin('tbl_paket', 'tbl_produk.id', '=', 'tbl_paket.id_produk')
+                    ->where(function($q) use ($keyword){
+                        if (!is_null($keyword)) {
+                            $q->where('tbl_produk.nama', 'like', '%'.$keyword.'%')
+                            ->orWhere('tbl_produk.desc_prod', 'like', '%'.$keyword.'%')
+                            ->orWhere('tbl_paket.perjalanan', 'like', '%'.$keyword.'%');
+                        }
+                    })->where(function($q) use($status){
+                        if (!is_null($status)) {
+                            $q->where('status_paket', $status);
+                        }
+                    })->where(function($q) use($kategori){
+                        if (!is_null($kategori)) {
+                            $q->where('type', $kategori);
+                        }else{
+                            $q->whereIn('tbl_produk.type', ['1', '2']);
+                        }
+                    })->where(function($q) use($tanggal_mulai){
+                        if (!is_null($tanggal_mulai)) {
+                            $q->where('tanggal_mulai', $tanggal_mulai);
+                        }
+                    })->where(function($q) use($tanggal_akhir){
+                        if (!is_null($tanggal_akhir)) {
+                            $q->where('tanggal_akhir', $tanggal_akhir);
+                        }
+                    })
+                    ->orderBy('id_paket', 'desc')
+                    ->paginate(15);
+        return view('admin.paket.paket', compact('produk'));
     }
 
     public function status($id_produk)

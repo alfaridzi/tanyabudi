@@ -92,6 +92,18 @@ desired effect
     $(document).on('click', '#btn-logout', function(){
       $('#frm-logout').submit();
     });
+
+    setInterval(function() {
+      $('#count-transaksi').load('{{ url('index/admin/ajax/dashboard_notif/transaksi') }}');
+      $('#count-haji').load('{{ url('index/admin/ajax/dashboard_notif/haji') }}');
+      $('#count-umroh').load('{{ url('index/admin/ajax/dashboard_notif/umroh') }}');
+      $('#count-wisata').load('{{ url('index/admin/ajax/dashboard_notif/wisata') }}');
+      $('#count-sedekah').load('{{ url('index/admin/ajax/dashboard_notif/sedekah') }}');
+      $('#count-tabungan').load('{{ url('index/admin/ajax/dashboard_notif/tabungan') }}');
+      $('#count-top-up').load('{{ url('index/admin/ajax/dashboard_notif/top-up') }}');
+      $('#count-user').load('{{ url('index/admin/ajax/dashboard_notif/user') }}');
+    }, 10000);
+    
   });
 </script>
 </body>

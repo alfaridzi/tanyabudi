@@ -18,8 +18,6 @@ class RedirectIfAdminAuthenticated
     {
         if (Auth::guard('admin')->check()) {
             return redirect('index/admin/dashboard');
-        }else{
-            abort(401);
         }
         return $next($request);
     }

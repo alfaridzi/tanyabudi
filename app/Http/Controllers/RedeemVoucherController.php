@@ -24,7 +24,9 @@ class RedeemVoucherController extends Controller
 
     	if (is_null($voucher)) {
     		return 'Voucher Tidak Ditemukan';
-    	}
+    	}elseif ($voucher->status_voucher == '1') {
+            return 'Voucher Sudah Terpakai';
+        }
 
     	$tabungan = tabungan::where('id_user', $voucher->id_user)->firstOrFail();
     	$tambah_tabungan = $tabungan->tabungan + $voucher->nominal;

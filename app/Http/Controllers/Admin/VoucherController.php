@@ -34,16 +34,31 @@ class VoucherController extends Controller
             $status_expired = $request->status_expired == 0 ? '>' : '<';
             $tanggal = date('Y-m-d H:i:s');
         }else{
-            $status_expired = '';
-            $tanggal = '';
+            $status_expired = null;
+            $tanggal = null;
         }
         $status_voucher = $request->status_voucher;
 
-        $voucher = DB::table('tbl_voucher')->where(function($q) use ($kategori, $status_expired, $status_voucher, $tanggal){
-            $q->where('kategori', $kategori)->orWhere('status_voucher', $status_voucher)->orWhere('tanggal_akhir', $status_expired, $tanggal);
-        })->orWhere(function($q) use($keyword){
-            $q->where('kode_voucher', 'like', '%'.$keyword.'%')->orWhere('nama_voucher', 'like', '%'.$keyword.'%')->orWhere('nominal', 'like', '%'.$keyword.'%');
-        })->orderBy('id_voucher', 'desc')->paginate(15);
+        $voucher = DB::table('tbl_voucher')
+                    ->where(function($q) use($keyword){
+                        if (!is_null($keyword)) {
+                            $q->where('kode_voucher', 'like', '%'.$keyword.'%')
+                            ->orWhere('nama_voucher', 'like', '%'.$keyword.'%')
+                            ->orWhere('nominal', 'like', '%'.$keyword.'%');
+                        }
+                    })->where(function($q) use ($kategori){
+                        if (!is_null($kategori)) {
+                            $q->where('kategori', $kategori);
+                        }
+                    })->where(function($q) use ($status_expired, $tanggal){
+                        if (!is_null($status_expired) && !is_null($tanggal)) {
+                            $q->where('tanggal_akhir', $status_expired, $tanggal);
+                        }
+                    })->where(function($q) use($status_voucher){
+                        if (!is_null($status_voucher)) {
+                            $q->where('status_voucher', $status_voucher);
+                        }
+                    })->orderBy('id_voucher', 'desc')->paginate(15);
         return view('admin.voucher.voucher', compact('voucher'));
     }
 

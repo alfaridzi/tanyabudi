@@ -1,5 +1,13 @@
 @extends('admin.layout.app')
 @section('title', 'Data Produk')
+@push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('admin/plugins/lightbox/ekko-lightbox.css') }}">
+<style type="text/css">
+	.img-produk {
+		max-width: 200px;
+	}
+</style>
+@endpush
 @section('content')
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -45,7 +53,10 @@
 		            			<tr>
 		            				<td>No</td>
 		            				<td>Nama Produk</td>
-		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3 || $tipe == 5)
+		            				@if($tipe == 3)
+		            				<td>Gambar</td>
+		            				@endif
+		            				@if($tipe == 3 || $tipe == 5)
 		            				<td>Harga</td>
 		            				@endif
 		            				<td>Deskripsi Produk</td>
@@ -57,7 +68,14 @@
 		            			<tr>
 		            				<td>{{ $loop->iteration }}</td>
 		            				<td>{{ $dataProduk->nama }}</td>
-		            				@if($tipe == 1 || $tipe == 2 || $tipe == 3 || $tipe == 5)
+		            				@if($tipe == 3)
+		            				<td>
+		            					<a href="{{ url('assets/images/paket/wisata/'.$dataProduk->gambar.'?image=250') }}" data-toggle="lightbox">
+		            						<img src="{{ asset('assets/images/paket/wisata/'.$dataProduk->gambar) }}" class="img-fluid img-produk">
+		            					</a>
+		            				</td>
+		            				@endif
+		            				@if($tipe == 3 || $tipe == 5)
 		            				<td>Rp {{ number_format($dataProduk->harga, 2, ',', '.') }}</td>
 		            				@endif
 		            				<td>{{ $dataProduk->desc_prod }}</td>
@@ -78,6 +96,7 @@
 </form>
 @endsection
 @push('js')
+<script type="text/javascript" src="{{ asset('admin/plugins/lightbox/ekko-lightbox.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).on('click', '#btn-delete-produk', function(e){
         e.preventDefault();
@@ -88,6 +107,10 @@
             $('#frm-delete-produk').attr('action', '{{ url('index/admin/produk/delete') }}/'+id_produk);
             $('#frm-delete-produk').submit();
         }
+    });
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
     });
 </script>
 @endpush
